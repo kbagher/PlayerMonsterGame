@@ -3,5 +3,5 @@
  */
 public interface MonsterSkills {
     public void leap();
-    public void hide();
+    public void invisible();
 }

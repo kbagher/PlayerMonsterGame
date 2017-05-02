@@ -86,6 +86,7 @@ public class Game extends JFrame {
          player.setDirection(' ');   // reset to no direction 
          
          Cell newMonsterCell = monster.move();
+         monster.performCapability();
          if (newMonsterCell == player.getCell())
          	break;        
 
