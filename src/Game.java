@@ -31,7 +31,7 @@ public class Game extends JFrame {
    public Game() throws Exception
    {
 	  grid = new Grid();
-	  player = new Player(grid,0,0);
+	  player = new Player(grid,0,10);
 	  monster = new Monster(grid,player,5,5);
       bp = new BoardPanel(grid,player,monster);
 
