@@ -38,9 +38,10 @@ public class Monster extends Moveable implements MonsterSkills {
         if the number is 5, monstor will perform a random capability
          */
         Random r = new Random();
-        int random= r.nextInt(10 - 1 + 1) + 1;
-        if (random ==5){
-            invisible();
+        int random= r.nextInt(5 - 1 + 1) + 1;
+        if (random ==2){
+//            invisible();
+            leap();
         }
     }
 
@@ -54,9 +55,34 @@ public class Monster extends Moveable implements MonsterSkills {
         return false;
     }
 
+    /**
+     * check if the monster is in the same row/column of the player
+     * @return
+     */
+    private boolean canLeap(){
+
+        // row is ligimit for leaping
+        if(this.getCell().row %5==0 && player.getCell().row %5==0){
+            // same row
+            if(getCell().row==player.getCell().row)
+                return true;
+        }
+        // column is ligimit for leaping
+        else if (this.getCell().col %5==0 && player.getCell().col %5==0){
+            // same column
+            if(getCell().col==player.getCell().col)
+                return true;
+        }
+        return false;
+    }
+
     @Override
     public void leap() {
+        // monster can't leap to player's cell
+        if (!canLeap()) return;
 
+        this.getCell().row=player.getCell().row;
+        this.getCell().col=player.getCell().col;
     }
 
     @Override
