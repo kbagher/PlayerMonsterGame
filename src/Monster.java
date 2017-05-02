@@ -3,7 +3,7 @@
  * The canView attribute can be used to limit monster visibility
  */
 
-public class Monster extends Moveable {
+public class Monster extends Moveable implements MonsterSkills {
 	private boolean canView = true;  // allows
 	private Player player;
 	public Monster(Grid g, Player p, int row, int col) throws Exception
@@ -22,4 +22,14 @@ public class Monster extends Moveable {
 	{
 		return canView;
 	}
+
+    @Override
+    public void leap() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
 }

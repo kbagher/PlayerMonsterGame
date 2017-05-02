@@ -1,6 +1,6 @@
 /*  This class encapsulates player position and direction  
  */
-public class Player extends Moveable {
+public class Player extends Moveable implements PlayerSkills {
    private boolean readyToStart = false;
    public Player(Grid g, int row, int col) throws Exception
    {
@@ -28,4 +28,14 @@ public class Player extends Moveable {
    public boolean isReady()
    {   return readyToStart;
    }
+
+    @Override
+    public void skip(int moves) {
+        
+    }
+
+    @Override
+    public void putTrap(Cell cell) {
+
+    }
 }
