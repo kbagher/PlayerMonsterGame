@@ -9,10 +9,15 @@ public class Monster extends Moveable implements MonsterSkills {
     private Player player;
     private int hideTime;
 
+    public enum Skills{
+        LEAP,INVISIBLE
+    }
+
     public Monster(Grid g, Player p, int row, int col) throws Exception {
         super(g);
         player = p;
         setCell(grid.getCell(row, col));
+
     }
 
     public Cell move() {

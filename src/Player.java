@@ -1,6 +1,11 @@
 /*  This class encapsulates player position and direction  
  */
 public class Player extends Moveable implements PlayerSkills {
+
+    public enum Skills{
+        TRAP,SKIP
+    }
+
     private boolean readyToStart = false;
 
     public Player(Grid g, int row, int col) throws Exception {
