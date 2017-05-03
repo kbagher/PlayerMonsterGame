@@ -12,7 +12,7 @@ public abstract class Moveable {
 
     public Moveable(Grid g) {
         grid = g;
-        skills= new ArrayList<>();
+        skills = new ArrayList<>();
     }
 
     public void setDirection(char d) {
@@ -20,14 +20,14 @@ public abstract class Moveable {
     }
 
     // TODO: throw an exception
-    public boolean addSkills(Object skill){
-        if (skills.size()==2)
+    public boolean addSkill(Object skill) {
+        if (skills.size() == 2)
             return false;
         skills.add(skill);
         return true;
     }
 
-    public ArrayList<?> getSkills(){
+    public ArrayList<?> getSkills() {
         return skills;
     }
 

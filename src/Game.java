@@ -32,6 +32,8 @@ public class Game extends JFrame {
         grid = new Grid();
         player = new Player(grid, 0, 0);
         monster = new Monster(grid, player, 5, 5);
+        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
+//        monster.addSkill(Monster.MonsterSkillsType.LEAP);
         bp = new BoardPanel(grid, player, monster);
 
         // Create a separate panel and add all the buttons
@@ -76,8 +78,6 @@ public class Game extends JFrame {
         while (!player.isReady())
             delay(100);
         do {
-
-            monster.performCapability();
 
             Cell newPlayerCell = player.move();
             if (newPlayerCell == monster.getCell())
