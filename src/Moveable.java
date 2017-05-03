@@ -4,14 +4,12 @@
 
 import java.util.ArrayList;
 
-public abstract class Moveable {
+public abstract class Moveable extends Sprite {
     protected char currentDirection;
-    protected Cell currentCell;
-    protected Grid grid;
     private ArrayList<Object> skills;
 
     public Moveable(Grid g) {
-        grid = g;
+        super(g);
         skills = new ArrayList<>();
     }
 
@@ -33,14 +31,6 @@ public abstract class Moveable {
 
     public char getDirection() {
         return currentDirection;
-    }
-
-    public void setCell(Cell c) {
-        currentCell = c;
-    }
-
-    public Cell getCell() {
-        return currentCell;
     }
 
     public abstract Cell move();
