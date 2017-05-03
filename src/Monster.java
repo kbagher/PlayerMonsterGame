@@ -29,18 +29,6 @@ public class Monster extends Moveable implements MonsterSkills {
         if (isTrapped()) {
             return getCell();
         }
-//        // check if the current cell has trap
-//        // TODO update the code with khalid's method
-//        Trap trap = grid.getCurrentTrap();
-//        if (trap != null) {
-//            System.out.println("active trap");
-//            if (trap.getCell().equals(getCell())) {
-//                System.out.println("stepped over a trap");
-//                trap.activate();
-//                disableAllActiveSkills();
-//                return getCell();
-//            }
-//        }
 
         if (canPerformSkill()) {
             performRandomSkill();
@@ -64,7 +52,6 @@ public class Monster extends Moveable implements MonsterSkills {
         Trap trap = grid.getCurrentTrap();
         if (trap != null) {
             if (trap.getCell().equals(getCell())) {
-                System.out.println("stepped over a trap");
                 if (trap.stepOver())
                     return false;
                 disableAllActiveSkills();
@@ -89,6 +76,9 @@ public class Monster extends Moveable implements MonsterSkills {
         if (isHiding())
             return false; // invisible skill is active
 
+        if(isTrapped())
+            return false;
+
         return true;
     }
 
@@ -103,8 +93,8 @@ public class Monster extends Moveable implements MonsterSkills {
         if the number is 5, monstor will perform a random capability
          */
         Random r = new Random();
-        int random = r.nextInt(3 - 1 + 1) + 1;
-        if (random == 2) {
+        int random = r.nextInt(10 - 1 + 1) + 1;
+        if (random == 5) {
             // pick a random skill from the available skills
             random = r.nextInt(getSkills().size());
 

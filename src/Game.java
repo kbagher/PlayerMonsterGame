@@ -31,8 +31,8 @@ public class Game extends JFrame {
         grid = new Grid();
         player = new Player(grid, 0, 0);
         monster = new Monster(grid, player, 5, 5);
-//        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
-//        monster.addSkill(Monster.MonsterSkillsType.LEAP);
+        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
+        monster.addSkill(Monster.MonsterSkillsType.LEAP);
         bp = new BoardPanel(grid, player, monster);
 
         // Create a separate panel and add all the buttons
@@ -52,6 +52,13 @@ public class Game extends JFrame {
         left.addActionListener(bp);
         right.addActionListener(bp);
         start.addActionListener(bp);
+
+        up.setFocusable(false);
+        down.setFocusable(false);
+        left.setFocusable(false);
+        right.setFocusable(false);
+        start.setFocusable(false);
+        trap.setFocusable(false);
 
         // add panels to frame
         add(bp, BorderLayout.CENTER);

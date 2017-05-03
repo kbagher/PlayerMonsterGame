@@ -9,7 +9,7 @@ import java.awt.*;
  * The overridden paintcompnent() is called whenever the board
  * or the pieces needs to be updated 
  */
-public class BoardPanel extends JPanel implements ActionListener {
+public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
 
     private Player player;
     private Monster monster;
@@ -26,10 +26,13 @@ public class BoardPanel extends JPanel implements ActionListener {
         grid = g;
         monster = m;
         gr = this.getGraphics();
+        addKeyListener(this);
+        setFocusable(true);
     }
 
     /* responds to various button clicked messages */
     public void actionPerformed(ActionEvent e) {
+        System.out.println("called");
         if (((JButton) e.getSource()).getText().compareTo("up") == 0)
             player.setDirection('U');
         else if (((JButton) e.getSource()).getText().compareTo("down") == 0)
@@ -75,24 +78,65 @@ public class BoardPanel extends JPanel implements ActionListener {
 
         if (grid.getCurrentTrap()!=null){
             cell= grid.getCurrentTrap().getCell();
-            gr.setColor(Color.BLUE);
-            gr.fillOval(xCor(cell.col)+CELLWIDTH/8, yCor(cell.row)+CELLWIDTH/8, CELLWIDTH*3/4, CELLHEIGHT*3/4);
-            gr.setColor(Color.white);
-            gr.drawString("T",xCor(cell.col)+CELLWIDTH/3, yCor(cell.row)+2*CELLWIDTH/3);
+            ImageIcon icon = new ImageIcon("./trap.png");
+            icon.paintIcon(this, gr, xCor(cell.col) +CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
+//            gr.setColor(Color.BLUE);
+//            gr.fillOval(xCor(cell.col)+CELLWIDTH/8, yCor(cell.row)+CELLWIDTH/8, CELLWIDTH*3/4, CELLHEIGHT*3/4);
+//            gr.setColor(Color.white);
+//            gr.drawString("T",xCor(cell.col)+CELLWIDTH/3, yCor(cell.row)+2*CELLWIDTH/3);
         }
 
         cell = player.getCell();
-        gr.setColor(Color.red);
-        gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
-        gr.setColor(Color.white);
-        gr.drawString("P", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
+        ImageIcon icon = new ImageIcon("./player.png");
+        icon.paintIcon(this, gr, xCor(cell.col) +CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
+
+
+//        cell = player.getCell();
+//        gr.setColor(Color.red);
+//        gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
+//        gr.setColor(Color.white);
+//        gr.drawString("P", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
 
         if (monster.viewable()) {
             cell = monster.getCell();
-            gr.setColor(Color.black);
-            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-            gr.setColor(Color.white);
-            gr.drawString("M", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
+            icon = new ImageIcon("./monster.png");
+            icon.paintIcon(this, gr, xCor(cell.col) +CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
+
+//            gr.setColor(Color.black);
+//            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+//            gr.setColor(Color.white);
+//            gr.drawString("M", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+//        System.out.println("keyTyped: "+e);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+//        System.out.println("keyPressed: "+e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            player.setDirection('L');
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            player.setDirection('R');
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            player.setDirection('D');
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_UP) {
+            player.setDirection('U');
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_T) {
+            player.putTrap();
+        }
+
+//        System.out.println("keyReleased: "+e);
     }
 }
