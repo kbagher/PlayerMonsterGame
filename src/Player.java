@@ -11,7 +11,7 @@ public class Player extends Moveable {
    public Cell move()
    {
        currentCell = grid.getCell(currentCell,currentDirection);
-       currentCell.gotGold=false;
+       currentCell.nougat.setConsumed();
        return currentCell;
    }
    public int maxCellsPerMove()

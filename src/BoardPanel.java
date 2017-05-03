@@ -74,9 +74,7 @@ public class BoardPanel extends JPanel implements ActionListener {
            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);         	
     	   gr.setColor(Color.black);
            gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-           if (cell.gotGold){
-           gr.setColor(Color.yellow);
-           gr.fillOval(xCor(cell.col)+CELLWIDTH/4, yCor(cell.row)+CELLWIDTH/4, CELLWIDTH*2/4, CELLHEIGHT*2/4);}
+         
         }
         cell = player.getCell();
  	    gr.setColor(Color.red);
