@@ -16,7 +16,7 @@ public class Grid {
           for (int j=0; j<11; j++)
              if ( (i %5 == 0) ||(j%5 == 0 && i%5 != 0))
              {
-                cells2D[i][j] = new Cell(i,j);
+                cells2D[i][j] = new Cell(i,j,6);
                 cells[k++] = cells2D[i][j];
              }   	
 	}
@@ -152,11 +152,16 @@ public class Grid {
          int d = 0;
          // compute minimum horizontal distance:  
          if ( from.row == to.row) d += abs(to.col-from.col);
-         else d += min(from.col+to.col, abs(from.col-5) + abs(to.col-5) , abs(from.col-10) + abs(to.col-10)); 
+		else
+			d += min(from.col + to.col
+					, abs(from.col - 5) + abs(to.col - 5)
+					, abs(from.col - 10) + abs(to.col - 10));
          
          // compute minimum vertical distance as follows:  
          if ( from.col == to.col) d += abs(to.row-from.row);
-         else d += min(from.row+to.row, abs(from.row-5) + abs(to.row-5) , abs(from.row-10) + abs(to.row-10)); 
+         else d += min(from.row+to.row,
+        		 abs(from.row-5)+ abs(to.row-5) ,
+        		 abs(from.row-10) + abs(to.row-10)); 
          return d;
     }
 
