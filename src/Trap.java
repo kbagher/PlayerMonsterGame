@@ -1,47 +1,43 @@
 
 public class Trap {
-	
-	private int affectTime;
-	private int durationTime;
-	
-	public Trap (int affectTime, int durationTime)
-	{
-		this.affectTime= affectTime;
-		this.durationTime= durationTime;	
-	}
-	
-	public int getAffectTime() {
-		return affectTime;
-	}
+
+    private int affectTime;
+    private int durationTime;
+    private Cell currentCell;
+    private boolean isSteppedOver;
+
+    public Trap(Cell cell,int affectTime, int durationTime) {
+        this.affectTime = affectTime;
+        this.durationTime = durationTime;
+        this.currentCell = cell;
+        isSteppedOver = false;
+    }
+
+    public Cell getCell(){
+        return currentCell;
+    }
+
+    public int getDurationTime() {
+        return durationTime;
+    }
 
 
+    public boolean stepOver(){
+        isSteppedOver = true;
+        if(affectTime!=0)
+            return false;
+        return true;
+    }
 
-	public void setAffectTime(int affectTime) {
-		this.affectTime = affectTime;
-	}
+    public int updateTime() {
+        if (isSteppedOver){
+            return affectTime--;
+        }
+        else if (durationTime == 0)
+            return 0;
+        else {
+            return durationTime--;
+        }
+    }
 
-
-
-	public int getDurationTime() {
-		return durationTime;
-	}
-
-
-
-	public void setDurationTime(int durationTime) {
-		this.durationTime = durationTime;
-	}
-	
-	public int reduceDurationTime ()
-	{
-		if (durationTime == 0)
-			return 0;
-		else {
-			durationTime--;
-		
-			return durationTime+1;
-		}
-		
-	}
-	
 }

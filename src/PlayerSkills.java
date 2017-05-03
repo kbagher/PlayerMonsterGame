@@ -6,5 +6,5 @@ public interface PlayerSkills {
         TRAP,SKIP
     }
     public void skip(int moves);
-    public void putTrap(Cell cell);
+    public void putTrap();
 }

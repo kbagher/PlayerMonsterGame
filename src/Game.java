@@ -9,14 +9,13 @@ import java.awt.*;
 
 public class Game extends JFrame {
 
-    private final int TIMEALLOWED = 100;
-
+    private JButton trap = new JButton("trap");
     private JButton up = new JButton("up");
     private JButton down = new JButton("down");
     private JButton left = new JButton("left");
     private JButton right = new JButton("right");
     private JButton start = new JButton("start");
-    private JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
+    private JLabel mLabel = new JLabel("Time Remaining : " + Settings.TIME_ALLOWED);
 
     private Grid grid;
     private Player player;
@@ -32,12 +31,13 @@ public class Game extends JFrame {
         grid = new Grid();
         player = new Player(grid, 0, 0);
         monster = new Monster(grid, player, 5, 5);
-        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
+//        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
 //        monster.addSkill(Monster.MonsterSkillsType.LEAP);
         bp = new BoardPanel(grid, player, monster);
 
         // Create a separate panel and add all the buttons
         JPanel panel = new JPanel();
+        panel.add(trap);
         panel.add(up);
         panel.add(down);
         panel.add(left);
@@ -46,6 +46,7 @@ public class Game extends JFrame {
         panel.add(mLabel);
 
         // add Action listeners to all button events
+        trap.addActionListener(bp);
         up.addActionListener(bp);
         down.addActionListener(bp);
         left.addActionListener(bp);
@@ -79,6 +80,8 @@ public class Game extends JFrame {
             delay(100);
         do {
 
+            grid.updateTrap();
+
             Cell newPlayerCell = player.move();
             if (newPlayerCell == monster.getCell())
                 break;
@@ -90,13 +93,13 @@ public class Game extends JFrame {
 
             // update time and repaint
             time++;
-            mLabel.setText("Time Remaining : " + (TIMEALLOWED - time));
+            mLabel.setText("Time Remaining : " + (Settings.TIME_ALLOWED - time));
             delay(1000);
             bp.repaint();
 
-        } while (time < TIMEALLOWED);
+        } while (time < Settings.TIME_ALLOWED);
 
-        if (time < TIMEALLOWED)            // players has been eaten up
+        if (time < Settings.TIME_ALLOWED)            // players has been eaten up
             message = "Player Lost";
         else
             message = "Player Won";

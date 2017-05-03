@@ -8,13 +8,11 @@ import java.util.Random;
 public class Monster extends Moveable implements MonsterSkills {
     private Player player;
     private int hideTime;
-    private int freezeTimer;
 
     public Monster(Grid g, Player p, int row, int col) throws Exception {
         super(g);
         player = p;
         setCell(grid.getCell(row, col));
-
     }
 
     public Cell move() {
@@ -29,18 +27,22 @@ public class Monster extends Moveable implements MonsterSkills {
 
         // don't move if the monster is trapped
         if (isTrapped()) {
-            freezeTimer--;
             return getCell();
         }
-        // check if the current cell has trap
-        // TODO update the code with khalid's method
-        else if (false) {
-            freeze();
-            disableAllActiveSkills();
-            return getCell();
-        }
+//        // check if the current cell has trap
+//        // TODO update the code with khalid's method
+//        Trap trap = grid.getCurrentTrap();
+//        if (trap != null) {
+//            System.out.println("active trap");
+//            if (trap.getCell().equals(getCell())) {
+//                System.out.println("stepped over a trap");
+//                trap.activate();
+//                disableAllActiveSkills();
+//                return getCell();
+//            }
+//        }
 
-        if(canPerformSkill()){
+        if (canPerformSkill()) {
             performRandomSkill();
         }
         currentDirection = grid.getBestDirection(currentCell, player.getCell());
@@ -56,6 +58,20 @@ public class Monster extends Moveable implements MonsterSkills {
 
         // disable the invisible skill
         hideTime = 0;
+    }
+
+    private boolean isTrapped() {
+        Trap trap = grid.getCurrentTrap();
+        if (trap != null) {
+            if (trap.getCell().equals(getCell())) {
+                System.out.println("stepped over a trap");
+                if (trap.stepOver())
+                    return false;
+                disableAllActiveSkills();
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isHiding() {
@@ -90,10 +106,10 @@ public class Monster extends Moveable implements MonsterSkills {
         int random = r.nextInt(3 - 1 + 1) + 1;
         if (random == 2) {
             // pick a random skill from the available skills
-            random = r.nextInt(getSkills().size() );
+            random = r.nextInt(getSkills().size());
 
             MonsterSkillsType skill = (MonsterSkillsType) getSkills().get(random);
-            switch (skill){
+            switch (skill) {
                 case LEAP:
                     leap();
                     break;
@@ -134,26 +150,6 @@ public class Monster extends Moveable implements MonsterSkills {
                 return true;
         }
         return false;
-    }
-
-    /**
-     * freeze the monster once he steps over a trap
-     */
-    private void freeze() {
-        if (isTrapped()) return;
-        freezeTimer = 5;
-    }
-
-    /**
-     * Check if the monster's status is freeze or not
-     *
-     * @return
-     */
-    public boolean isTrapped() {
-        if (freezeTimer == 0) {
-            return false;
-        }
-        return true;
     }
 
     @Override
