@@ -2,9 +2,11 @@
  * Row and column corresponds to the 2D array row and column respectively. 
  * Hence, for the standard grid both row and column must be in the range 
  * 0 to 10. Furthermore, either row or column must be 0, 5 or 10.    
-*/ 
+*/
 
-public class Grid {
+import java.io.Serializable;
+
+public class Grid  implements Serializable{
 
 	Cell cells[] = new Cell[57];
     Cell cells2D[][] = new Cell[11][11];

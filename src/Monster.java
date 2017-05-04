@@ -3,46 +3,36 @@
  * The canView attribute can be used to limit monster visibility
  */
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Random;
 
-public class Monster extends Moveable implements MonsterSkills {
+public class Monster extends Moveable implements MonsterSkills, Serializable {
     private Player player;
+    private Trap trap;
     private int hideTime;
-    private int freezeTimer;
+    private boolean steppedOverTrap;
 
-    public Monster(Grid g, Player p, int row, int col) throws Exception {
+    public Monster(Grid g, Player p, Trap t, int row, int col) throws Exception {
         super(g);
         player = p;
+        trap = t;
         setCell(grid.getCell(row, col));
-
+        steppedOverTrap = false;
     }
 
     public Cell move() {
-        /**
-         * 1- if trapped then don't move and don't do any skill
-         * 2- decrease the freeze timer
-         * 3- can perform skills? chek if there are any active skill
-         * 4- decrease hide timer
-         * 4- if no, then perform skill
-         * 4- return the direction
-         */
-
         // don't move if the monster is trapped
         if (isTrapped()) {
-            freezeTimer--;
             return getCell();
         }
-        // check if the current cell has trap
-        // TODO update the code with khalid's method
-        else if (false) {
-            freeze();
-            disableAllActiveSkills();
-            return getCell();
-        }
+        steppedOverTrap=false;
 
-        if(canPerformSkill()){
+        if (canPerformSkill()) {
             performRandomSkill();
         }
+        if (currentCell.equals(player.getCell()))
+            return currentCell;
         currentDirection = grid.getBestDirection(currentCell, player.getCell());
         currentCell = (grid.getCell(getCell(), getDirection()));
         return currentCell;
@@ -56,6 +46,31 @@ public class Monster extends Moveable implements MonsterSkills {
 
         // disable the invisible skill
         hideTime = 0;
+    }
+
+    private boolean isTrapped() {
+        if (!trap.isSet())
+            return false;
+
+        if (!trap.isTrapped(getCell()))
+            return false;
+
+        // monster is trapped
+        if (!steppedOverTrap){
+            trap.stepOver(); // first step
+            steppedOverTrap=true;
+            try {
+                GameAudioPlayer player = new GameAudioPlayer();
+                player.playAudio("monster_trapped.wav");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        // remove all active skills
+        disableAllActiveSkills();
+        return true;
     }
 
     private boolean isHiding() {
@@ -73,6 +88,9 @@ public class Monster extends Moveable implements MonsterSkills {
         if (isHiding())
             return false; // invisible skill is active
 
+        if (isTrapped())
+            return false;
+
         return true;
     }
 
@@ -88,12 +106,12 @@ public class Monster extends Moveable implements MonsterSkills {
          */
         Random r = new Random();
         int random = r.nextInt(10 - 1 + 1) + 1;
-        if (random == 2) {
+        if (random == 5) {
             // pick a random skill from the available skills
-            random = r.nextInt(getSkills().size() );
+            random = r.nextInt(getSkills().size());
 
             MonsterSkillsType skill = (MonsterSkillsType) getSkills().get(random);
-            switch (skill){
+            switch (skill) {
                 case LEAP:
                     leap();
                     break;
@@ -136,31 +154,12 @@ public class Monster extends Moveable implements MonsterSkills {
         return false;
     }
 
-    /**
-     * freeze the monster once he steps over a trap
-     */
-    private void freeze() {
-        if (isTrapped()) return;
-        freezeTimer = 5;
-    }
-
-    /**
-     * Check if the monster's status is freeze or not
-     *
-     * @return
-     */
-    public boolean isTrapped() {
-        if (freezeTimer == 0) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public void leap() {
         // monster can't leap to player's cell
         if (!canLeap()) return;
 
+//        System.out.println("can leap");
         // set the current cell to be the
         currentCell = player.getCell();
 //        getCell().row = player.getCell().row;
