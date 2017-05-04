@@ -23,6 +23,18 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
     private final int TMARGIN = 100;
 
     public BoardPanel(Grid g, Player p, Monster m,Trap t,Game gm) {
+   private Player player;
+   private Monster monster;
+   private Grid grid;
+   private Graphics gr;
+   private Game game;
+   private final int CELLWIDTH = 40;
+   private final int CELLHEIGHT = 40;
+   private final int LMARGIN = 100;
+   private final int TMARGIN = 100;
+   
+   public BoardPanel(Grid g, Player p, Monster m)
+   {
         player = p;
         grid = g;
         monster = m;
@@ -65,18 +77,22 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
      */
     protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        Cell cells[] = grid.getAllCells();
-        Cell cell;
-        for (int i = 0; i < cells.length; i++) {
-            cell = cells[i];
-            if (cell.col % 5 == 0 && cell.row % 5 == 0)
-                gr.setColor(Color.cyan);
-            else
-                gr.setColor(Color.white);
-            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-            gr.setColor(Color.black);
-            gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-
+  		Cell cells[] = grid.getAllCells();
+		Cell cell;
+        for (int i=0; i<cells.length; i++)
+        {
+           cell = cells[i];
+           if (cell.col%5 == 0 && cell.row%5 == 0)
+        	   gr.setColor(Color.cyan);
+           else 
+        	   gr.setColor(Color.white);
+           gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);         	
+    	   gr.setColor(Color.black);
+           gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+           if (!cell.nougat.isConsumed())
+        	   	{gr.setColor(Color.YELLOW);
+           		gr.fillOval(xCor(cell.col)+CELLWIDTH/4, yCor(cell.row)+CELLWIDTH/4, CELLWIDTH*1/2, CELLHEIGHT*1/2);}
+         
         }
 
         if (trap.isSet()){
