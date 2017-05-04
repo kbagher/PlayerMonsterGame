@@ -38,8 +38,8 @@ public class Game extends JFrame implements Runnable {
         trap = new Trap(grid);
         player = new Player(grid, trap,0, 0,40);
         monster = new Monster(grid, player, trap,5, 5);
-        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
-        monster.addSkill(Monster.MonsterSkillsType.LEAP);
+//        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
+//        monster.addSkill(Monster.MonsterSkillsType.LEAP);
         bp = new BoardPanel(grid, player, monster, trap,this);
 
         // Create a separate panel and add all the buttons
@@ -118,6 +118,11 @@ public class Game extends JFrame implements Runnable {
             e.printStackTrace();
         }
     }
+
+    public void updatePanel(){
+
+    }
+
 
     /* This method waits until play is ready (until start button is pressed)
      * after which it updates the moves in turn until time runs out (player won)

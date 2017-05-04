@@ -19,8 +19,8 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
     private transient Game game;
     private final int CELLWIDTH = 40;
     private final int CELLHEIGHT = 40;
-    private final int LMARGIN = 100;
-    private final int TMARGIN = 100;
+    private final int LMARGIN = 20;
+    private final int TMARGIN = 20;
 
     public BoardPanel(Grid g, Player p, Monster m,Trap t,Game gm) {
         player = p;

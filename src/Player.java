@@ -17,10 +17,10 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
     }
 
     public Cell move() {
-        if (canPerformEnergyAction(calculateCalories(2))) {
+        if (canPerformEnergyAction(calculateCalories(steps))) {
             if (currentDirection != ' ') {
                 //System.out.println(calories+"BEFORe");
-                Cell tempcell = grid.getCell(currentCell, currentDirection, 2);
+                Cell tempcell = grid.getCell(currentCell, currentDirection, steps);
                 steps = grid.distance(currentCell, tempcell);
                 calories -= calculateCalories(steps);
                 //System.out.println(calories+"After "+ steps);
@@ -33,17 +33,16 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
                         calories += currentCell.nougat.getValue();
                         return currentCell;
                     }
-
                     calories += currentCell.nougat.getValue();
                     currentCell.nougat.setConsumed();
                     return currentCell;
-
                 }
-
             }
+            steps =1;
             return currentCell;
-        } else
-            return currentCell;
+        }
+        steps=1;
+        return currentCell;
     }
 
     public int calculateCalories(int steps) {
