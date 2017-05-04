@@ -38,7 +38,7 @@ public class Game extends JFrame implements Runnable {
         pause = false;
         grid = new Grid();
         trap = new Trap(grid);
-        player = new Player(grid, trap,0, 0,40);
+        player = new Player(grid, trap,0, 0,Settings.CALORIES_INITIAL_VALUE);
         monster = new Monster(grid, player, trap,5, 5);
         monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
         monster.addSkill(Monster.MonsterSkillsType.LEAP);

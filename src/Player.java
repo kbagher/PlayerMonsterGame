@@ -21,30 +21,26 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
             if (currentDirection != ' ') {
                 Cell tempcell = grid.getCell(currentCell, currentDirection, steps);
                 steps = grid.distance(currentCell, tempcell);
-                calories -= calculateCalories(steps);
-                if (steps == 0) {
-                    steps = 1;
+                calories = reduceCalories(calculateCalories(steps));
+                //System.out.println(calories+"After "+ steps);
+
+                if (tempcell != null)
                     currentCell = tempcell;
-                    return currentCell;
-                } else {
-                    currentCell = tempcell;
-                    if (currentCell.nougat.isConsumed()) {
-                        calories += currentCell.nougat.getValue();
-                        steps = 1;
-                        return currentCell;
-                    }
+                if (currentCell.nougat.isConsumed()) {
                     calories += currentCell.nougat.getValue();
-                    currentCell.nougat.setConsumed();
                     steps = 1;
                     return currentCell;
                 }
+                calories += currentCell.nougat.getValue();
+                currentCell.nougat.setConsumed();
+                steps = 1;
+                return currentCell;
             }
-            steps = 1;
-            return currentCell;
         }
         steps = 1;
         return currentCell;
     }
+
 
     public int calculateCalories(int steps) {
         int sum = 0;
@@ -55,8 +51,8 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
         return sum;
     }
 
-    public void increaseSteps(){
-        if (steps>=3) return;
+    public void increaseSteps() {
+        if (steps >= 3) return;
         steps++;
     }
 
@@ -82,6 +78,12 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
         return readyToStart;
     }
 
+    public int reduceCalories(int value) {
+        calories -= value;
+        return calories;
+
+    }
+
     @Override
     public void skip(int moves) {
 
@@ -98,6 +100,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
         if (canPerformEnergyAction(Settings.TRAP_REQUIRED_ENERGY)) {
             System.out.println("Setting Trap");
             trap.setTrap(getCell(), Settings.TRAP_DURATION, Settings.TRAP_AFFECT_DURATION);
+            calories = reduceCalories(Settings.TRAP_REQUIRED_ENERGY);
 
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
