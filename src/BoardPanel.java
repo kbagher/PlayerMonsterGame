@@ -32,7 +32,6 @@ public class BoardPanel extends JPanel implements ActionListener {
    /* responds to various button clicked messages */ 
    public void actionPerformed(ActionEvent e)
    {
-	   System.out.println("%%");
 	   if (((JButton)e.getSource()).getText().compareTo("up") == 0)
 	      player.setDirection('U');
 	   else if (((JButton)e.getSource()).getText().compareTo("down") == 0)
@@ -74,6 +73,9 @@ public class BoardPanel extends JPanel implements ActionListener {
            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);         	
     	   gr.setColor(Color.black);
            gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+           if (!cell.nougat.isConsumed())
+        	   	{gr.setColor(Color.YELLOW);
+           		gr.fillOval(xCor(cell.col)+CELLWIDTH/4, yCor(cell.row)+CELLWIDTH/4, CELLWIDTH*1/2, CELLHEIGHT*1/2);}
          
         }
         cell = player.getCell();

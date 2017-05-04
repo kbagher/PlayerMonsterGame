@@ -36,6 +36,25 @@ public class Grid {
 	   Valid direction must be either 'R', 'L', 'U', 'D' or ' '.
 	   A null value will be returned if attempt to get a non-existent cell.
 	*/  
+	public Cell getCell(Cell cell, char direction, int steps)
+	{ 
+		Cell tempCell=null;
+		try {
+			tempCell = getCell(cell.row, cell.col);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i=1;i<=steps;i++)
+		{
+			if (getCell(tempCell, direction)==null)
+				return tempCell;
+			else 
+				tempCell = getCell(tempCell, direction);	
+		}
+		return tempCell;
+		
+		   	}
 	public Cell getCell(Cell cell, char direction)
 	{
        if (direction == ' ') return cell;

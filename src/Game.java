@@ -30,7 +30,7 @@ public class Game extends JFrame {
      */
     public Game() throws Exception {
         grid = new Grid();
-        player = new Player(grid, 0, 0);
+        player = new Player(grid, 0, 0,40);
         monster = new Monster(grid, player, 5, 5);
         monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
 //        monster.addSkill(Monster.MonsterSkillsType.LEAP);

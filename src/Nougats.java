@@ -13,7 +13,10 @@ public class Nougats {
 	public int getValue (){
 		return value;
 	}
-
+	
+	public boolean isConsumed (){
+		return consumed;
+	}
 	public void setConsumed (){
 		value =0;
 		consumed=true;
