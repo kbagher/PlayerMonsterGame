@@ -16,36 +16,41 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
         trap = t;
     }
 
-    public Cell move() {
-        if (canPerformEnergyAction(calculateCalories(steps))) {
-            if (currentDirection != ' ') {
-                Cell tempcell = grid.getCell(currentCell, currentDirection, steps);
-                steps = grid.distance(currentCell, tempcell);
-                calories = reduceCalories(calculateCalories(steps));
-                //System.out.println(calories+"After "+ steps);
+	public Cell move() {
+		if (currentCell.nougat.isConsumed())
+			calories = increaseCalories(currentCell.nougat.getValue());
+		if (canPerformEnergyAction(calculateCalories(steps))) {
+			if (currentDirection != ' ') {
+				System.out.println(calories);
+				Cell tempcell = grid.getCell(currentCell, currentDirection, steps);
+				steps = grid.distance(currentCell, tempcell);
+				calories = reduceCalories(calculateCalories(steps));
+				// System.out.println(calories+"After "+ steps);
 
-                if (tempcell != null)
-                    currentCell = tempcell;
-                if (currentCell.nougat.isConsumed()) {
-                    calories += currentCell.nougat.getValue();
-                    steps = 1;
-                    return currentCell;
-                }
-                calories += currentCell.nougat.getValue();
-                currentCell.nougat.setConsumed();
-                steps = 1;
-                return currentCell;
-            }
-        }
-        steps = 1;
-        return currentCell;
-    }
+				if (tempcell != null)
+					currentCell = tempcell;
+				if (currentCell.nougat.isConsumed()) {
+					calories = increaseCalories(currentCell.nougat.getValue());
+					steps = 1;
+					return currentCell;
+				}
+				calories += currentCell.nougat.getValue();
+				currentCell.nougat.setConsumed();
+				steps = 1;
+				return currentCell;
 
+			}
+			steps = 1;
+			return currentCell;
+		}
+		steps = 1;
+		return currentCell;
+	}
 
-    public int calculateCalories(int steps) {
-        int sum = 0;
-        for (int i = 1; i <= steps; i++) {
-            sum += Math.pow(2, i);
+	public int calculateCalories(int steps) {
+		int sum = 0;
+		for (int i = 1; i <= steps; i++) {
+			sum += Math.pow(Settings.STEP_CONSUMED_CALORIES, i);
 
         }
         return sum;
@@ -74,15 +79,24 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
         readyToStart = val;
     }
 
-    public boolean isReady() {
-        return readyToStart;
-    }
+	public boolean isReady() {
+		return readyToStart;
+	}
 
-    public int reduceCalories(int value) {
-        calories -= value;
-        return calories;
+	public int reduceCalories(int value) {
+		calories -= value;
+		return calories;
 
-    }
+	}
+
+	public int increaseCalories(int value) {
+		calories += value;
+		return calories;
+	}
+
+	public int getCalories() {
+		return calories;
+	}
 
     @Override
     public void skip(int moves) {
