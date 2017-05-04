@@ -19,29 +19,30 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
     public Cell move() {
         if (canPerformEnergyAction(calculateCalories(steps))) {
             if (currentDirection != ' ') {
-                //System.out.println(calories+"BEFORe");
                 Cell tempcell = grid.getCell(currentCell, currentDirection, steps);
                 steps = grid.distance(currentCell, tempcell);
                 calories -= calculateCalories(steps);
-                //System.out.println(calories+"After "+ steps);
                 if (steps == 0) {
+                    steps = 1;
                     currentCell = tempcell;
                     return currentCell;
                 } else {
                     currentCell = tempcell;
                     if (currentCell.nougat.isConsumed()) {
                         calories += currentCell.nougat.getValue();
+                        steps = 1;
                         return currentCell;
                     }
                     calories += currentCell.nougat.getValue();
                     currentCell.nougat.setConsumed();
+                    steps = 1;
                     return currentCell;
                 }
             }
-            steps =1;
+            steps = 1;
             return currentCell;
         }
-        steps=1;
+        steps = 1;
         return currentCell;
     }
 
@@ -52,6 +53,11 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
 
         }
         return sum;
+    }
+
+    public void increaseSteps(){
+        if (steps>=3) return;
+        steps++;
     }
 
     public boolean canPerformEnergyAction(int requiredCalories) {
@@ -89,9 +95,10 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
 
         // TODO: call canPerformEnergyAction(calories)
         // enough calories to put a trap
-        if (true) {
+        if (canPerformEnergyAction(Settings.TRAP_REQUIRED_ENERGY)) {
             System.out.println("Setting Trap");
             trap.setTrap(getCell(), Settings.TRAP_DURATION, Settings.TRAP_AFFECT_DURATION);
+
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
                 player.playAudio("place_trap.wav");

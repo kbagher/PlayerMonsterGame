@@ -27,6 +27,7 @@ public class Game extends JFrame implements Runnable {
     private Trap trap;
     private Monster monster;
     private BoardPanel bp;
+    private boolean pause;
 
 
     /* This constructor creates the main model objects and the panel used for UI.
@@ -34,12 +35,13 @@ public class Game extends JFrame implements Runnable {
      * monster in an invalid location.
      */
     public Game() throws Exception {
+        pause = false;
         grid = new Grid();
         trap = new Trap(grid);
         player = new Player(grid, trap,0, 0,40);
         monster = new Monster(grid, player, trap,5, 5);
-//        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
-//        monster.addSkill(Monster.MonsterSkillsType.LEAP);
+        monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
+        monster.addSkill(Monster.MonsterSkillsType.LEAP);
         bp = new BoardPanel(grid, player, monster, trap,this);
 
         // Create a separate panel and add all the buttons
@@ -98,8 +100,8 @@ public class Game extends JFrame implements Runnable {
         }
     }
 
-    public void pauseGame(){
-
+    public void pauseAnResumeGame(){
+        pause=!pause;
     }
 
 
@@ -137,6 +139,12 @@ public class Game extends JFrame implements Runnable {
         while (!player.isReady())
             delay(100);
         do {
+
+            if (pause){
+                delay(1000);
+                continue;
+            }
+
             trap.update();
 
             Cell newPlayerCell = player.move();
@@ -181,7 +189,9 @@ public class Game extends JFrame implements Runnable {
 
     public static void main(String args[]) throws Exception {
         Game game = new Game();
-        game.run();
+        Thread t = new Thread(game);
+        t.start();
+        System.out.println("hello");
 //        game.setTitle("Monster Game");
 //        game.setSize(700, 700);
 //        game.setLocationRelativeTo(null);  // center the frame

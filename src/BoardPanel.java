@@ -19,8 +19,8 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
     private transient Game game;
     private final int CELLWIDTH = 40;
     private final int CELLHEIGHT = 40;
-    private final int LMARGIN = 20;
-    private final int TMARGIN = 20;
+    private final int LMARGIN = 50;
+    private final int TMARGIN = 50;
 
     public BoardPanel(Grid g, Player p, Monster m,Trap t,Game gm) {
         player = p;
@@ -145,7 +145,10 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
             player.putTrap();
         }
         else if (e.getKeyCode() == KeyEvent.VK_P) {
-            game.notify();
+            game.pauseAnResumeGame();
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            player.increaseSteps();
         }
     }
 }
