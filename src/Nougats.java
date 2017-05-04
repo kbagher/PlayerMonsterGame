@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Nougats {
+public class Nougats  implements Serializable{
 	
 	private int value ;
 	private boolean consumed;

@@ -3,36 +3,36 @@
  * The canView attribute can be used to limit monster visibility
  */
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Random;
 
-public class Monster extends Moveable implements MonsterSkills {
+public class Monster extends Moveable implements MonsterSkills, Serializable {
     private Player player;
+    private Trap trap;
     private int hideTime;
+    private boolean steppedOverTrap;
 
-    public Monster(Grid g, Player p, int row, int col) throws Exception {
+    public Monster(Grid g, Player p, Trap t, int row, int col) throws Exception {
         super(g);
         player = p;
+        trap = t;
         setCell(grid.getCell(row, col));
+        steppedOverTrap = false;
     }
 
     public Cell move() {
-        /**
-         * 1- if trapped then don't move and don't do any skill
-         * 2- decrease the freeze timer
-         * 3- can perform skills? chek if there are any active skill
-         * 4- decrease hide timer
-         * 4- if no, then perform skill
-         * 4- return the direction
-         */
-
         // don't move if the monster is trapped
         if (isTrapped()) {
             return getCell();
         }
+        steppedOverTrap=false;
 
         if (canPerformSkill()) {
             performRandomSkill();
         }
+        if (currentCell.equals(player.getCell()))
+            return currentCell;
         currentDirection = grid.getBestDirection(currentCell, player.getCell());
         currentCell = (grid.getCell(getCell(), getDirection()));
         return currentCell;
@@ -49,16 +49,28 @@ public class Monster extends Moveable implements MonsterSkills {
     }
 
     private boolean isTrapped() {
-        Trap trap = grid.getCurrentTrap();
-        if (trap != null) {
-            if (trap.getCell().equals(getCell())) {
-                if (trap.stepOver())
-                    return false;
-                disableAllActiveSkills();
-                return true;
+        if (!trap.isSet())
+            return false;
+
+        if (!trap.isTrapped(getCell()))
+            return false;
+
+        // monster is trapped
+        if (!steppedOverTrap){
+            trap.stepOver(); // first step
+            steppedOverTrap=true;
+            try {
+                GameAudioPlayer player = new GameAudioPlayer();
+                player.playAudio("monster_trapped.wav");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        return false;
+
+
+        // remove all active skills
+        disableAllActiveSkills();
+        return true;
     }
 
     private boolean isHiding() {
@@ -76,7 +88,7 @@ public class Monster extends Moveable implements MonsterSkills {
         if (isHiding())
             return false; // invisible skill is active
 
-        if(isTrapped())
+        if (isTrapped())
             return false;
 
         return true;
@@ -147,6 +159,7 @@ public class Monster extends Moveable implements MonsterSkills {
         // monster can't leap to player's cell
         if (!canLeap()) return;
 
+//        System.out.println("can leap");
         // set the current cell to be the
         currentCell = player.getCell();
 //        getCell().row = player.getCell().row;

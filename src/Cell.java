@@ -1,7 +1,9 @@
 /* This class represents the individual cell in the grid.
  */
 
-public class Cell {
+import java.io.Serializable;
+
+public class Cell implements Serializable{
    protected int row;
    protected int col;
    protected Nougats nougat;

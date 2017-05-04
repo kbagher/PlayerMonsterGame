@@ -1,42 +1,76 @@
-
-public class Trap {
+public class Trap extends Sprite {
 
     private int affectTime;
     private int durationTime;
-    private Cell currentCell;
     private boolean isSteppedOver;
 
-    public Trap(Cell cell,int affectTime, int durationTime) {
-        this.affectTime = affectTime;
-        this.durationTime = durationTime;
-        this.currentCell = cell;
+    public Trap(Grid g) {
+        super(g);
         isSteppedOver = false;
     }
 
-    public Cell getCell(){
-        return currentCell;
+    public int getAffectTime() {
+        return affectTime;
+    }
+
+    public void setAffectTime(int affectTime) {
+        this.affectTime = affectTime;
+    }
+
+    public void setDurationTime(int durationTime) {
+        this.durationTime = durationTime;
     }
 
     public int getDurationTime() {
         return durationTime;
     }
 
-
-    public boolean stepOver(){
-        isSteppedOver = true;
-        if(affectTime!=0)
-            return false;
-        return true;
+    public boolean isTrapped(Cell cell) {
+        if (getCell().equals(cell)) {
+            if (affectTime > 0)
+                return true;
+        }
+        return false;
     }
 
-    public int updateTime() {
-        if (isSteppedOver){
-            return affectTime--;
-        }
-        else if (durationTime == 0)
-            return 0;
-        else {
-            return durationTime--;
+
+    public void stepOver() {
+        isSteppedOver = true;
+    }
+
+
+    public boolean isSet() {
+        return getCell() == null ? false : true;
+    }
+
+
+    public void setTrap(Cell cell, int durationTime, int affectTime) {
+        this.durationTime = durationTime;
+        this.affectTime = affectTime;
+        setCell(cell);
+    }
+
+    private void removeTrap() {
+        setCell(null);
+        isSteppedOver = false;
+        this.durationTime = 0;
+        this.affectTime = 0;
+    }
+
+    public void update() {
+        if (!isSet())
+            return;
+
+        if (isSteppedOver && affectTime > 0) {
+            if (affectTime-- == 1)
+                removeTrap();
+            durationTime = 0;
+        } else if (isSteppedOver && affectTime == 0) {
+            removeTrap();
+        } else if (durationTime <= 1) {
+            removeTrap();
+        } else {
+            durationTime--;
         }
     }
 

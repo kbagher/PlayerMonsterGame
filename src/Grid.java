@@ -4,14 +4,14 @@
  * 0 to 10. Furthermore, either row or column must be 0, 5 or 10.    
 */
 
-public class Grid {
+import java.io.Serializable;
+
+public class Grid implements Serializable{
 
     Cell cells[] = new Cell[57];
     Cell cells2D[][] = new Cell[11][11];
-    private Trap currentTrap;
 
     public Grid() {
-        currentTrap = null;
         int k = 0;
         for (int i = 0; i < 11; i++)
             for (int j = 0; j < 11; j++)
@@ -19,21 +19,6 @@ public class Grid {
                     cells2D[i][j] = new Cell(i, j, 6);
                     cells[k++] = cells2D[i][j];
                 }
-    }
-
-    public void updateTrap() {
-        if (currentTrap == null) return;
-        if (currentTrap.updateTime()==0)
-            currentTrap=null;
-    }
-
-    public void setTrap(Cell cell) {
-        if (currentTrap==null)
-            currentTrap = new Trap(cell, Settings.TRAP_AFFECT_DURATION, Settings.TRAP_DURATION);
-    }
-
-    public Trap getCurrentTrap() {
-        return currentTrap;
     }
 
     /* Returns a reference to the specified cell.

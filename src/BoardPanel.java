@@ -13,18 +13,21 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
 
     private Player player;
     private Monster monster;
+    private Trap trap;
     private Grid grid;
     private Graphics gr;
-    private Game game;
+    private transient Game game;
     private final int CELLWIDTH = 40;
     private final int CELLHEIGHT = 40;
     private final int LMARGIN = 100;
     private final int TMARGIN = 100;
 
-    public BoardPanel(Grid g, Player p, Monster m) {
+    public BoardPanel(Grid g, Player p, Monster m,Trap t,Game gm) {
         player = p;
         grid = g;
         monster = m;
+        trap = t;
+        game = gm;
         gr = this.getGraphics();
         addKeyListener(this);
         setFocusable(true);
@@ -76,8 +79,8 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
 
         }
 
-        if (grid.getCurrentTrap()!=null){
-            cell= grid.getCurrentTrap().getCell();
+        if (trap.isSet()){
+            cell= trap.getCell();
             ImageIcon icon = new ImageIcon("./trap.png");
             icon.paintIcon(this, gr, xCor(cell.col) +CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
 //            gr.setColor(Color.BLUE);
@@ -112,6 +115,7 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
     @Override
     public void keyTyped(KeyEvent e) {
 //        System.out.println("keyTyped: "+e);
+
     }
 
     @Override
@@ -136,7 +140,8 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
         else if (e.getKeyCode() == KeyEvent.VK_T) {
             player.putTrap();
         }
-
-//        System.out.println("keyReleased: "+e);
+        else if (e.getKeyCode() == KeyEvent.VK_P) {
+            game.notify();
+        }
     }
 }
