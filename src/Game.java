@@ -36,8 +36,8 @@ public class Game extends JFrame implements Runnable {
     public Game() throws Exception {
         grid = new Grid();
         trap = new Trap(grid);
-        player = new Player(grid, 0, 0,40);
-        monster = new Monster(grid, player, 5, 5);
+        player = new Player(grid, trap,0, 0,40);
+        monster = new Monster(grid, player, trap,5, 5);
         monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
         monster.addSkill(Monster.MonsterSkillsType.LEAP);
         bp = new BoardPanel(grid, player, monster, trap,this);
