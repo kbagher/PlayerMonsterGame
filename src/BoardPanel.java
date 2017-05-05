@@ -38,20 +38,26 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
     /* responds to various button clicked messages */
     public void actionPerformed(ActionEvent e) {
         System.out.println("called");
-        if (((JButton) e.getSource()).getText().compareTo("up") == 0)
+        if (((JButton) e.getSource()).getText().compareTo("Up") == 0)
             player.setDirection('U');
-        else if (((JButton) e.getSource()).getText().compareTo("down") == 0)
+        else if (((JButton) e.getSource()).getText().compareTo("Down") == 0)
             player.setDirection('D');
-        else if (((JButton) e.getSource()).getText().compareTo("left") == 0)
+        else if (((JButton) e.getSource()).getText().compareTo("Left") == 0)
             player.setDirection('L');
-        else if (((JButton) e.getSource()).getText().compareTo("right") == 0)
+        else if (((JButton) e.getSource()).getText().compareTo("Right") == 0)
             player.setDirection('R');
         else if (((JButton) e.getSource()).getText().compareTo("Start") == 0)
             player.setReady(true);
-        else if (((JButton) e.getSource()).getText().compareTo("trap") == 0)
+        else if (((JButton) e.getSource()).getText().compareTo("Trap") == 0)
             player.putTrap();
         else if (((JButton) e.getSource()).getText().compareTo("Save Settings") == 0)
             game.updateSettingsVariables();
+        else if (((JButton) e.getSource()).getText().compareTo("Restart") == 0)
+            game.restartGame();
+        else if (((JButton) e.getSource()).getText().compareTo("Pause") == 0)
+            game.pauseAnResumeGame();
+        else if (((JButton) e.getSource()).getText().compareTo("Resume") == 0)
+            game.pauseAnResumeGame();
     }
 
     /* returns the x coordinate based on left margin and cell width */
@@ -124,17 +130,11 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-//        System.out.println("keyTyped: "+e);
 
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-//        System.out.println("keyPressed: "+e);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             player.setDirection('L');
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -143,12 +143,20 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             player.setDirection('D');
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             player.setDirection('U');
-        } else if (e.getKeyCode() == KeyEvent.VK_T) {
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_T) {
             player.putTrap();
         } else if (e.getKeyCode() == KeyEvent.VK_P) {
             game.pauseAnResumeGame();
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             player.skip();
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_S) {
+            player.setReady(true);
         }
     }
 }

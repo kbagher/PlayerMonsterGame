@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
  * It also implements the main game loop 
  */
 
-public class Game extends JFrame implements Runnable {
+public class Game extends JFrame {
 
     // labels
     private JLabel mLabel = new JLabel("Time Remaining : " + Settings.getTimeAllowed());
@@ -69,6 +69,7 @@ public class Game extends JFrame implements Runnable {
     private Monster monster;
     private BoardPanel bp;
     private boolean pause;
+    private boolean restart;
 
 
     public void setupControls() {
@@ -86,6 +87,8 @@ public class Game extends JFrame implements Runnable {
         pnDashboard.setLayout(gbDashboard);
 
         btLeft = new JButton("Left");
+        btLeft.setFocusable(false);
+        btLeft.addActionListener(bp);
         gbcDashboard.gridx = 0;
         gbcDashboard.gridy = 1;
         gbcDashboard.gridwidth = 1;
@@ -98,6 +101,8 @@ public class Game extends JFrame implements Runnable {
         pnDashboard.add(btLeft);
 
         btUp = new JButton("Up");
+        btUp.setFocusable(false);
+        btUp.addActionListener(bp);
         gbcDashboard.gridx = 1;
         gbcDashboard.gridy = 0;
         gbcDashboard.gridwidth = 1;
@@ -110,6 +115,8 @@ public class Game extends JFrame implements Runnable {
         pnDashboard.add(btUp);
 
         btRight = new JButton("Right");
+        btRight.setFocusable(false);
+        btRight.addActionListener(bp);
         gbcDashboard.gridx = 2;
         gbcDashboard.gridy = 1;
         gbcDashboard.gridwidth = 1;
@@ -122,6 +129,8 @@ public class Game extends JFrame implements Runnable {
         pnDashboard.add(btRight);
 
         btDown = new JButton("Down");
+        btDown.setFocusable(false);
+        btDown.addActionListener(bp);
         gbcDashboard.gridx = 1;
         gbcDashboard.gridy = 1;
         gbcDashboard.gridwidth = 1;
@@ -162,6 +171,7 @@ public class Game extends JFrame implements Runnable {
 
         btPause = new JButton("Pause");
         btPause.setFocusable(false);
+        btPause.addActionListener(bp);
         gbcDashboard.gridx = 2;
         gbcDashboard.gridy = 2;
         gbcDashboard.gridwidth = 1;
@@ -519,6 +529,7 @@ public class Game extends JFrame implements Runnable {
         pnSettings.add(cbMonsterHide);
 
         btSaveSettings = new JButton("Save Settings");
+        btSaveSettings.setFocusable(false);
         btSaveSettings.addActionListener(bp);
         gbcSettings.gridx = 4;
         gbcSettings.gridy = 3;
@@ -615,8 +626,9 @@ public class Game extends JFrame implements Runnable {
             monster.removeSkill(Monster.MonsterSkillsType.INVISIBLE);
     }
 
-    private void reflectGameSettings(){
+    private void prepareToStartGame() {
         player.setCalories(Settings.getCaloriesInitialValue());
+        btStart.setText("Restart");
     }
 
     /* This constructor creates the main model objects and the panel used for UI.
@@ -625,6 +637,7 @@ public class Game extends JFrame implements Runnable {
      */
     public Game() throws Exception {
         pause = false;
+        restart = false;
         grid = new Grid();
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Settings.getCaloriesInitialValue());
@@ -665,9 +678,19 @@ public class Game extends JFrame implements Runnable {
     }
 
     public void pauseAnResumeGame() {
-        pause = !pause;
+        if (!pause){
+            pause = !pause;
+            btPause.setText("Resume");
+        }
+        else{
+            pause = !pause;
+            btPause.setText("Pause");
+        }
     }
-
+    public void restartGame() {
+        System.out.println("restart");
+        restart=true;
+    }
 
     public void playBackgroundMusic() {
         try {
@@ -686,16 +709,12 @@ public class Game extends JFrame implements Runnable {
         }
     }
 
-    public void updatePanel() {
-
-    }
-
 
     /* This method waits until play is ready (until start button is pressed)
      * after which it updates the moves in turn until time runs out (player won)
      * or player is eaten up (player lost).
      */
-    public String play() {
+    public void play() {
         int time = 0;
         String message;
         player.setDirection(' '); // set to no direction
@@ -703,10 +722,9 @@ public class Game extends JFrame implements Runnable {
         while (!player.isReady())
             delay(100);
 
-        reflectGameSettings();
+        prepareToStartGame();
 
         do {
-
             if (pause) {
                 delay(1000);
                 continue;
@@ -729,8 +747,7 @@ public class Game extends JFrame implements Runnable {
             lbEnergy.setText("" + player.getCalories());
             delay(Settings.getGameSpeed());
             bp.repaint();
-
-        } while (time < Settings.getTimeAllowed());
+        } while (time < Settings.getTimeAllowed() && !restart);
 
         if (time < Settings.getTimeAllowed()) {
             // players has been eaten up
@@ -751,32 +768,26 @@ public class Game extends JFrame implements Runnable {
             }
         }
         lbStatus.setText(message);
-        return message;
+
+        do {
+            delay(1000);
+        } while (!restart);
+
     }
 
     public static void main(String args[]) throws Exception {
-        Game game = new Game();
-        Thread t = new Thread(game);
-        t.start();
-
-//        game.setTitle("Monster Game");
-//        game.setSize(700, 700);
-//        game.setLocationRelativeTo(null);  // center the frame
-//        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        game.setVisible(true);
-//        game.playBackgroundMusic();
-//        game.play();
-
-    }
-
-    @Override
-    public void run() {
-        setTitle("Monster Game");
-        setSize(700, 700);
-        setLocationRelativeTo(null);  // center the frame
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-        playBackgroundMusic();
-        play();
+        boolean firstRun = true;
+        do {
+            Game game = new Game();
+            game.player.setReady(!firstRun);
+            game.setTitle("Monster Game");
+            game.setSize(700, 700);
+            game.setLocationRelativeTo(null);  // center the frame
+            game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            game.setVisible(true);
+            game.playBackgroundMusic();
+            game.play();
+            firstRun=false;
+        } while (true);
     }
 }

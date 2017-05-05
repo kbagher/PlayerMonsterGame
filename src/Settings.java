@@ -2,8 +2,8 @@
  * Created by kassem on 3/5/17.
  */
 public class Settings {
-    private static int GAME_SPEED = 300;
-    private static int TIME_ALLOWED = 200;
+    private static int GAME_SPEED = 250;
+    private static int TIME_ALLOWED = 60;
     private static int TRAP_DURATION = 10;
     private static int TRAP_REQUIRED_ENERGY = 50;
     private static int TRAP_EFFECT_DURATION = 5;
