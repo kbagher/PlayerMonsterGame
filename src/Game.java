@@ -777,6 +777,7 @@ public class Game extends JFrame {
 
     public static void main(String args[]) throws Exception {
         boolean firstRun = true;
+
         do {
             Game game = new Game();
             game.player.setReady(!firstRun);

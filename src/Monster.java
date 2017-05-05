@@ -74,10 +74,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
     }
 
     private boolean isHiding() {
-        if (hideTime == 0) {
-            return false;
-        }
-        return true;
+        return hideTime != 0;
     }
 
     private boolean canPerformSkill() {
@@ -88,10 +85,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         if (isHiding())
             return false; // invisible skill is active
 
-        if (isTrapped())
-            return false;
-
-        return true;
+        return !isTrapped();
     }
 
 

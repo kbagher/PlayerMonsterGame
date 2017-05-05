@@ -35,10 +35,8 @@ public abstract class Moveable extends Sprite {
     public boolean hasSkill(Object skill){
         if (getSkills().size() == 0) return false;
 
-        if(getSkills().contains(skill))
-            return true;
+        return getSkills().contains(skill);
 
-        return false;
     }
 
 

@@ -47,9 +47,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
     }
 
     public boolean canPerformEnergyAction(int requiredCalories) {
-        if (requiredCalories <= calories)
-            return true;
-        return false;
+        return requiredCalories <= calories;
     }
 
     public void setReady(boolean val) {

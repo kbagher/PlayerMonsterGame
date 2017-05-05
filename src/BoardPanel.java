@@ -15,7 +15,6 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
     private Monster monster;
     private Trap trap;
     private Grid grid;
-    private Graphics gr;
     private transient Game game;
     private final int CELLWIDTH = 40;
     private final int CELLHEIGHT = 40;
@@ -28,10 +27,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
         monster = m;
         trap = t;
         game = gm;
-        gr = this.getGraphics();
         addKeyListener(this);
         setFocusable(true);
-        setBackground(Color.GRAY);
     }
 
 

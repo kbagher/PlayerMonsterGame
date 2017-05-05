@@ -19,8 +19,8 @@ public class GameAudioPlayer {
         sun.audio.AudioPlayer.player.start(audio);
     }
 
-    public void stopAudio(){
-        if (audio!=null){
+    public void stopAudio() {
+        if (audio != null) {
             System.out.println("stop");
             sun.audio.AudioPlayer.player.stop(audio);
         }

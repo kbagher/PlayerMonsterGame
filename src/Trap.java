@@ -22,7 +22,7 @@ public class Trap extends Sprite {
     }
 
     public boolean isSet() {
-        return getCell() == null ? false : true;
+        return getCell() != null;
     }
 
     public void setTrap(Cell cell) {
