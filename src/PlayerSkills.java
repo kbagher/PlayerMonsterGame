@@ -5,6 +5,6 @@ public interface PlayerSkills {
     public enum PlayerSkillsType{
         TRAP,SKIP
     }
-    public void skip(int moves);
+    public void skip();
     public void putTrap();
 }

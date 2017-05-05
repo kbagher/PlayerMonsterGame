@@ -25,6 +25,23 @@ public abstract class Moveable extends Sprite {
         return true;
     }
 
+    public void removeSkill(Object skill) {
+        if (skills.size()==0) return;
+
+        if (skills.contains(skill))
+            skills.remove(skill);
+    }
+
+    public boolean hasSkill(Object skill){
+        if (getSkills().size() == 0) return false;
+
+        if(getSkills().contains(skill))
+            return true;
+
+        return false;
+    }
+
+
     public ArrayList<?> getSkills() {
         return skills;
     }

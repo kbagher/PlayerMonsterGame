@@ -9,7 +9,7 @@ import java.awt.*;
  * The overridden paintcompnent() is called whenever the board
  * or the pieces needs to be updated 
  */
-public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
+public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
     private Player player;
     private Monster monster;
@@ -19,10 +19,10 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
     private transient Game game;
     private final int CELLWIDTH = 40;
     private final int CELLHEIGHT = 40;
-    private final int LMARGIN = 50;
-    private final int TMARGIN = 50;
+    private final int LMARGIN = 130;
+    private final int TMARGIN = 30;
 
-    public BoardPanel(Grid g, Player p, Monster m,Trap t,Game gm) {
+    public BoardPanel(Grid g, Player p, Monster m, Trap t, Game gm) {
         player = p;
         grid = g;
         monster = m;
@@ -31,7 +31,9 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
         gr = this.getGraphics();
         addKeyListener(this);
         setFocusable(true);
+        setBackground(Color.GRAY);
     }
+
 
     /* responds to various button clicked messages */
     public void actionPerformed(ActionEvent e) {
@@ -44,10 +46,12 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
             player.setDirection('L');
         else if (((JButton) e.getSource()).getText().compareTo("right") == 0)
             player.setDirection('R');
-        else if (((JButton) e.getSource()).getText().compareTo("start") == 0)
+        else if (((JButton) e.getSource()).getText().compareTo("Start") == 0)
             player.setReady(true);
         else if (((JButton) e.getSource()).getText().compareTo("trap") == 0)
             player.putTrap();
+        else if (((JButton) e.getSource()).getText().compareTo("Save Settings") == 0)
+            game.updateSettingsVariables();
     }
 
     /* returns the x coordinate based on left margin and cell width */
@@ -65,28 +69,30 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
      */
     protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-  		Cell cells[] = grid.getAllCells();
-		Cell cell;
-        for (int i=0; i<cells.length; i++)
-        {
-           cell = cells[i];
-           if (cell.col%5 == 0 && cell.row%5 == 0)
-        	   gr.setColor(Color.cyan);
-           else 
-        	   gr.setColor(Color.white);
-           gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);         	
-    	   gr.setColor(Color.black);
-           gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-           if (!cell.nougat.isConsumed())
-        	   	{gr.setColor(Color.YELLOW);
-           		gr.fillOval(xCor(cell.col)+CELLWIDTH/4, yCor(cell.row)+CELLWIDTH/4, CELLWIDTH*1/2, CELLHEIGHT*1/2);}
-         
+        Cell cells[] = grid.getAllCells();
+        Cell cell;
+        for (int i = 0; i < cells.length; i++) {
+            cell = cells[i];
+            if (cell.col % 5 == 0 && cell.row % 5 == 0)
+                gr.setColor(Color.cyan);
+            else
+                gr.setColor(Color.white);
+            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+            gr.setColor(Color.black);
+            gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+            if (!cell.nougat.isConsumed()) {
+                ImageIcon icon = new ImageIcon("./coin.png");
+                icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
+//                gr.setColor(Color.YELLOW);
+//                gr.fillOval(xCor(cell.col) + CELLWIDTH / 4, yCor(cell.row) + CELLWIDTH / 4, CELLWIDTH * 1 / 2, CELLHEIGHT * 1 / 2);
+            }
+
         }
 
-        if (trap.isSet()){
-            cell= trap.getCell();
+        if (trap.isSet()) {
+            cell = trap.getCell();
             ImageIcon icon = new ImageIcon("./trap.png");
-            icon.paintIcon(this, gr, xCor(cell.col) +CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
+            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
 //            gr.setColor(Color.BLUE);
 //            gr.fillOval(xCor(cell.col)+CELLWIDTH/8, yCor(cell.row)+CELLWIDTH/8, CELLWIDTH*3/4, CELLHEIGHT*3/4);
 //            gr.setColor(Color.white);
@@ -95,7 +101,7 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
 
         cell = player.getCell();
         ImageIcon icon = new ImageIcon("./player.png");
-        icon.paintIcon(this, gr, xCor(cell.col) +CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
+        icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
 
 
 //        cell = player.getCell();
@@ -107,7 +113,7 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
         if (monster.viewable()) {
             cell = monster.getCell();
             icon = new ImageIcon("./monster.png");
-            icon.paintIcon(this, gr, xCor(cell.col) +CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
+            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
 
 //            gr.setColor(Color.black);
 //            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
@@ -131,24 +137,18 @@ public class BoardPanel extends JPanel implements ActionListener,KeyListener  {
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             player.setDirection('L');
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             player.setDirection('R');
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             player.setDirection('D');
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_UP) {
+        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             player.setDirection('U');
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_T) {
+        } else if (e.getKeyCode() == KeyEvent.VK_T) {
             player.putTrap();
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_P) {
+        } else if (e.getKeyCode() == KeyEvent.VK_P) {
             game.pauseAnResumeGame();
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            player.increaseSteps();
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            player.skip();
         }
     }
 }

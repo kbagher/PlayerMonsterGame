@@ -94,6 +94,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         return true;
     }
 
+
     /**
      * perform random monster capability
      */
@@ -159,11 +160,9 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         // monster can't leap to player's cell
         if (!canLeap()) return;
 
-//        System.out.println("can leap");
+        System.out.println("LEAP :D");
         // set the current cell to be the
         currentCell = player.getCell();
-//        getCell().row = player.getCell().row;
-//        getCell().col = player.getCell().col;
     }
 
     @Override

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<jpanel name="Panel0" title="" class="0" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="50" maxy="27">
+   <jpanel name="Panel4" title="Control" class="0" bordered="1" scrollbars="0" x="0" y="0" dx="5" dy="20" wx="0" wy="0" fill="1" anchor="11" insets="0,0,0,0" maxx="30" maxy="14">
+      <jbutton name="But4" title="UP" x="2" y="0" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jbutton>
+      <jbutton name="But5" title="Right" x="3" y="1" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jbutton>
+      <jbutton name="But6" title="Left" x="0" y="1" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jbutton>
+      <jbutton name="But7" title="Down" x="2" y="1" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jbutton>
+      <jbutton name="But9" title="Start" x="0" y="6" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="15,0,0,0">
+      </jbutton>
+      <jbutton name="But10" title="Pause" x="2" y="6" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="15,0,0,0">
+      </jbutton>
+      <jbutton name="But11" title="Restart" x="4" y="6" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="15,0,0,0">
+      </jbutton>
+   </jpanel>
+   <jpanel name="Panel8" title="Settings" class="0" bordered="1" scrollbars="0" x="5" y="0" dx="23" dy="20" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0" maxx="19" maxy="19">
+      <jlabel name="Label0" title="Speed" scrollbars="0" x="0" y="0" dx="4" dy="2" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+      </jlabel>
+      <jlabel name="Label1" title="Time" scrollbars="0" x="0" y="2" dx="4" dy="2" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+      </jlabel>
+      <jtextfield name="Text0" x="4" y="0" dx="4" dy="2" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jtextfield>
+      <jtextfield name="Text1" x="4" y="2" dx="4" dy="2" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jtextfield>
+      <jlabel name="Label2" title="Initial energy" scrollbars="0" x="0" y="4" dx="4" dy="2" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+      </jlabel>
+      <jlabel name="Label3" title="Coin energy" scrollbars="0" x="0" y="6" dx="4" dy="2" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+      </jlabel>
+      <jlabel name="Label4" title="Trap energy" scrollbars="0" x="8" y="2" dx="4" dy="2" wx="1" wy="1" fill="1" anchor="11" insets="0,10,0,0">
+      </jlabel>
+      <jlabel name="Label5" title="Step energy" scrollbars="0" x="8" y="0" dx="4" dy="2" wx="1" wy="1" fill="1" anchor="11" insets="0,10,0,0">
+      </jlabel>
+      <jlabel name="Label7" title="Trap effect time" scrollbars="0" x="8" y="4" dx="4" dy="2" wx="1" wy="1" fill="1" anchor="11" insets="0,10,0,0">
+      </jlabel>
+      <jlabel name="Label9" title="Trap lifetime" scrollbars="0" x="8" y="6" dx="4" dy="2" wx="1" wy="1" fill="1" anchor="11" insets="0,10,0,0">
+      </jlabel>
+      <jtextfield name="Text2" x="4" y="4" dx="4" dy="2" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jtextfield>
+      <jtextfield name="Text3" x="4" y="6" dx="4" dy="2" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jtextfield>
+      <jtextfield name="Text4" x="12" y="0" dx="4" dy="2" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jtextfield>
+      <jtextfield name="Text5" x="12" y="2" dx="4" dy="2" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jtextfield>
+      <jtextfield name="Text6" x="12" y="4" dx="4" dy="2" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jtextfield>
+      <jtextfield name="Text7" x="12" y="6" dx="4" dy="2" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+      </jtextfield>
+   </jpanel>
+   <jpanel name="Panel10" title="Top Players" class="0" bordered="1" scrollbars="0" x="28" y="0" dx="18" dy="21" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0" maxx="18" maxy="21">
+      <jtable name="Table0" scrollbars="0" x="0" y="0" dx="18" dy="17" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+         <complists>
+            <complist>
+               <complistitem>11</complistitem>
+               <complistitem>12</complistitem>
+               <complistitem>13</complistitem>
+            </complist>
+            <complist>
+               <complistitem>21</complistitem>
+               <complistitem>22</complistitem>
+               <complistitem>23</complistitem>
+            </complist>
+         </complists>
+      </jtable>
+   </jpanel>
+</jpanel>
