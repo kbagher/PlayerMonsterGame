@@ -22,6 +22,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
     private final int TMARGIN = 30;
 
     public BoardPanel(Grid g, Player p, Monster m, Trap t, Game gm) {
+        updatePabel(g,p,m,t,gm);
+    }
+
+    public void updatePabel(Grid g, Player p, Monster m, Trap t, Game gm){
         player = p;
         grid = g;
         monster = m;
@@ -84,7 +88,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             gr.setColor(Color.black);
             gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
             if (!cell.nougat.isConsumed()) {
-                ImageIcon icon = new ImageIcon("./coin.png");
+                ImageIcon icon = new ImageIcon("assets/coin.png");
                 icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
 //                gr.setColor(Color.YELLOW);
 //                gr.fillOval(xCor(cell.col) + CELLWIDTH / 4, yCor(cell.row) + CELLWIDTH / 4, CELLWIDTH * 1 / 2, CELLHEIGHT * 1 / 2);
@@ -94,7 +98,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
         if (trap.isSet()) {
             cell = trap.getCell();
-            ImageIcon icon = new ImageIcon("./trap.png");
+            ImageIcon icon = new ImageIcon("assets/trap.png");
             icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
 //            gr.setColor(Color.BLUE);
 //            gr.fillOval(xCor(cell.col)+CELLWIDTH/8, yCor(cell.row)+CELLWIDTH/8, CELLWIDTH*3/4, CELLHEIGHT*3/4);
@@ -103,7 +107,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
         }
 
         cell = player.getCell();
-        ImageIcon icon = new ImageIcon("./player.png");
+        ImageIcon icon = new ImageIcon("assets/player.png");
         icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
 
 
@@ -115,7 +119,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
         if (monster.viewable()) {
             cell = monster.getCell();
-            icon = new ImageIcon("./monster.png");
+            icon = new ImageIcon("assets/monster.png");
             icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
 
 //            gr.setColor(Color.black);
@@ -127,7 +131,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        System.out.println("aa");
     }
 
     @Override
@@ -145,6 +149,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+
         if (e.getKeyCode() == KeyEvent.VK_T) {
             player.putTrap();
         } else if (e.getKeyCode() == KeyEvent.VK_P) {

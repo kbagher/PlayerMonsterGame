@@ -61,7 +61,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
             steppedOverTrap=true;
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
-                player.playAudio("monster_trapped.wav");
+                player.playAudio("assets/monster_trapped.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }

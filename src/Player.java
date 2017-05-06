@@ -97,7 +97,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
             reduceCalories(Settings.getTrapRequiredEnergy());
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
-                player.playAudio("place_trap.wav");
+                player.playAudio("assets/place_trap.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }

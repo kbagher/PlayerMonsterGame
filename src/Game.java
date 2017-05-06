@@ -547,6 +547,7 @@ public class Game extends JFrame {
         GridBagLayout gbResults = new GridBagLayout();
         GridBagConstraints gbcResults = new GridBagConstraints();
         pnResults.setLayout(gbResults);
+        pnResults.setFocusable(false);
 
         taScoreResults = new JTextArea(2, 10);
         JScrollPane scpScoreResults = new JScrollPane(taScoreResults);
@@ -571,6 +572,7 @@ public class Game extends JFrame {
         gbcMain.anchor = GridBagConstraints.CENTER;
         gbMain.setConstraints(tbpControl, gbcMain);
         pnMain.add(tbpControl);
+
     }
 
     public void loadSettingsToView() {
@@ -600,7 +602,10 @@ public class Game extends JFrame {
         Settings.setTrapRequiredEnergy(Integer.parseInt(tfTrapEnergy.getText()));
         Settings.setTrapEffectDuration(Integer.parseInt(tfTrapEffectDuration.getText()));
         Settings.setTrapDuration(Integer.parseInt(tfTrapLifetime.getText()));
+        updateSkills();
+    }
 
+    public void updateSkills() {
         // player skipp skill
         if (cbPlayerSkip.isSelected())
             player.addSkill(PlayerSkills.PlayerSkillsType.SKIP);
@@ -629,6 +634,8 @@ public class Game extends JFrame {
     private void prepareToStartGame() {
         player.setCalories(Settings.getCaloriesInitialValue());
         btStart.setText("Restart");
+        updateSkills();
+
     }
 
     /* This constructor creates the main model objects and the panel used for UI.
@@ -646,9 +653,20 @@ public class Game extends JFrame {
 
         // Create a separate panel and add all the buttons
         setupControls();
-        loadSettingsToView();
         add(bp, BorderLayout.CENTER);
         add(pnMain, BorderLayout.SOUTH);
+    }
+
+    public void resetGameObjects() throws Exception {
+        pause = false;
+        restart = false;
+        grid = new Grid();
+        trap = new Trap(grid);
+        player = new Player(grid, trap, 0, 0, Settings.getCaloriesInitialValue());
+        monster = new Monster(grid, player, trap, 5, 5);
+        bp.updatePabel(grid, player, monster, trap, this);
+        btStart.setText("Start");
+        bp.repaint();
     }
 
     // method to delay by specified time in ms
@@ -678,24 +696,28 @@ public class Game extends JFrame {
     }
 
     public void pauseAnResumeGame() {
-        if (!pause){
+        if (!pause) {
             pause = !pause;
             btPause.setText("Resume");
-        }
-        else{
+        } else {
             pause = !pause;
             btPause.setText("Pause");
         }
     }
+
     public void restartGame() {
         System.out.println("restart");
-        restart=true;
+        restart = true;
+    }
+
+    public void reloadGame() {
+
     }
 
     public void playBackgroundMusic() {
         try {
             audio = new GameAudioPlayer();
-            audio.playAudio("background.wav");
+            audio.playAudio("assets/background.wav");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -721,7 +743,6 @@ public class Game extends JFrame {
 
         while (!player.isReady())
             delay(100);
-
         prepareToStartGame();
 
         do {
@@ -754,7 +775,7 @@ public class Game extends JFrame {
             message = "Player Lost";
             try {
                 audio.stopAudio();
-                audio.playAudio("lost.wav");
+                audio.playAudio("assets/lost.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -762,7 +783,7 @@ public class Game extends JFrame {
             message = "Player Won";
             try {
                 audio.stopAudio();
-                audio.playAudio("win.wav");
+                audio.playAudio("assets/win.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -772,23 +793,21 @@ public class Game extends JFrame {
         do {
             delay(1000);
         } while (!restart);
-
     }
 
     public static void main(String args[]) throws Exception {
-        boolean firstRun = true;
-
+        Game game = new Game();
+        game.setTitle("Monster Game");
+        game.setSize(700, 700);
+        game.setLocationRelativeTo(null);  // center the frame
+        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.setVisible(true);
         do {
-            Game game = new Game();
-            game.player.setReady(!firstRun);
-            game.setTitle("Monster Game");
-            game.setSize(700, 700);
-            game.setLocationRelativeTo(null);  // center the frame
-            game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            game.setVisible(true);
+            game.loadSettingsToView();
+            game.resetGameObjects();
             game.playBackgroundMusic();
             game.play();
-            firstRun=false;
+            game.updateSettingsVariables();
         } while (true);
     }
 }

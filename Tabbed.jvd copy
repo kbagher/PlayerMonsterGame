@@ -1,21 +1,36 @@
 <?xml version="1.0"?>
-<jpanel name="Panel0" title="" class="0" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="59" maxy="26">
-   <jtabbedpane name="Control" title="Results" x="0" y="0" dx="55" dy="26" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0" maxx="1" maxy="1">
-      <jpanel name="Control" title="Control" class="0" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="3" maxy="8">
-         <jbutton name="But1" title="Left" x="0" y="4" dx="1" dy="1" wx="1" wy="0" fill="2" anchor="11" insets="0,0,0,0">
+<jpanel name="Main" title="" class="0" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="59" maxy="26">
+   <jtabbedpane name="Control" title="Dashboard" x="0" y="0" dx="55" dy="26" wx="1" wy="1" fill="1" anchor="10" insets="0,0,0,0" maxx="1" maxy="1">
+      <jpanel name="Dashboard" title="Dashboard" class="0" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="6" maxy="3">
+         <jbutton name="Left" title="Left" x="0" y="1" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jbutton>
-         <jbutton name="But2" title="Up" x="1" y="0" dx="1" dy="4" wx="1" wy="1" fill="0" anchor="11" insets="0,0,0,0">
+         <jbutton name="Up" title="Up" x="1" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
          </jbutton>
-         <jbutton name="But3" title="Right" x="2" y="4" dx="1" dy="1" wx="1" wy="0" fill="2" anchor="11" insets="0,0,0,0">
+         <jbutton name="Right" title="Right" x="2" y="1" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jbutton>
-         <jbutton name="But4" title="Down" x="1" y="4" dx="1" dy="1" wx="1" wy="0" fill="2" anchor="11" insets="0,0,0,0">
+         <jbutton name="Down" title="Down" x="1" y="1" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jbutton>
-         <jbutton name="But5" title="Save" x="0" y="7" dx="1" dy="1" wx="1" wy="0" fill="2" anchor="11" insets="15,0,0,0">
+         <jbutton name="Save" title="Save" x="0" y="2" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+            <property name="focusable">false</property>
          </jbutton>
-         <jbutton name="But6" title="Start" x="1" y="7" dx="1" dy="1" wx="1" wy="0" fill="2" anchor="11" insets="15,0,0,0">
+         <jbutton name="Start" title="Start" x="1" y="2" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+            <property name="focusable">false</property>
          </jbutton>
-         <jbutton name="But7" title="Pause" x="2" y="7" dx="1" dy="1" wx="1" wy="0" fill="2" anchor="11" insets="15,0,0,0">
+         <jbutton name="Pause" title="Pause" x="2" y="2" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+            <property name="focusable">false</property>
          </jbutton>
+         <jlabel name="Label14" title="Time" scrollbars="0" x="3" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,0">
+         </jlabel>
+         <jlabel name="Label15" title="Energy" scrollbars="0" x="3" y="1" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,0">
+         </jlabel>
+         <jlabel name="Time" title="190" scrollbars="0" x="4" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+         </jlabel>
+         <jlabel name="Energy" title="123" scrollbars="0" x="4" y="1" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+         </jlabel>
+         <jlabel name="Status" title="Welcome Kassem" scrollbars="0" x="3" y="2" dx="2" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,0">
+            <property name="foreground">#720000</property>
+         </jlabel>
+         <property name="focusable">false</property>
       </jpanel>
       <jpanel name="Settings" title="Settings" class="0" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="10" maxy="7">
          <jlabel name="Label1" title="Speed" scrollbars="0" x="0" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
@@ -26,21 +41,21 @@
          </jlabel>
          <jlabel name="Label4" title="Step Energy" scrollbars="0" x="0" y="3" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
          </jlabel>
-         <jtextfield name="Text0" x="1" y="0" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextfield name="Speed" x="1" y="0" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jtextfield>
-         <jtextfield name="Text1" x="1" y="1" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextfield name="Time" x="1" y="1" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jtextfield>
-         <jtextfield name="Text2" x="1" y="2" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextfield name="InitialEnergy" x="1" y="2" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jtextfield>
-         <jtextfield name="Text3" x="1" y="3" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextfield name="StepEnergy" x="1" y="3" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jtextfield>
-         <jtextfield name="Text4" x="3" y="0" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextfield name="CoinEnergy" x="3" y="0" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jtextfield>
-         <jtextfield name="Text5" x="3" y="1" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextfield name="TrapEnergy" x="3" y="1" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jtextfield>
-         <jtextfield name="Text6" x="3" y="2" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextfield name="TrapEffectDuration" x="3" y="2" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jtextfield>
-         <jtextfield name="Text7" x="3" y="3" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextfield name="TrapLifetime" x="3" y="3" dx="1" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
          </jtextfield>
          <jlabel name="Label6" title="Coins energy" scrollbars="0" x="2" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,0">
          </jlabel>
@@ -48,23 +63,25 @@
          </jlabel>
          <jlabel name="Label8" title="Trap effect duration" scrollbars="0" x="2" y="2" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,0">
          </jlabel>
-         <jlabel name="Label9" title="Trap ifetime" scrollbars="0" x="2" y="3" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,0">
+         <jlabel name="Label9" title="Trap lifetime" scrollbars="0" x="2" y="3" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,0">
          </jlabel>
          <jlabel name="Label10" title="Player Skills" scrollbars="0" x="6" y="0" dx="2" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,10">
          </jlabel>
          <jlabel name="Label11" title="Monster Skills" scrollbars="0" x="4" y="0" dx="2" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,20,0,0">
          </jlabel>
-         <jcheckbox name="Box0" title="Skip" x="6" y="1" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,20,0,0">
+         <jcheckbox name="PlayerSkip" title="Skip" x="6" y="1" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,20,0,0">
          </jcheckbox>
-         <jcheckbox name="Box1" title="Trap" x="6" y="2" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,20,0,0">
+         <jcheckbox name="PlayerTrap" title="Trap" x="6" y="2" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,20,0,0">
          </jcheckbox>
-         <jcheckbox name="Box2" title="Leap" x="4" y="1" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,20,0,0">
+         <jcheckbox name="MonsterLeap" title="Leap" x="4" y="1" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,20,0,0">
          </jcheckbox>
-         <jcheckbox name="Box3" title="Hide" x="4" y="2" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,20,0,0">
+         <jcheckbox name="MonsterHide" title="Hide" x="4" y="2" dx="2" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,20,0,0">
          </jcheckbox>
+         <jbutton name="SaveSettings" title="Save" x="4" y="3" dx="4" dy="1" wx="1" wy="0" fill="1" anchor="11" insets="0,0,0,0">
+         </jbutton>
       </jpanel>
       <jpanel name="Results" title="Results" class="0" bordered="0" scrollbars="0" x="0" y="0" dx="0" dy="0" wx="0" wy="0" fill="0" anchor="0" insets="0,0,0,0" maxx="3" maxy="1">
-         <jtextarea name="Area1" scrollbars="1" x="1" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
+         <jtextarea name="ScoreResults" scrollbars="1" x="1" y="0" dx="1" dy="1" wx="1" wy="1" fill="1" anchor="11" insets="0,0,0,0">
          </jtextarea>
       </jpanel>
    </jtabbedpane>
