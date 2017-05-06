@@ -2,9 +2,10 @@
  * The abstract method move() must be overridden by Player and Monster classes
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Moveable extends Sprite {
+public abstract class Moveable extends Sprite implements Serializable {
     protected char currentDirection;
     private ArrayList<Object> skills;
 

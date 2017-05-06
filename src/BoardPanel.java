@@ -15,10 +15,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
     private Monster monster;
     private Trap trap;
     private Grid grid;
-    private transient Game game;
-    private final int CELLWIDTH = 40;
-    private final int CELLHEIGHT = 40;
-    private final int LMARGIN = 130;
+    private Game game;
+    private final int CELLWIDTH = 45;
+    private final int CELLHEIGHT = 45;
+    private final int LMARGIN = 50;
     private final int TMARGIN = 30;
 
     public BoardPanel(Grid g, Player p, Monster m, Trap t, Game gm) {
@@ -44,7 +44,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
         else if (((JButton) e.getSource()).getText().compareTo("Down") == 0)
             player.setDirection('D');
         else if (((JButton) e.getSource()).getText().compareTo("Left") == 0)
-            player.setDirection('L');
+            game.loadGame();
+//            player.setDirection('L');
         else if (((JButton) e.getSource()).getText().compareTo("Right") == 0)
             player.setDirection('R');
         else if (((JButton) e.getSource()).getText().compareTo("Start") == 0)
@@ -59,6 +60,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             game.pauseAnResumeGame();
         else if (((JButton) e.getSource()).getText().compareTo("Resume") == 0)
             game.pauseAnResumeGame();
+        else if (((JButton) e.getSource()).getText().compareTo("Save") == 0)
+            game.saveGame();
     }
 
     /* returns the x coordinate based on left margin and cell width */
@@ -88,44 +91,44 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             gr.setColor(Color.black);
             gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
             if (!cell.nougat.isConsumed()) {
-                ImageIcon icon = new ImageIcon("assets/coin.png");
-                icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
-//                gr.setColor(Color.YELLOW);
-//                gr.fillOval(xCor(cell.col) + CELLWIDTH / 4, yCor(cell.row) + CELLWIDTH / 4, CELLWIDTH * 1 / 2, CELLHEIGHT * 1 / 2);
+//                ImageIcon icon = new ImageIcon("assets/coin.png");
+//                icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
+                gr.setColor(Color.YELLOW);
+                gr.fillOval(xCor(cell.col) + CELLWIDTH / 4, yCor(cell.row) + CELLWIDTH / 4, CELLWIDTH * 1 / 2, CELLHEIGHT * 1 / 2);
             }
 
         }
 
         if (trap.isSet()) {
             cell = trap.getCell();
-            ImageIcon icon = new ImageIcon("assets/trap.png");
-            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
-//            gr.setColor(Color.BLUE);
-//            gr.fillOval(xCor(cell.col)+CELLWIDTH/8, yCor(cell.row)+CELLWIDTH/8, CELLWIDTH*3/4, CELLHEIGHT*3/4);
-//            gr.setColor(Color.white);
-//            gr.drawString("T",xCor(cell.col)+CELLWIDTH/3, yCor(cell.row)+2*CELLWIDTH/3);
+//            ImageIcon icon = new ImageIcon("assets/trap.png");
+//            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
+            gr.setColor(Color.BLUE);
+            gr.fillOval(xCor(cell.col)+CELLWIDTH/8, yCor(cell.row)+CELLWIDTH/8, CELLWIDTH*3/4, CELLHEIGHT*3/4);
+            gr.setColor(Color.white);
+            gr.drawString("T",xCor(cell.col)+CELLWIDTH/3, yCor(cell.row)+2*CELLWIDTH/3);
         }
 
         cell = player.getCell();
-        ImageIcon icon = new ImageIcon("assets/player.png");
-        icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
+//        ImageIcon icon = new ImageIcon("assets/player.png");
+//        icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
 
 
-//        cell = player.getCell();
-//        gr.setColor(Color.red);
-//        gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
-//        gr.setColor(Color.white);
-//        gr.drawString("P", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
+        cell = player.getCell();
+        gr.setColor(Color.red);
+        gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
+        gr.setColor(Color.white);
+        gr.drawString("P", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
 
         if (monster.viewable()) {
             cell = monster.getCell();
-            icon = new ImageIcon("assets/monster.png");
-            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
+//            icon = new ImageIcon("assets/monster.png");
+//            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
 
-//            gr.setColor(Color.black);
-//            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-//            gr.setColor(Color.white);
-//            gr.drawString("M", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
+            gr.setColor(Color.black);
+            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+            gr.setColor(Color.white);
+            gr.drawString("M", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
         }
     }
 

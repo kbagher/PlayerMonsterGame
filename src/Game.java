@@ -1,9 +1,7 @@
 import javax.swing.*;
 
 import java.awt.*;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 
 /* This class is the main System level class which creates all the objects 
@@ -12,7 +10,6 @@ import java.io.ObjectOutputStream;
  */
 
 public class Game extends JFrame {
-
     // labels
     private JLabel mLabel = new JLabel("Time Remaining : " + Settings.getTimeAllowed());
 
@@ -70,6 +67,8 @@ public class Game extends JFrame {
     private BoardPanel bp;
     private boolean pause;
     private boolean restart;
+    private boolean load;
+    private int time;
 
 
     public void setupControls() {
@@ -144,6 +143,7 @@ public class Game extends JFrame {
 
         btSave = new JButton("Save");
         btSave.setFocusable(false);
+        btSave.addActionListener(bp);
         gbcDashboard.gridx = 0;
         gbcDashboard.gridy = 2;
         gbcDashboard.gridwidth = 1;
@@ -644,6 +644,7 @@ public class Game extends JFrame {
     public Game() throws Exception {
         pause = false;
         restart = false;
+        load = false;
         grid = new Grid();
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Settings.getCaloriesInitialValue());
@@ -659,6 +660,7 @@ public class Game extends JFrame {
     public void resetGameObjects() throws Exception {
         pause = false;
         restart = false;
+        load = false;
         grid = new Grid();
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Settings.getCaloriesInitialValue());
@@ -677,32 +679,28 @@ public class Game extends JFrame {
         }
     }
 
+    public void saveGame() {
+        if (!pause)
+            pause = true;
 
-    private void saveGame() {
-        String serializedObject = "";
-
-        // serialize the object
         try {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            ObjectOutputStream so = new ObjectOutputStream(bo);
-            so.writeObject(this);
-            so.flush();
-            serializedObject = bo.toString();
-            System.out.println(serializedObject);
+            FileOutputStream fos = new FileOutputStream("mybean.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            oos.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("Saved");
     }
 
     public void pauseAnResumeGame() {
         if (!pause) {
-            pause = !pause;
+            pause = true;
             btPause.setText("Resume");
-            System.out.println("FALSE");
         } else {
-            pause = !pause;
+            pause = false;
             btPause.setText("Pause");
-            System.out.println("TURE");
         }
     }
 
@@ -710,6 +708,10 @@ public class Game extends JFrame {
         restart = true;
     }
 
+    public void loadGame() {
+        player.setReady(true);
+        load = true;
+    }
 
     public void playBackgroundMusic() {
         try {
@@ -729,17 +731,41 @@ public class Game extends JFrame {
     }
 
 
+    private void updateStatusMessage(String message) {
+        if (time < Settings.getTimeAllowed()) {
+            // players has been eaten up
+            message = "Player Lost";
+            try {
+                audio.stopAudio();
+                audio.playAudio("assets/lost.wav");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            message = "Player Won";
+            try {
+                audio.stopAudio();
+                audio.playAudio("assets/win.wav");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        lbStatus.setText(message);
+    }
+
     /* This method waits until play is ready (until start button is pressed)
      * after which it updates the moves in turn until time runs out (player won)
      * or player is eaten up (player lost).
      */
-    public void play() {
-        int time = 0;
-        String message;
+    public String play() {
+
+        time = 0;
+        String message = "";
         player.setDirection(' '); // set to no direction
 
         while (!player.isReady())
             delay(100);
+
         prepareToStartGame();
 
         do {
@@ -765,46 +791,14 @@ public class Game extends JFrame {
             lbEnergy.setText("" + player.getCalories());
             delay(Settings.getGameSpeed());
             bp.repaint();
-        } while (time < Settings.getTimeAllowed() && !restart);
+        } while (time < Settings.getTimeAllowed() && !restart && !load);
 
-        if (time < Settings.getTimeAllowed()) {
-            // players has been eaten up
-            message = "Player Lost";
-            try {
-                audio.stopAudio();
-                audio.playAudio("assets/lost.wav");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            message = "Player Won";
-            try {
-                audio.stopAudio();
-                audio.playAudio("assets/win.wav");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        lbStatus.setText(message);
+        updateStatusMessage(message);
 
-        do {
-            delay(1000);
-        } while (!restart);
-    }
+        delay(2500);
 
-    public static void main(String args[]) throws Exception {
-        Game game = new Game();
-        game.setTitle("Monster Game");
-        game.setSize(700, 700);
-        game.setLocationRelativeTo(null);  // center the frame
-        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        game.setVisible(true);
-        do {
-            game.loadSettingsToView();
-            game.resetGameObjects();
-            game.playBackgroundMusic();
-            game.play();
-            game.updateSettingsVariables();
-        } while (true);
+        if (load)
+            return "load";
+        return "restart";
     }
 }

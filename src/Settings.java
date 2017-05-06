@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by kassem on 3/5/17.
  */
-public class Settings {
+public class Settings implements Serializable {
     private static int GAME_SPEED = 250;
     private static int TIME_ALLOWED = 60;
     private static int TRAP_DURATION = 10;

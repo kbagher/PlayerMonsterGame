@@ -1,4 +1,6 @@
-public class Trap extends Sprite {
+import java.io.Serializable;
+
+public class Trap extends Sprite implements Serializable {
 
     private int affectTime;
     private int durationTime;

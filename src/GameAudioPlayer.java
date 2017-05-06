@@ -1,16 +1,13 @@
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * Created by kassem on 4/5/17.
  */
-public class GameAudioPlayer {
-    private AudioStream audio;
+public class GameAudioPlayer implements Serializable {
+    private transient AudioStream audio;
 
     public void playAudio(String fileName) throws FileNotFoundException, IOException {
         InputStream in = null;
