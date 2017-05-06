@@ -22,15 +22,16 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
     private final int TMARGIN = 30;
 
     public BoardPanel(Grid g, Player p, Monster m, Trap t, Game gm) {
-        updatePabel(g,p,m,t,gm);
+        update(g,p,m,t,gm);
     }
 
-    public void updatePabel(Grid g, Player p, Monster m, Trap t, Game gm){
+    public void update(Grid g, Player p, Monster m, Trap t, Game gm){
         player = p;
         grid = g;
         monster = m;
         trap = t;
         game = gm;
+        removeKeyListener(this);
         addKeyListener(this);
         setFocusable(true);
     }
@@ -38,7 +39,6 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
     /* responds to various button clicked messages */
     public void actionPerformed(ActionEvent e) {
-        System.out.println("called");
         if (((JButton) e.getSource()).getText().compareTo("Up") == 0)
             player.setDirection('U');
         else if (((JButton) e.getSource()).getText().compareTo("Down") == 0)
@@ -131,7 +131,6 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("aa");
     }
 
     @Override

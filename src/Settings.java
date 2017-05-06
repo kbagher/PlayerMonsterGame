@@ -10,7 +10,6 @@ public class Settings {
     private static int NOUGAT_CALORIES = 6;
     private static int CALORIES_INITIAL_VALUE=40;
     private static int STEP_CALORIES =2;
-    private static int GRID_SIZE =11;
 
     public static int getGameSpeed() {
         return GAME_SPEED;

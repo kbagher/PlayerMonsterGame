@@ -635,7 +635,6 @@ public class Game extends JFrame {
         player.setCalories(Settings.getCaloriesInitialValue());
         btStart.setText("Restart");
         updateSkills();
-
     }
 
     /* This constructor creates the main model objects and the panel used for UI.
@@ -664,7 +663,7 @@ public class Game extends JFrame {
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Settings.getCaloriesInitialValue());
         monster = new Monster(grid, player, trap, 5, 5);
-        bp.updatePabel(grid, player, monster, trap, this);
+        bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");
         bp.repaint();
     }
@@ -699,20 +698,18 @@ public class Game extends JFrame {
         if (!pause) {
             pause = !pause;
             btPause.setText("Resume");
+            System.out.println("FALSE");
         } else {
             pause = !pause;
             btPause.setText("Pause");
+            System.out.println("TURE");
         }
     }
 
     public void restartGame() {
-        System.out.println("restart");
         restart = true;
     }
 
-    public void reloadGame() {
-
-    }
 
     public void playBackgroundMusic() {
         try {
