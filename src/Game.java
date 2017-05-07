@@ -55,6 +55,10 @@ public class Game extends JFrame {
     JCheckBox cbMonsterHide;
     JButton btSaveSettings;
 
+    JTextField tfUsername;
+    JTextField tfPassword;
+
+
     JPanel pnResults;
     JTextArea taScoreResults;
 
@@ -69,6 +73,7 @@ public class Game extends JFrame {
     private boolean restart;
     private boolean load;
     private int time;
+    private Settings settings;
 
 
     public void setupControls() {
@@ -573,6 +578,8 @@ public class Game extends JFrame {
         gbMain.setConstraints(tbpControl, gbcMain);
         pnMain.add(tbpControl);
 
+        tfUsername = new JTextField(5);
+        tfPassword = new JTextField(5);
     }
 
     public void loadSettingsToView() {
@@ -592,6 +599,7 @@ public class Game extends JFrame {
         cbMonsterLeap.setSelected(monster.hasSkill(MonsterSkills.MonsterSkillsType.LEAP));
         cbMonsterHide.setSelected(monster.hasSkill(MonsterSkills.MonsterSkillsType.INVISIBLE));
     }
+
 
     public void updateSettingsVariables() {
         Settings.setGameSpeed(Integer.parseInt(tfSpeed.getText()));

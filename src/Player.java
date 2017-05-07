@@ -5,8 +5,6 @@ import java.io.*;
 public class Player extends Moveable implements PlayerSkills, Serializable {
     private boolean readyToStart = false;
     private int steps;
-
-
     private int calories;
     private Trap trap;
 
