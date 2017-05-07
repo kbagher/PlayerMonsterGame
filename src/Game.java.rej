@@ -1,0 +1,9 @@
+diff a/src/Game.java b/src/Game.java	(rejected hunks)
+@@ -195,7 +195,6 @@
+     @Override
+     public void run() {
+         setTitle("Monster Game");
+-        setSize(700, 700);
+         setSize(1000, 1000);
+         setLocationRelativeTo(null);  // center the frame
+         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

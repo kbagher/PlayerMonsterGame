@@ -9,22 +9,6 @@ public class Trap extends Sprite {
         isSteppedOver = false;
     }
 
-    public int getAffectTime() {
-        return affectTime;
-    }
-
-    public void setAffectTime(int affectTime) {
-        this.affectTime = affectTime;
-    }
-
-    public void setDurationTime(int durationTime) {
-        this.durationTime = durationTime;
-    }
-
-    public int getDurationTime() {
-        return durationTime;
-    }
-
     public boolean isTrapped(Cell cell) {
         if (getCell().equals(cell)) {
             if (affectTime > 0)
@@ -33,20 +17,17 @@ public class Trap extends Sprite {
         return false;
     }
 
-
     public void stepOver() {
         isSteppedOver = true;
     }
 
-
     public boolean isSet() {
-        return getCell() == null ? false : true;
+        return getCell() != null;
     }
 
-
-    public void setTrap(Cell cell, int durationTime, int affectTime) {
-        this.durationTime = durationTime;
-        this.affectTime = affectTime;
+    public void setTrap(Cell cell) {
+        this.durationTime = Settings.getTrapDuration();
+        this.affectTime = Settings.getTrapEffectDuration();
         setCell(cell);
     }
 

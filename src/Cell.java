@@ -8,9 +8,9 @@ public class Cell implements Serializable{
    protected int col;
    protected Nougats nougat;
    
-   public Cell(int i, int j, int nougatsValue )
+   public Cell(int i, int j )
    {
-	  this.nougat= new Nougats(nougatsValue); 
+	  this.nougat= new Nougats();
 	  row = i;
 	  col = j;
 	  

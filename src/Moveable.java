@@ -2,9 +2,10 @@
  * The abstract method move() must be overridden by Player and Monster classes
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Moveable extends Sprite {
+public abstract class Moveable extends Sprite implements Serializable {
     protected char currentDirection;
     private ArrayList<Object> skills;
 
@@ -24,6 +25,21 @@ public abstract class Moveable extends Sprite {
         skills.add(skill);
         return true;
     }
+
+    public void removeSkill(Object skill) {
+        if (skills.size()==0) return;
+
+        if (skills.contains(skill))
+            skills.remove(skill);
+    }
+
+    public boolean hasSkill(Object skill){
+        if (getSkills().size() == 0) return false;
+
+        return getSkills().contains(skill);
+
+    }
+
 
     public ArrayList<?> getSkills() {
         return skills;

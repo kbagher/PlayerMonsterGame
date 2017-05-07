@@ -1,0 +1,19 @@
+diff a/.idea/workspace.xml b/.idea/workspace.xml	(rejected hunks)
+@@ -7,11 +7,16 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="a1758c46-aa22-42f4-ba81-88503cc3a222" name="Default" comment="">
+-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GameSettings.java" afterPath="" />
++      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BoardPanel.java" afterPath="$PROJECT_DIR$/src/BoardPanel.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.java" afterPath="$PROJECT_DIR$/src/Game.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameAudioPlayer.java" afterPath="$PROJECT_DIR$/src/GameAudioPlayer.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonsterSkills.java" afterPath="$PROJECT_DIR$/src/MonsterSkills.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Moveable.java" afterPath="$PROJECT_DIR$/src/Moveable.java" />
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Settings.java" afterPath="$PROJECT_DIR$/src/Settings.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sprite.java" afterPath="$PROJECT_DIR$/src/Sprite.java" />
++      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Trap.java" afterPath="$PROJECT_DIR$/src/Trap.java" />
+     </list>
+     <ignored path="$PROJECT_DIR$/bin/" />
+     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

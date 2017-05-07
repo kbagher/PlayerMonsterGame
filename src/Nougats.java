@@ -1,26 +1,23 @@
+import java.io.IOException;
 import java.io.Serializable;
 
-public class Nougats  implements Serializable{
-	
-	private int value ;
-	private boolean consumed;
-	
-	public Nougats (int value){
-		this.value= value;
-		consumed=false;
-		
-	}
-	
-	public int getValue (){
-		return value;
-	}
-	
-	public boolean isConsumed (){
-		return consumed;
-	}
-	public void setConsumed (){
-		value =0;
-		consumed=true;
-		
-	}
+public class Nougats implements Serializable {
+
+    private boolean consumed;
+
+    public Nougats() {
+        consumed = false;
+    }
+
+    public boolean isConsumed() {
+        return consumed;
+    }
+
+    public int consume() {
+        if (!consumed) {
+            consumed = true;
+            return Settings.getNougatCalories();
+        }
+        return 0;
+    }
 }

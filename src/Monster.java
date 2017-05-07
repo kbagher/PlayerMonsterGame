@@ -61,7 +61,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
             steppedOverTrap=true;
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
-                player.playAudio("monster_trapped.wav");
+                player.playAudio("assets/monster_trapped.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -74,10 +74,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
     }
 
     private boolean isHiding() {
-        if (hideTime == 0) {
-            return false;
-        }
-        return true;
+        return hideTime != 0;
     }
 
     private boolean canPerformSkill() {
@@ -88,11 +85,9 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         if (isHiding())
             return false; // invisible skill is active
 
-        if (isTrapped())
-            return false;
-
-        return true;
+        return !isTrapped();
     }
+
 
     /**
      * perform random monster capability
@@ -159,11 +154,9 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         // monster can't leap to player's cell
         if (!canLeap()) return;
 
-//        System.out.println("can leap");
+        System.out.println("LEAP :D");
         // set the current cell to be the
         currentCell = player.getCell();
-//        getCell().row = player.getCell().row;
-//        getCell().col = player.getCell().col;
     }
 
     @Override

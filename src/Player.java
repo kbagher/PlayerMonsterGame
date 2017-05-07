@@ -3,120 +3,104 @@ import java.io.*;
 /*  This class encapsulates player position and direction
  */
 public class Player extends Moveable implements PlayerSkills, Serializable {
-	private boolean readyToStart = false;
-	private int steps;
-	private int calories;
-	private Trap trap;
+    private boolean readyToStart = false;
+    private int steps;
 
-	public Player(Grid g, Trap t, int row, int col, int caloriesValue) throws Exception {
-		super(g);
-		currentCell = grid.getCell(row, col);
-		currentDirection = ' ';
-		calories = caloriesValue;
-		trap = t;
-	}
 
-	public Cell move() {
-		if (currentCell.nougat.isConsumed())
-			calories = increaseCalories(currentCell.nougat.getValue());
-		if (canPerformEnergyAction(calculateCalories(steps))) {
-			if (currentDirection != ' ') {
-				System.out.println(calories);
-				Cell tempcell = grid.getCell(currentCell, currentDirection, steps);
-				steps = grid.distance(currentCell, tempcell);
-				calories = reduceCalories(calculateCalories(steps));
-				// System.out.println(calories+"After "+ steps);
+    private int calories;
+    private Trap trap;
 
-				if (tempcell != null)
-					currentCell = tempcell;
-				if (currentCell.nougat.isConsumed()) {
-					calories = increaseCalories(currentCell.nougat.getValue());
-					steps = 1;
-					return currentCell;
-				}
-				calories += currentCell.nougat.getValue();
-				currentCell.nougat.setConsumed();
-				steps = 1;
-				return currentCell;
+    public Player(Grid g, Trap t, int row, int col, int caloriesValue) throws Exception {
+        super(g);
+        currentCell = grid.getCell(row, col);
+        currentDirection = ' ';
+        calories = caloriesValue;
+        trap = t;
+    }
 
-			}
-			steps = 1;
-			return currentCell;
-		}
-		steps = 1;
-		return currentCell;
-	}
+    public Cell move() {
+        increaseCalories(currentCell.nougat.consume());
+        if (canPerformEnergyAction(calculateCalories(steps))) {
+            if (currentDirection != ' ') {
+                System.out.println(calories);
+                Cell tempcell = grid.getCell(currentCell, currentDirection, steps);
+                steps = grid.distance(currentCell, tempcell);
+                reduceCalories(calculateCalories(steps));
+                if (tempcell != null)
+                    currentCell = tempcell;
+                steps = 1;
+                return currentCell;
+            }
+            steps = 1;
+            return currentCell;
+        }
+        steps = 1;
+        return currentCell;
+    }
 
-	public int calculateCalories(int steps) {
-		int sum = 0;
-		for (int i = 1; i <= steps; i++) {
-			sum += Math.pow(Settings.STEP_CONSUMED_CALORIES, i);
+    public int calculateCalories(int steps) {
+        int sum = 0;
+        for (int i = 1; i <= steps; i++) {
+            sum += Math.pow(Settings.getStepCalories(), i);
+        }
+        return sum;
+    }
 
-		}
-		return sum;
-	}
+    public boolean canPerformEnergyAction(int requiredCalories) {
+        return requiredCalories <= calories;
+    }
 
-	public boolean canPerformEnergyAction(int requiredCalories) {
-		if (requiredCalories <= calories)
-			return true;
-		return false;
-	}
+    public void setReady(boolean val) {
+        readyToStart = val;
+    }
 
-	public int maxCellsPerMove() {
-		return 1;
-	}
+    public boolean isReady() {
+        return readyToStart;
+    }
 
-	public int pointsRemaining() {
-		return -1; // not implemented
-	}
+    public void reduceCalories(int value) {
+        calories -= value;
+    }
 
-	public void setReady(boolean val) {
-		readyToStart = val;
-	}
+    public void increaseCalories(int value) {
+        calories += value;
+    }
 
-	public boolean isReady() {
-		return readyToStart;
-	}
+    public int getCalories() {
+        return calories;
+    }
 
-	public int reduceCalories(int value) {
-		calories -= value;
-		return calories;
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
 
-	}
+    @Override
+    public void skip() {
+        if (!hasSkill(PlayerSkillsType.SKIP))  return;
+        if (steps >= 3) return;
+        steps++;
+    }
 
-	public int increaseCalories(int value) {
-		calories += value;
-		return calories;
-	}
+    @Override
+    public void putTrap() {
 
-	public int getCalories() {
-		return calories;
-	}
+        if (!hasSkill(PlayerSkillsType.TRAP))  return;
 
-	@Override
-	public void skip(int moves) {
+        if (trap.getCell() != null)
+            return; // there is an active trap
 
-	}
-
-	@Override
-
-	public void putTrap() {
-		// Trap currentTrap = grid.getCurrentTrap();
-		if (trap.getCell() != null)
-			return; // there is an active trap
-
-		// TODO: call canPerformEnergyAction(calories)
-		// enough calories to put a trap
-		if (canPerformEnergyAction(Settings.TRAP_REQUIRED_ENERGY)) {
-			System.out.println("Setting Trap");
-			trap.setTrap(getCell(), Settings.TRAP_DURATION, Settings.TRAP_AFFECT_DURATION);
-			calories = reduceCalories(Settings.TRAP_REQUIRED_ENERGY);
-			try {
-				GameAudioPlayer player = new GameAudioPlayer();
-				player.playAudio("place_trap.wav");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        // TODO: call canPerformEnergyAction(calories)
+        // enough calories to put a trap
+        if (canPerformEnergyAction(Settings.getTrapRequiredEnergy())) {
+            System.out.println("Setting Trap");
+            trap.setTrap(getCell());
+            reduceCalories(Settings.getTrapRequiredEnergy());
+            try {
+                GameAudioPlayer player = new GameAudioPlayer();
+                player.playAudio("assets/place_trap.wav");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
