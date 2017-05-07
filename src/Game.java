@@ -195,7 +195,7 @@ public class Game extends JFrame implements Runnable {
     @Override
     public void run() {
         setTitle("Monster Game");
-        setSize(700, 700);
+        setSize(1000, 1000);
         setLocationRelativeTo(null);  // center the frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

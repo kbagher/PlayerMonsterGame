@@ -8,19 +8,20 @@ import java.io.Serializable;
 
 public class Grid  implements Serializable{
 
-	Cell cells[] = new Cell[57];
-    Cell cells2D[][] = new Cell[11][11];
+	Cell cells[] = new Cell[185];
+    Cell cells2D[][] = new Cell[21][21];
 			
 	public Grid()
 	{	
 	   int k=0;
-       for (int i=0; i<11; i++)
-          for (int j=0; j<11; j++)
+       for (int i=0; i<21; i++){
+          for (int j=0; j<21; j++)
              if ( (i %5 == 0) ||(j%5 == 0 && i%5 != 0))
              {
+            	 System.out.println("i= "+i+" j= "+j);
                 cells2D[i][j] = new Cell(i,j,Settings.CALORIES_AFFECT_VALUE);
                 cells[k++] = cells2D[i][j];
-             }   	
+             }System.out.println("-----------------------------");   }	
 	}
     /* Returns a reference to the specified cell.
      * row and cell must be in the range 0 .. 10 and either row or col
@@ -29,7 +30,7 @@ public class Grid  implements Serializable{
 	public Cell getCell(int row, int col) throws Exception
 	{
 		if ((row %5 != 0 && col %5 != 0) || 
-				 row < 0 || row > 10 || col < 0 || col > 10)
+				 row < 0 || row > 20 || col < 0 || col > 20)
 			throw new Exception("Invalid Coordiantes row = " + row + " column " + col);
 		return cells2D[row][col];
 	}
