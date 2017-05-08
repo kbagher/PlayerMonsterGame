@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
  */
 public class Main {
 
-    private static void showLogin(){
+    private static boolean showLogin(){
         JPanel loginPanel = new JPanel(new BorderLayout(5,1));
 
         JPanel labelsPanel = new JPanel(new GridLayout(0,1,2,2));
@@ -31,6 +31,27 @@ public class Main {
         String passText = new String(password.getPassword());
         System.out.println("Password: " + passText);
 
+        // user does not exists
+        // TODO: link with khalid's methid
+        if (true){
+            int answer = JOptionPane.showConfirmDialog(null,"User does not exist, do you want to register using the provided information?","Unknow username",JOptionPane.YES_NO_OPTION);
+            if (answer==JOptionPane.YES_OPTION) // TODO: register user
+            {
+                boolean status=true;
+                // TODO: register the user and check the results
+                if (status){
+                    JOptionPane.showMessageDialog(null,"User created successfully :D","Registerd", JOptionPane.INFORMATION_MESSAGE);
+                    return true;
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Could not register :(","Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+        return true;
     }
 
     private static Game getSavedGameObject() throws Exception {
@@ -44,7 +65,9 @@ public class Main {
     public static void main(String args[]) throws Exception {
 
 
-        showLogin();
+        // login or register a user
+        while (!showLogin()){}
+
 
         String status = "";
         Game game=null;
