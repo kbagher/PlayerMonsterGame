@@ -6,13 +6,12 @@ import java.io.Serializable;
 public class Cell implements Serializable{
    protected int row;
    protected int col;
-   protected Nougats nougat;
+   protected Nougat nougat;
    
    public Cell(int i, int j )
    {
-	  this.nougat= new Nougats();
+	  this.nougat= new Nougat();
 	  row = i;
 	  col = j;
-	  
    }
 }

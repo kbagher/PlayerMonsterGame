@@ -7,8 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1758c46-aa22-42f4-ba81-88503cc3a222" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Edge.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Node.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Nougats.java" afterPath="$PROJECT_DIR$/src/Nougat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mybean.ser" afterPath="$PROJECT_DIR$/mybean.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cell.java" afterPath="$PROJECT_DIR$/src/Cell.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.java" afterPath="$PROJECT_DIR$/src/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Grid.java" afterPath="$PROJECT_DIR$/src/Grid.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Monster.java" afterPath="$PROJECT_DIR$/src/Monster.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Settings.java" afterPath="$PROJECT_DIR$/src/Settings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sprite.java" afterPath="$PROJECT_DIR$/src/Sprite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Trap.java" afterPath="$PROJECT_DIR$/src/Trap.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,95 +30,38 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="pf_cosc2315_1710_assignment_2_b" />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JOptionPane.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JOptionPane.java">
+    <leaf>
+      <file leaf-file-name="Settings.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8700">
-              <caret line="633" column="23" lean-forward="false" selection-start-line="633" selection-start-column="23" selection-end-line="633" selection-end-column="23" />
+            <state relative-caret-position="90">
+              <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
               <folding>
-                <element signature="e#0#108867#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#44390#44391#0" expanded="false" />
-                <element signature="e#44436#44437#0" expanded="false" />
-                <element signature="e#76414#76415#0" expanded="false" />
-                <element signature="e#76457#76458#0" expanded="false" />
-                <element signature="e#76757#76758#0" expanded="false" />
-                <element signature="e#76801#76802#0" expanded="false" />
-                <element signature="e#77416#77417#0" expanded="false" />
-                <element signature="e#77474#77475#0" expanded="false" />
-                <element signature="e#83405#83406#0" expanded="false" />
-                <element signature="e#83444#83445#0" expanded="false" />
-                <element signature="e#83720#83721#0" expanded="false" />
-                <element signature="e#83778#83779#0" expanded="false" />
-                <element signature="e#84046#84047#0" expanded="false" />
-                <element signature="e#84078#84079#0" expanded="false" />
-                <element signature="e#84740#84741#0" expanded="false" />
-                <element signature="e#84770#84771#0" expanded="false" />
-                <element signature="e#85441#85442#0" expanded="false" />
-                <element signature="e#85468#85469#0" expanded="false" />
-                <element signature="e#86549#86550#0" expanded="false" />
-                <element signature="e#86577#86578#0" expanded="false" />
-                <element signature="e#88739#88740#0" expanded="false" />
-                <element signature="e#88774#88775#0" expanded="false" />
-                <element signature="e#90375#90376#0" expanded="false" />
-                <element signature="e#90409#90410#0" expanded="false" />
-                <element signature="e#91949#91950#0" expanded="false" />
-                <element signature="e#91982#91983#0" expanded="false" />
-                <element signature="e#93511#93512#0" expanded="false" />
-                <element signature="e#93549#93550#0" expanded="false" />
-                <element signature="e#94479#94480#0" expanded="false" />
-                <element signature="e#94523#94524#0" expanded="false" />
-                <element signature="e#95981#95982#0" expanded="false" />
-                <element signature="e#96014#96015#0" expanded="false" />
-                <element signature="e#96383#96384#0" expanded="false" />
-                <element signature="e#96423#96424#0" expanded="false" />
-                <element signature="e#97566#97567#0" expanded="false" />
-                <element signature="e#97599#97600#0" expanded="false" />
+                <element signature="method#setCaloriesInitialValue#0;class#Settings#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <file leaf-file-name="Monster.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Monster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="44" column="17" lean-forward="false" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="75" column="30" lean-forward="true" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Moveable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Moveable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            <state relative-caret-position="161">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -115,313 +70,90 @@
       <file leaf-file-name="Grid.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Grid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-              <folding />
+            <state relative-caret-position="240">
+              <caret line="133" column="34" lean-forward="true" selection-start-line="133" selection-start-column="34" selection-end-line="133" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4055#4056#0" expanded="true" />
+                <element signature="e#4083#4084#0" expanded="true" />
+                <element signature="e#4837#4843#0" expanded="true" />
+                <element signature="e#5691#5697#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Nougats.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Nougats.java">
+      <file leaf-file-name="Edge.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Edge.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+            <state relative-caret-position="60">
+              <caret line="4" column="15" lean-forward="false" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JAVA/BoardPanel" pinned="false" current-in-tab="false">
-        <entry file="uml://JAVA/BoardPanel">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>JAVA</ID>
-              <OriginalElement>BoardPanel</OriginalElement>
-              <nodes>
-                <node x="0.0" y="380.0">java.awt.event.KeyListener</node>
-                <node x="142.0" y="380.0">java.awt.event.ActionListener</node>
-                <node x="346.25" y="120.0">Grid</node>
-                <node x="799.25" y="200.0">javax.swing.TransferHandler.HasGetTransferHandler</node>
-                <node x="1342.25" y="0.0">java.awt.image.ImageObserver</node>
-                <node x="549.25" y="200.0">MonsterSkills</node>
-                <node x="570.25" y="120.0">GameAudioPlayer</node>
-                <node x="461.8560283687944" y="300.0">Monster</node>
-                <node x="1358.25" y="200.0">java.awt.Container</node>
-                <node x="1392.125" y="470.0">javax.swing.JFrame</node>
-                <node x="202.02269503546108" y="200.0">PlayerSkills</node>
-                <node x="1260.25" y="120.0">Cell</node>
-                <node x="1139.25" y="120.0">Settings</node>
-                <node x="978.1574468085108" y="300.0">javax.swing.JComponent</node>
-                <node x="217.20744680851112" y="300.0">Player</node>
-                <node x="1633.625" y="380.0">java.awt.Frame</node>
-                <node x="442.25" y="120.0">Sprite</node>
-                <node x="1593.4764184397168" y="300.0">java.awt.Window</node>
-                <node x="1635.9574468085111" y="0.0">java.awt.MenuContainer</node>
-                <node x="701.25" y="200.0">Trap</node>
-                <node x="1173.6991134751775" y="380.0">javax.swing.RootPaneContainer</node>
-                <node x="1488.25" y="200.0">javax.accessibility.Accessible</node>
-                <node x="1352.25" y="120.0">java.awt.Component</node>
-                <node x="340.0226950354611" y="200.0">Moveable</node>
-                <node x="610.7074468085111" y="0.0">java.io.Serializable</node>
-                <node x="63.20744680851112" y="300.0">java.util.EventListener</node>
-                <node x="151.5" y="470.0">BoardPanel</node>
-                <node x="1396.625" y="550.0">Game</node>
-                <node x="1016.25" y="120.0">Nougats</node>
-                <node x="0.0" y="625.0">Main</node>
-                <node x="1063.6991134751775" y="380.0">javax.swing.JPanel</node>
-                <node x="1449.625" y="380.0">javax.swing.WindowConstants</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="javax.swing.JPanel" target="javax.swing.JComponent">
-                  <point x="-22.5" y="-15.0" />
-                  <point x="1086.1991134751775" y="355.0" />
-                  <point x="1042.657446808511" y="355.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="java.awt.event.KeyListener" target="java.util.EventListener">
-                  <point x="0.0" y="-15.0" />
-                  <point x="61.0" y="355.0" />
-                  <point x="96.70744680851112" y="355.0" />
-                  <point x="-33.5" y="15.0" />
-                </edge>
-                <edge source="Settings" target="java.io.Serializable">
-                  <point x="0.0" y="-15.0" />
-                  <point x="1189.75" y="70.0" />
-                  <point x="704.1241134751779" y="70.0" />
-                  <point x="34.41666666666674" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JComponent" target="java.awt.Container">
-                  <point x="43.0" y="-15.0" />
-                  <point x="1085.657446808511" y="260.0" />
-                  <point x="1385.75" y="260.0" />
-                  <point x="-27.5" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JPanel" target="javax.accessibility.Accessible">
-                  <point x="22.5" y="-15.0" />
-                  <point x="1131.1991134751775" y="355.0" />
-                  <point x="1224.9574468085111" y="355.0" />
-                  <point x="1224.9574468085111" y="270.0" />
-                  <point x="1507.4166666666667" y="270.0" />
-                  <point x="-38.33333333333326" y="15.0" />
-                </edge>
-                <edge source="Nougats" target="java.io.Serializable">
-                  <point x="0.0" y="-15.0" />
-                  <point x="1067.75" y="80.0" />
-                  <point x="694.2907801418446" y="80.0" />
-                  <point x="24.58333333333337" y="15.0" />
-                </edge>
-                <edge source="Moveable" target="Sprite">
-                  <point x="27.0" y="-15.0" />
-                  <point x="421.0226950354611" y="175.0" />
-                  <point x="463.75" y="175.0" />
-                  <point x="-21.5" y="15.0" />
-                </edge>
-                <edge source="java.awt.Component" target="java.awt.image.ImageObserver">
-                  <point x="0.0" y="-15.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="Cell" target="java.io.Serializable">
-                  <point x="0.0" y="-15.0" />
-                  <point x="1296.25" y="60.0" />
-                  <point x="713.9574468085111" y="60.0" />
-                  <point x="44.25" y="15.0" />
-                </edge>
-                <edge source="Player" target="PlayerSkills">
-                  <point x="0.0" y="-15.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="Game" target="javax.swing.JFrame">
-                  <point x="0.0" y="-15.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="java.awt.Frame" target="java.awt.Window">
-                  <point x="-21.75" y="-15.0" />
-                  <point x="1655.375" y="355.0" />
-                  <point x="1643.4764184397168" y="355.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JFrame" target="javax.swing.RootPaneContainer">
-                  <point x="-18.799999999999955" y="-15.0" />
-                  <point x="1420.325" y="430.0" />
-                  <point x="1258.1991134751775" y="430.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="BoardPanel" target="javax.swing.JPanel">
-                  <point x="40.0" y="-15.0" />
-                  <point x="251.5" y="450.0" />
-                  <point x="1108.6991134751775" y="450.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="Moveable" target="java.io.Serializable">
-                  <point x="-27.0" y="-15.0" />
-                  <point x="367.0226950354611" y="175.0" />
-                  <point x="335.75" y="175.0" />
-                  <point x="335.75" y="60.0" />
-                  <point x="625.4574468085111" y="60.0" />
-                  <point x="-44.25" y="15.0" />
-                </edge>
-                <edge source="java.awt.Frame" target="java.awt.MenuContainer">
-                  <point x="21.75" y="-15.0" />
-                  <point x="1698.875" y="355.0" />
-                  <point x="1743.9574468085111" y="355.0" />
-                  <point x="36.0" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JFrame" target="javax.accessibility.Accessible">
-                  <point x="0.0" y="-15.0" />
-                  <point x="1439.125" y="280.0" />
-                  <point x="1545.75" y="280.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="Player" target="Moveable">
-                  <point x="29.0" y="-15.0" />
-                  <point x="289.7074468085111" y="280.0" />
-                  <point x="367.0226950354611" y="280.0" />
-                  <point x="-27.0" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JComponent" target="javax.swing.TransferHandler.HasGetTransferHandler">
-                  <point x="-43.0" y="-15.0" />
-                  <point x="999.6574468085108" y="280.0" />
-                  <point x="946.25" y="280.0" />
-                  <point x="49.0" y="15.0" />
-                </edge>
-                <edge source="Monster" target="java.io.Serializable">
-                  <point x="0.0" y="-15.0" />
-                  <point x="512.3560283687943" y="280.0" />
-                  <point x="538.75" y="280.0" />
-                  <point x="538.75" y="90.0" />
-                  <point x="654.9574468085111" y="90.0" />
-                  <point x="-14.75" y="15.0" />
-                </edge>
-                <edge source="java.awt.Window" target="javax.accessibility.Accessible">
-                  <point x="25.0" y="-15.0" />
-                  <point x="1668.4764184397168" y="250.0" />
-                  <point x="1584.0833333333333" y="250.0" />
-                  <point x="38.33333333333326" y="15.0" />
-                </edge>
-                <edge source="BoardPanel" target="java.awt.event.ActionListener">
-                  <point x="0.0" y="-15.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="Monster" target="Moveable">
-                  <point x="-33.66666666666663" y="-15.0" />
-                  <point x="478.68936170212777" y="280.0" />
-                  <point x="421.0226950354611" y="280.0" />
-                  <point x="27.0" y="15.0" />
-                </edge>
-                <edge source="BoardPanel" target="java.awt.event.KeyListener">
-                  <point x="-40.0" y="-15.0" />
-                  <point x="171.5" y="450.0" />
-                  <point x="61.0" y="450.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="Sprite" target="java.io.Serializable">
-                  <point x="0.0" y="-15.0" />
-                  <point x="485.25" y="80.0" />
-                  <point x="645.1241134751779" y="80.0" />
-                  <point x="-24.58333333333337" y="15.0" />
-                </edge>
-                <edge source="java.awt.Window" target="java.awt.Container">
-                  <point x="-25.0" y="-15.0" />
-                  <point x="1618.4764184397168" y="260.0" />
-                  <point x="1440.75" y="260.0" />
-                  <point x="27.5" y="15.0" />
-                </edge>
-                <edge source="Trap" target="java.io.Serializable">
-                  <point x="19.5" y="-15.0" />
-                  <point x="759.75" y="100.0" />
-                  <point x="674.6241134751779" y="100.0" />
-                  <point x="4.916666666666629" y="15.0" />
-                </edge>
-                <edge source="Grid" target="java.io.Serializable">
-                  <point x="0.0" y="-15.0" />
-                  <point x="384.25" y="70.0" />
-                  <point x="635.2907801418446" y="70.0" />
-                  <point x="-34.41666666666663" y="15.0" />
-                </edge>
-                <edge source="java.awt.Component" target="java.awt.MenuContainer">
-                  <point x="40.66666666666674" y="-15.0" />
-                  <point x="1453.9166666666667" y="100.0" />
-                  <point x="1671.9574468085111" y="100.0" />
-                  <point x="-36.0" y="15.0" />
-                </edge>
-                <edge source="GameAudioPlayer" target="java.io.Serializable">
-                  <point x="0.0" y="-15.0" />
-                  <point x="649.25" y="100.0" />
-                  <point x="664.7907801418446" y="100.0" />
-                  <point x="-4.916666666666629" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JFrame" target="java.awt.Frame">
-                  <point x="37.59999999999991" y="-15.0" />
-                  <point x="1476.725" y="450.0" />
-                  <point x="1677.125" y="450.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JFrame" target="javax.swing.WindowConstants">
-                  <point x="18.799999999999955" y="-15.0" />
-                  <point x="1457.925" y="440.0" />
-                  <point x="1531.625" y="440.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="Trap" target="Sprite">
-                  <point x="-19.5" y="-15.0" />
-                  <point x="720.75" y="175.0" />
-                  <point x="506.75" y="175.0" />
-                  <point x="21.5" y="15.0" />
-                </edge>
-                <edge source="java.awt.Component" target="java.io.Serializable">
-                  <point x="-40.66666666666674" y="-15.0" />
-                  <point x="1372.5833333333333" y="50.0" />
-                  <point x="723.7907801418446" y="50.0" />
-                  <point x="54.08333333333337" y="15.0" />
-                </edge>
-                <edge source="Monster" target="MonsterSkills">
-                  <point x="33.66666666666663" y="-15.0" />
-                  <point x="546.0226950354611" y="280.0" />
-                  <point x="615.25" y="280.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="Player" target="java.io.Serializable">
-                  <point x="-29.0" y="-15.0" />
-                  <point x="231.70744680851112" y="280.0" />
-                  <point x="191.52269503546108" y="280.0" />
-                  <point x="191.52269503546108" y="50.0" />
-                  <point x="615.6241134751779" y="50.0" />
-                  <point x="-54.08333333333337" y="15.0" />
-                </edge>
-                <edge source="java.awt.event.ActionListener" target="java.util.EventListener">
-                  <point x="0.0" y="-15.0" />
-                  <point x="211.5" y="355.0" />
-                  <point x="163.70744680851112" y="355.0" />
-                  <point x="33.5" y="15.0" />
-                </edge>
-                <edge source="java.awt.Container" target="java.awt.Component">
-                  <point x="0.0" y="-15.0" />
-                  <point x="0.0" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JFrame" target="javax.swing.TransferHandler.HasGetTransferHandler">
-                  <point x="-37.59999999999991" y="-15.0" />
-                  <point x="1401.525" y="440.0" />
-                  <point x="848.25" y="440.0" />
-                  <point x="-49.0" y="15.0" />
-                </edge>
-                <edge source="javax.swing.JComponent" target="java.io.Serializable">
-                  <point x="0.0" y="-15.0" />
-                  <point x="1042.657446808511" y="280.0" />
-                  <point x="1005.75" y="280.0" />
-                  <point x="1005.75" y="90.0" />
-                  <point x="684.4574468085111" y="90.0" />
-                  <point x="14.75" y="15.0" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.6" x="390.0" y="183.33333333333326" />
-              <SelectedNodes>
-                <node>BoardPanel</node>
-              </SelectedNodes>
-              <Categories />
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
+      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Node.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Nougat.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Nougat.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Trap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Trap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding>
+                <element signature="e#150#151#0" expanded="true" />
+                <element signature="e#183#184#0" expanded="true" />
+                <element signature="e#219#220#0" expanded="true" />
+                <element signature="e#254#255#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="21" column="42" lean-forward="false" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerSkills.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PlayerSkills.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PrintStream.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/io/PrintStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="803" column="16" lean-forward="false" selection-start-line="803" selection-start-column="16" selection-end-line="803" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -438,15 +170,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>5</find>
-      <find>SETCO</find>
-      <find>yello</find>
-      <find>ife</find>
-      <find>ifet</find>
-      <find>c</find>
-      <find>calle</find>
-      <find>called</find>
-      <find>actionPerformed</find>
       <find>speed</find>
       <find>settext</find>
       <find>start</find>
@@ -468,6 +191,15 @@
       <find>load</find>
       <find>static</find>
       <find>stop</find>
+      <find>11</find>
+      <find>10</find>
+      <find>right</find>
+      <find>s</find>
+      <find>syste</find>
+      <find>system</find>
+      <find>system.</find>
+      <find>system.o</find>
+      <find>system.ou</find>
     </findStrings>
     <replaceStrings>
       <replace>6</replace>
@@ -493,20 +225,23 @@
         <option value="$PROJECT_DIR$/src/LLL.form" />
         <option value="$PROJECT_DIR$/src/Nougats.java" />
         <option value="$PROJECT_DIR$/src/PlayerSkills.java" />
-        <option value="$PROJECT_DIR$/src/Grid.java" />
-        <option value="$PROJECT_DIR$/src/Monster.java" />
-        <option value="$PROJECT_DIR$/src/Cell.java" />
         <option value="$PROJECT_DIR$/src/GameSettings.java" />
         <option value="$PROJECT_DIR$/src/Moveable.java" />
         <option value="$PROJECT_DIR$/src/MonsterSkills.java" />
-        <option value="$PROJECT_DIR$/src/Sprite.java" />
-        <option value="$PROJECT_DIR$/src/Trap.java" />
         <option value="$PROJECT_DIR$/src/GameAudioPlayer.java" />
-        <option value="$PROJECT_DIR$/src/BoardPanel.java" />
-        <option value="$PROJECT_DIR$/src/Settings.java" />
-        <option value="$PROJECT_DIR$/src/Player.java" />
-        <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/Cell.java" />
+        <option value="$PROJECT_DIR$/src/Nougat.java" />
+        <option value="$PROJECT_DIR$/src/Sprite.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/BoardPanel.java" />
+        <option value="$PROJECT_DIR$/src/Edge.java" />
+        <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/Node.java" />
+        <option value="$PROJECT_DIR$/src/Monster.java" />
+        <option value="$PROJECT_DIR$/src/Player.java" />
+        <option value="$PROJECT_DIR$/src/Settings.java" />
+        <option value="$PROJECT_DIR$/src/Trap.java" />
+        <option value="$PROJECT_DIR$/src/Grid.java" />
       </list>
     </option>
   </component>
@@ -539,9 +274,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -570,6 +304,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1040,7 +775,8 @@
       <workItem from="1494065367046" duration="3835000" />
       <workItem from="1494146545643" duration="54000" />
       <workItem from="1494155791426" duration="697000" />
-      <workItem from="1494202999710" duration="268000" />
+      <workItem from="1494202999710" duration="4633000" />
+      <workItem from="1494209559368" duration="20259000" />
     </task>
     <task id="LOCAL-00001" summary="added login screen">
       <created>1494137974843</created>
@@ -1053,40 +789,50 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109979000" />
+    <option name="totallyTimeSpent" value="134603000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="803" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23587571" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24152543" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49473685" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.48603353" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.50526315" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5139665" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1101,8 +847,9 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.519774" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.50706214" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1112,10 +859,10 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23587571" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.48022598" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49293786" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1142,16 +889,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Capability.java" />
-    <entry file="file://$PROJECT_DIR$/src/PlayerCapabilityType.java" />
-    <entry file="file://$PROJECT_DIR$/src/MonsterCapabilityType.java" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/awt/Component.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="3309" column="16" lean-forward="false" selection-start-line="3309" selection-start-column="16" selection-end-line="3309" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Class Diagram" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/awt/event/KeyListener.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1178,6 +915,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="1055" column="0" lean-forward="false" selection-start-line="1055" selection-start-column="0" selection-end-line="1055" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1192,6 +930,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
           <caret line="971" column="16" lean-forward="false" selection-start-line="971" selection-start-column="16" selection-end-line="971" selection-end-column="16" />
+          <folding>
+            <element signature="e#37566#37567#0" expanded="false" />
+            <element signature="e#37612#37613#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1255,13 +997,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PlayerSkills.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/monster.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1287,55 +1022,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Trap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="2" column="56" lean-forward="false" selection-start-line="2" selection-start-column="56" selection-end-line="2" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="43" lean-forward="false" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MonsterSkills.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Monster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BoardPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-212">
-          <caret line="46" column="20" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="37" lean-forward="false" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1348,7 +1038,7 @@
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JOptionPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8700">
+        <state relative-caret-position="15">
           <caret line="633" column="23" lean-forward="false" selection-start-line="633" selection-start-column="23" selection-end-line="633" selection-end-column="23" />
           <folding>
             <element signature="e#0#108867#0" expanded="false" />
@@ -1393,48 +1083,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="44" column="17" lean-forward="false" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="75" column="30" lean-forward="true" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Moveable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Nougats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="uml://JAVA/BoardPanel">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -1469,7 +1117,7 @@
             <node x="63.20744680851112" y="300.0">java.util.EventListener</node>
             <node x="151.5" y="470.0">BoardPanel</node>
             <node x="1396.625" y="550.0">Game</node>
-            <node x="1016.25" y="120.0">Nougats</node>
+            <node x="1016.25" y="120.0">Nougat</node>
             <node x="0.0" y="625.0">Main</node>
             <node x="1063.6991134751775" y="380.0">javax.swing.JPanel</node>
             <node x="1449.625" y="380.0">javax.swing.WindowConstants</node>
@@ -1508,12 +1156,6 @@
               <point x="1507.4166666666667" y="270.0" />
               <point x="-38.33333333333326" y="15.0" />
             </edge>
-            <edge source="Nougats" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="1067.75" y="80.0" />
-              <point x="694.2907801418446" y="80.0" />
-              <point x="24.58333333333337" y="15.0" />
-            </edge>
             <edge source="Moveable" target="Sprite">
               <point x="27.0" y="-15.0" />
               <point x="421.0226950354611" y="175.0" />
@@ -1533,6 +1175,12 @@
             <edge source="Player" target="PlayerSkills">
               <point x="0.0" y="-15.0" />
               <point x="0.0" y="15.0" />
+            </edge>
+            <edge source="Nougat" target="java.io.Serializable">
+              <point x="0.0" y="-15.0" />
+              <point x="1067.75" y="80.0" />
+              <point x="694.2907801418446" y="80.0" />
+              <point x="24.58333333333337" y="15.0" />
             </edge>
             <edge source="Game" target="javax.swing.JFrame">
               <point x="0.0" y="-15.0" />
@@ -1717,9 +1365,9 @@
               <point x="14.75" y="15.0" />
             </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="0.6" x="390.0" y="183.33333333333326" />
+          <settings layout="Hierarchic Group" zoom="0.6" x="390.0" y="264.0" />
           <SelectedNodes>
-            <node>BoardPanel</node>
+            <node>Cell</node>
           </SelectedNodes>
           <Categories />
           <SCOPE>All</SCOPE>
@@ -1727,11 +1375,158 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Grid.java">
+    <entry file="file://$PROJECT_DIR$/src/BoardPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="47" column="31" lean-forward="false" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding>
+            <element signature="e#237#238#0" expanded="true" />
+            <element signature="e#261#262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="147" column="19" lean-forward="false" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
+          <folding>
+            <element signature="e#5748#5749#0" expanded="false" />
+            <element signature="e#5784#5785#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Moveable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="792" column="0" lean-forward="false" selection-start-line="792" selection-start-column="0" selection-end-line="792" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/io/PrintStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="803" column="16" lean-forward="false" selection-start-line="803" selection-start-column="16" selection-end-line="803" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PlayerSkills.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="21" column="42" lean-forward="false" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Nougat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Edge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="15" lean-forward="false" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+          <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+          <folding>
+            <element signature="method#setCaloriesInitialValue#0;class#Settings#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Monster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Trap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#150#151#0" expanded="true" />
+            <element signature="e#183#184#0" expanded="true" />
+            <element signature="e#219#220#0" expanded="true" />
+            <element signature="e#254#255#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Grid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="133" column="34" lean-forward="true" selection-start-line="133" selection-start-column="34" selection-end-line="133" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4055#4056#0" expanded="true" />
+            <element signature="e#4083#4084#0" expanded="true" />
+            <element signature="e#4837#4843#0" expanded="true" />
+            <element signature="e#5691#5697#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

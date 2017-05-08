@@ -1,11 +1,11 @@
 import java.io.IOException;
 import java.io.Serializable;
 
-public class Nougats implements Serializable {
+public class Nougat implements Serializable {
 
     private boolean consumed;
 
-    public Nougats() {
+    public Nougat() {
         consumed = false;
     }
 

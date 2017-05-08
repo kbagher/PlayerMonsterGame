@@ -66,7 +66,7 @@ public class Main {
 
 
         // login or register a user
-        while (!showLogin()){}
+//        while (!showLogin()){}
 
 
         String status = "";

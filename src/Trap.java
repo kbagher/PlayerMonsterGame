@@ -3,6 +3,15 @@ import java.io.Serializable;
 public class Trap extends Sprite implements Serializable {
 
     private int affectTime;
+
+    public int getAffectTime() {
+        return affectTime;
+    }
+
+    public int getDurationTime() {
+        return durationTime;
+    }
+
     private int durationTime;
     private boolean isSteppedOver;
 
@@ -12,6 +21,7 @@ public class Trap extends Sprite implements Serializable {
     }
 
     public boolean isTrapped(Cell cell) {
+        if (getCell()==null) return false;
         if (getCell().equals(cell)) {
             if (affectTime > 0)
                 return true;

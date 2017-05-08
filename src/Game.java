@@ -2,6 +2,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.io.*;
+import java.util.Properties;
 
 
 /* This class is the main System level class which creates all the objects 
@@ -73,8 +74,6 @@ public class Game extends JFrame {
     private boolean restart;
     private boolean load;
     private int time;
-    private Settings settings;
-
 
     public void setupControls() {
         pnMain = new JPanel();
@@ -642,6 +641,7 @@ public class Game extends JFrame {
     private void prepareToStartGame() {
         player.setCalories(Settings.getCaloriesInitialValue());
         btStart.setText("Restart");
+        btPause.setText("Pause");
         updateSkills();
     }
 
@@ -656,6 +656,7 @@ public class Game extends JFrame {
         grid = new Grid();
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Settings.getCaloriesInitialValue());
+        player.addSkill(PlayerSkills.PlayerSkillsType.TRAP);
         monster = new Monster(grid, player, trap, 5, 5);
         bp = new BoardPanel(grid, player, monster, trap, this);
 
@@ -785,12 +786,12 @@ public class Game extends JFrame {
             trap.update();
 
             Cell newPlayerCell = player.move();
-            if (newPlayerCell == monster.getCell())
+            if (newPlayerCell == monster.getCell() && !trap.isTrapped(monster.getCell()))
                 break;
             player.setDirection(' ');   // reset to no direction
 
             Cell newMonsterCell = monster.move();
-            if (newMonsterCell == player.getCell())
+            if (newMonsterCell == player.getCell() && !trap.isTrapped(monster.getCell()))
                 break;
 
             // update time and repaint

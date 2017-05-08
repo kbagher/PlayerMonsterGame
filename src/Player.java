@@ -20,7 +20,6 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
         increaseCalories(currentCell.nougat.consume());
         if (canPerformEnergyAction(calculateCalories(steps))) {
             if (currentDirection != ' ') {
-                System.out.println(calories);
                 Cell tempcell = grid.getCell(currentCell, currentDirection, steps);
                 steps = grid.distance(currentCell, tempcell);
                 reduceCalories(calculateCalories(steps));

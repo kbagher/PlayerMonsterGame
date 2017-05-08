@@ -5,9 +5,9 @@ import java.io.Serializable;
  */
 public class Settings implements Serializable {
     private static int GAME_SPEED = 250;
-    private static int TIME_ALLOWED = 60;
+    private static int TIME_ALLOWED = 300;
     private static int TRAP_DURATION = 10;
-    private static int TRAP_REQUIRED_ENERGY = 50;
+    private static int TRAP_REQUIRED_ENERGY = 1;
     private static int TRAP_EFFECT_DURATION = 5;
     private static int NOUGAT_CALORIES = 6;
     private static int CALORIES_INITIAL_VALUE=40;
