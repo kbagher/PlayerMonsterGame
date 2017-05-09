@@ -5,45 +5,45 @@
 */
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Grid implements Serializable {
 
     Cell cells[] = new Cell[57];
     Cell cells2D[][] = new Cell[11][11];
-    Node nodes[][] = new Node[11][11];
+    SpriteNode spriteNodes[][] = new SpriteNode[11][11];
 
-    public Grid() {
+    public Grid() throws Exception {
         int k = 0;
         for (int row = 0; row < 11; row++) {
             for (int column = 0; column < 11; column++) {
                 if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)) {
                     cells2D[row][column] = new Cell(row, column);
                     cells[k++] = cells2D[row][column];
-                    nodes[row][column] = new Node(cells2D[row][column]);
+                    spriteNodes[row][column] = new SpriteNode(this, row, column);
                 }
             }
         }
-
         // build the graph
+        buildGraph();
+    }
+
+    private void buildGraph() {
         for (int row = 0; row < 11; row++)
             for (int column = 0; column < 11; column++) {
                 if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)) {
-                    Node v = nodes[row][column];
+                    SpriteNode v = spriteNodes[row][column];
                     if (column % 5 == 0 && row > 0) {     // up cell
-                        v.addEdge(new Edge(nodes[row - 1][column], 1));
+                        v.addEdge(new Edge(spriteNodes[row - 1][column], 1));
                     }
                     if (column % 5 == 0 && row < 11 - 1) { // down cell
-                        v.addEdge(new Edge(nodes[row + 1][column], 1));
+                        v.addEdge(new Edge(spriteNodes[row + 1][column], 1));
                     }
                     if (row % 5 == 0 && column > 0) {     // left cell
-                        v.addEdge(new Edge(nodes[row][column - 1], 1));
+                        v.addEdge(new Edge(spriteNodes[row][column - 1], 1));
                     }
                     if (row % 5 == 0 && (column < 11 - 1)) { // right cell
-                        v.addEdge(new Edge(nodes[row][column + 1], 1));
+                        v.addEdge(new Edge(spriteNodes[row][column + 1], 1));
                     }
                 }
             }
@@ -59,6 +59,14 @@ public class Grid implements Serializable {
             throw new Exception("Invalid Coordiantes row = " + row + " column " + col);
         return cells2D[row][col];
     }
+
+    public SpriteNode getNode(int row, int col) throws Exception {
+        if ((row % 5 != 0 && col % 5 != 0) ||
+                row < 0 || row > 10 || col < 0 || col > 10)
+            throw new Exception("Invalid Coordiantes row = " + row + " column " + col);
+        return spriteNodes[row][col];
+    }
+
 
     /* Returns the cell in the specified direction of the given cell.
        Valid direction must be either 'R', 'L', 'U', 'D' or ' '.
@@ -117,47 +125,45 @@ public class Grid implements Serializable {
 
     }
 
-    private void clearGraph(){
+    private void clearGraph() {
         for (int row = 0; row < 11; row++)
             for (int column = 0; column < 11; column++) {
-                if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)){
-                    nodes[row][column].previous = null;
-                    nodes[row][column].minDistance= Double.POSITIVE_INFINITY;
+                if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)) {
+                    spriteNodes[row][column].previous = null;
+                    spriteNodes[row][column].distance = Double.POSITIVE_INFINITY;
                 }
             }
     }
 
-    private void computePaths(Node sourceNode, Trap trap) {
-        sourceNode.minDistance = 0.;
-        PriorityQueue<Node> nodes = new PriorityQueue<Node>();
-        nodes.add(sourceNode);
-        while (!nodes.isEmpty()) {
-            Node u = nodes.poll();
-            // Visit each edge exiting u
-            for (Edge e : u.linkedCells) {
-                Node v = e.getTargetNode();
-                double weight = e.getTargetNode().getCell().equals(trap.getCell()) ? trap.getAffectTime() + trap.getDurationTime() : e.getValue();
-//                double weight = e.getValue();
-                double distanceThroughU = u.minDistance + weight;
-                if (distanceThroughU < v.minDistance) {
-                    nodes.remove(v);
-                    v.minDistance = distanceThroughU;
-                    v.previous = u;
-                    nodes.add(v);
+    private void computePaths(SpriteNode sourceNode, Trap trap) {
+        sourceNode.distance = 0.;
+        PriorityQueue<SpriteNode> spriteNodes = new PriorityQueue<>();
+        spriteNodes.add(sourceNode);
+
+        while (!spriteNodes.isEmpty()) {
+            SpriteNode currentNode = spriteNodes.poll();
+            // Visit each edge exiting currentNode
+            for (Edge edge : currentNode.linkedNodes) {
+                SpriteNode linkedNode = edge.getTargetNode();
+                double weight = edge.getTargetNode().getCell().equals(trap.getCell()) ? trap.getAffectTime() + trap.getDurationTime() : edge.getWeight();
+                double distanceThroughU = currentNode.distance + weight;
+                if (distanceThroughU < linkedNode.distance) {
+                    spriteNodes.remove(linkedNode);
+                    linkedNode.distance = distanceThroughU;
+                    linkedNode.previous = currentNode;
+                    spriteNodes.add(linkedNode);
                 }
             }
         }
     }
 
-    private Cell getCellTo(Node from, Node to) {
-        List<Node> path = new ArrayList<Node>();
+    private Cell getCellTo(SpriteNode from, SpriteNode to) {
+        LinkedList<SpriteNode> path = new LinkedList<>();
 
-        for (Node node = to; node != null; node = node.previous) {
-            path.add(node);
+        for (SpriteNode spriteNode = to; spriteNode != null; spriteNode = spriteNode.previous) {
+            path.add(spriteNode);
         }
-        Collections.reverse(path);
-//        System.out.println("Path: " + path);
-        return path.get(1).getCell();
+        return path.get(path.size() - 2).getCell();
     }
 
 
@@ -170,13 +176,9 @@ public class Grid implements Serializable {
         compute path from the monster to all node
          taking into consideration available traps
          */
-//        System.out.println("from row:"+ from.col+" from col:"+from.col);
         clearGraph();
-        computePaths(nodes[from.row][from.col], trap);
-        Cell newTo = getCellTo(nodes[from.row][from.col], nodes[to.row][to.col]);
-//        System.out.println("" + from.row + "-" + from.col);
-//        System.out.println("" + newTo.row + "-" + newTo.col);
-//        System.out.println("======");
+        computePaths(spriteNodes[from.row][from.col], trap);
+        Cell newTo = getCellTo(spriteNodes[from.row][from.col], spriteNodes[to.row][to.col]);
 
         if (from.row == newTo.row) {
             if (from.col < newTo.col)
@@ -190,29 +192,6 @@ public class Grid implements Serializable {
                 return 'U';
         }
 
-        int row = newTo.row;
-        int col = newTo.col;
-
-        if (inBetween(newTo.row % 5, 1, 2))
-            row = newTo.row / 5 * 5;
-        else if (inBetween(to.row % 5, 3, 4))
-            row = newTo.row / 5 * 5 + 5;
-        if (inBetween(newTo.col % 5, 1, 2))
-            col = newTo.col / 5 * 5;
-        else if (inBetween(newTo.col % 5, 3, 4))
-            col = newTo.col / 5 * 5 + 5;
-
-
-        if (from.row % 5 == 0)
-            if (from.col < col)
-                return 'R';
-            else if (from.col > col)
-                return 'L';
-        if (from.col % 5 == 0)
-            if (from.row < row)
-                return 'D';
-            else if (from.row > row)
-                return 'U';
         return ' ';
     }
 
@@ -258,13 +237,14 @@ public class Grid implements Serializable {
         Cell c4 = grid.getCell(2, 0);
         Cell c5 = grid.getCell(8, 5);
 
-//        System.out.println("Distance from (0,0) to (10,10) is "
-//                + grid.distance(c1, c2));
-//        System.out.println("Distance from (0,0) to (8,5) is "
-//                + grid.distance(c1, c5));
-//        System.out.println("From (0,0) to (0,2) best direction is "
-//                + grid.getBestDirection(c1, c3));
-//        System.out.println("From (0,0) to (2,0) best direction is "
-//                + grid.getBestDirection(c1, c4));
+        System.out.println("Distance from (0,0) to (10,10) is "
+                + grid.distance(c1, c2));
+        System.out.println("Distance from (0,0) to (8,5) is "
+                + grid.distance(c1, c5));
+
+        System.out.println("From (0,0) to (0,2) best direction is "
+                + grid.getBestDirection(c1, c3, new Trap(null)));
+        System.out.println("From (0,0) to (2,0) best direction is "
+                + grid.getBestDirection(c1, c4, new Trap(null)));
     }
 }

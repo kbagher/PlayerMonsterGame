@@ -22,10 +22,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
     private final int TMARGIN = 30;
 
     public BoardPanel(Grid g, Player p, Monster m, Trap t, Game gm) {
-        update(g,p,m,t,gm);
+        update(g, p, m, t, gm);
     }
 
-    public void update(Grid g, Player p, Monster m, Trap t, Game gm){
+    public void update(Grid g, Player p, Monster m, Trap t, Game gm) {
         player = p;
         grid = g;
         monster = m;
@@ -104,9 +104,9 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 //            ImageIcon icon = new ImageIcon("assets/trap.png");
 //            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
             gr.setColor(Color.BLUE);
-            gr.fillOval(xCor(cell.col)+CELLWIDTH/8, yCor(cell.row)+CELLWIDTH/8, CELLWIDTH*3/4, CELLHEIGHT*3/4);
+            gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
             gr.setColor(Color.white);
-            gr.drawString("T",xCor(cell.col)+CELLWIDTH/3, yCor(cell.row)+2*CELLWIDTH/3);
+            gr.drawString("T", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
         }
 
         cell = player.getCell();
@@ -134,18 +134,31 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            player.setDirection('L');
+            if (player.getDirection() == 'L')
+                player.setDirection(' ');
+            else
+                player.setDirection('L');
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            player.setDirection('R');
+            if (player.getDirection() == 'R')
+                player.setDirection(' ');
+            else
+                player.setDirection('R');
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            player.setDirection('D');
+            if (player.getDirection() == 'D')
+                player.setDirection(' ');
+            else
+                player.setDirection('D');
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            player.setDirection('U');
+            if (player.getDirection() == 'U')
+                player.setDirection(' ');
+            else
+                player.setDirection('U');
         }
     }
 
@@ -158,8 +171,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             game.pauseAnResumeGame();
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             player.skip();
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_S) {
+        } else if (e.getKeyCode() == KeyEvent.VK_S) {
             player.setReady(true);
         }
     }

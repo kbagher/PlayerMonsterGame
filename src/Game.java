@@ -788,7 +788,8 @@ public class Game extends JFrame {
             Cell newPlayerCell = player.move();
             if (newPlayerCell == monster.getCell() && !trap.isTrapped(monster.getCell()))
                 break;
-            player.setDirection(' ');   // reset to no direction
+            // reset to no direction
+//            player.setDirection(' ');
 
             Cell newMonsterCell = monster.move();
             if (newMonsterCell == player.getCell() && !trap.isTrapped(monster.getCell()))

@@ -37,7 +37,6 @@ public abstract class Moveable extends Sprite implements Serializable {
         if (getSkills().size() == 0) return false;
 
         return getSkills().contains(skill);
-
     }
 
 

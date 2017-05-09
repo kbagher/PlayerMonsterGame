@@ -11,6 +11,7 @@ public abstract class Sprite implements Serializable {
     public Sprite(Grid g) {
         grid = g;
     }
+
     public void setCell(Cell c) {
         currentCell = c;
     }

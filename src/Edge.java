@@ -1,20 +1,21 @@
+import java.io.Serializable;
+
 /**
  * Created by kassem on 8/5/17.
  */
-public class Edge {
-    private Node targetNode;
-    private double value;
+public class Edge implements Serializable {
+    private SpriteNode targetNode;
+    private double weight;
 
-    public Edge(Node argTarget, double argWeight) {
-        targetNode = argTarget;
-        value = argWeight;
+    public Edge(SpriteNode targetNode, double edgeWeight) {
+        this.weight = edgeWeight;
+        this.targetNode = targetNode;
     }
-
-    public Node getTargetNode() {
+    public double getWeight() {
+        return weight;
+    }
+    public SpriteNode getTargetNode() {
         return targetNode;
     }
 
-    public double getValue() {
-        return value;
-    }
 }
