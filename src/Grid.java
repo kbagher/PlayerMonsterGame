@@ -137,30 +137,30 @@ public class Grid implements Serializable {
 
     private void computePaths(SpriteNode sourceNode, Trap trap) {
         sourceNode.distance = 0.;
-        PriorityQueue<SpriteNode> spriteNodes = new PriorityQueue<>();
-        spriteNodes.add(sourceNode);
+        PriorityQueue<SpriteNode> visitedNodes = new PriorityQueue<>();
+        visitedNodes.add(sourceNode);
 
-        while (!spriteNodes.isEmpty()) {
-            SpriteNode currentNode = spriteNodes.poll();
+        while (!visitedNodes.isEmpty()) {
+            SpriteNode currentNode = visitedNodes.poll();
             // Visit each edge exiting currentNode
             for (Edge edge : currentNode.linkedNodes) {
                 SpriteNode linkedNode = edge.getTargetNode();
-                double weight = edge.getTargetNode().getCell().equals(trap.getCell()) ? trap.getAffectTime() + trap.getDurationTime() : edge.getWeight();
-                double distanceThroughU = currentNode.distance + weight;
-                if (distanceThroughU < linkedNode.distance) {
-                    spriteNodes.remove(linkedNode);
-                    linkedNode.distance = distanceThroughU;
+                double trapWeight = edge.getTargetNode().getCell().equals(trap.getCell()) ? trap.getAffectTime() + trap.getDurationTime() : 0;
+                double calculatedWeight = trapWeight + edge.getWeight();
+                double distanceThroughLinkedNode = currentNode.distance + calculatedWeight;
+                if (distanceThroughLinkedNode < linkedNode.distance) {
+                    visitedNodes.remove(linkedNode);
+                    linkedNode.distance = distanceThroughLinkedNode;
                     linkedNode.previous = currentNode;
-                    spriteNodes.add(linkedNode);
+                    visitedNodes.add(linkedNode);
                 }
             }
         }
     }
 
-    private Cell getCellTo(SpriteNode from, SpriteNode to) {
+    private Cell getPathCell(SpriteNode fromNode, SpriteNode toNode) {
         LinkedList<SpriteNode> path = new LinkedList<>();
-
-        for (SpriteNode spriteNode = to; spriteNode != null; spriteNode = spriteNode.previous) {
+        for (SpriteNode spriteNode = toNode; spriteNode != null; spriteNode = spriteNode.previous) {
             path.add(spriteNode);
         }
         return path.get(path.size() - 2).getCell();
@@ -178,7 +178,7 @@ public class Grid implements Serializable {
          */
         clearGraph();
         computePaths(spriteNodes[from.row][from.col], trap);
-        Cell newTo = getCellTo(spriteNodes[from.row][from.col], spriteNodes[to.row][to.col]);
+        Cell newTo = getPathCell(spriteNodes[from.row][from.col], spriteNodes[to.row][to.col]);
 
         if (from.row == newTo.row) {
             if (from.col < newTo.col)
