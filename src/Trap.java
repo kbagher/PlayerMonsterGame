@@ -2,10 +2,10 @@ import java.io.Serializable;
 
 public class Trap extends Sprite implements Serializable {
 
-    private int affectTime;
+    private int effectTime;
 
-    public int getAffectTime() {
-        return affectTime;
+    public int getEffectTime() {
+        return effectTime;
     }
 
     public int getDurationTime() {
@@ -23,7 +23,7 @@ public class Trap extends Sprite implements Serializable {
     public boolean isTrapped(Cell cell) {
         if (getCell()==null) return false;
         if (getCell().equals(cell)) {
-            if (affectTime > 0)
+            if (effectTime > 0)
                 return true;
         }
         return false;
@@ -38,8 +38,8 @@ public class Trap extends Sprite implements Serializable {
     }
 
     public void setTrap(Cell cell) {
-        this.durationTime = Settings.getTrapDuration();
-        this.affectTime = Settings.getTrapEffectDuration();
+        this.durationTime = Game.settings.trapDuration;
+        this.effectTime = Game.settings.trapEffectDuration;
         setCell(cell);
     }
 
@@ -47,18 +47,18 @@ public class Trap extends Sprite implements Serializable {
         setCell(null);
         isSteppedOver = false;
         this.durationTime = 0;
-        this.affectTime = 0;
+        this.effectTime = 0;
     }
 
     public void update() {
         if (!isSet())
             return;
 
-        if (isSteppedOver && affectTime > 0) {
-            if (affectTime-- == 1)
+        if (isSteppedOver && effectTime > 0) {
+            if (effectTime-- == 1)
                 removeTrap();
             durationTime = 0;
-        } else if (isSteppedOver && affectTime == 0) {
+        } else if (isSteppedOver && effectTime == 0) {
             removeTrap();
         } else if (durationTime <= 1) {
             removeTrap();

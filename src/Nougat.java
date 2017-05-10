@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.io.Serializable;
 
 public class Nougat implements Serializable {
@@ -16,7 +15,7 @@ public class Nougat implements Serializable {
     public int consume() {
         if (!consumed) {
             consumed = true;
-            return Settings.getNougatCalories();
+            return Game.settings.nougatEnergy;
         }
         return 0;
     }

@@ -1,49 +1,107 @@
+import javax.xml.crypto.Data;
+import java.io.*;
+import java.util.Base64;
 
-public class User {
+public class User implements Serializable {
 
-	private String username;
-	private String password;
-	private int win;
-	private int loss;
+    private String username;
+    private String password;
+    private int win;
+    private int loss;
 
-	/*public User(String username, String password, int win, int loss) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.win = win;
-		this.loss = loss;
-	}*/
+    public static User login(String username, String password) {
+        return Database.getInstance().login(username, password);
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public int getWin() {
+        return win;
+    }
 
-	public int getWin() {
-		return win;
-	}
+    public void setWin(int win) {
+        this.win = win;
+    }
 
-	public void setWin(int win) {
-		this.win = win;
-	}
+    public int getLoss() {
+        return loss;
+    }
 
-	public int getLoss() {
-		return loss;
-	}
+    public void setLoss(int loss) {
+        this.loss = loss;
+    }
 
-	public void setLoss(int loss) {
-		this.loss = loss;
-	}
+
+    public boolean saveGame(Game g,Settings s) {
+        try {
+            ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+            ObjectOutputStream oStream = new ObjectOutputStream(bStream);
+            oStream.writeObject(g);
+            oStream.flush();
+            oStream.close();
+            Database.getInstance().saveGame(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
+
+            bStream = new ByteArrayOutputStream();
+            oStream = new ObjectOutputStream(bStream);
+            oStream.writeObject(s);
+            oStream.flush();
+            oStream.close();
+            Database.getInstance().saveSetings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean saveSettings(Settings s) {
+        try {
+            ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+            ObjectOutputStream oStream = new ObjectOutputStream(bStream);
+            oStream.writeObject(s);
+            oStream.close();
+            return Database.getInstance().saveSetings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public Game loadSettings() {
+        try {
+            byte[] gameData = Base64.getDecoder().decode(Database.getInstance().loadGame(username));
+            ObjectInputStream oStream = new ObjectInputStream(new ByteArrayInputStream(gameData));
+            Game g = (Game) oStream.readObject();
+            oStream.close();
+            return g;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+
+    public Game loadGame() {
+        try {
+            byte[] gameData = Base64.getDecoder().decode(Database.getInstance().loadGame(username));
+            ObjectInputStream oStream = new ObjectInputStream(new ByteArrayInputStream(gameData));
+            Game g = (Game) oStream.readObject();
+            oStream.close();
+            return g;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 
 }

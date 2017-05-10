@@ -38,7 +38,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
     public int calculateCalories(int steps) {
         int sum = 0;
         for (int i = 1; i <= steps; i++) {
-            sum += Math.pow(Settings.getStepCalories(), i);
+            sum += Math.pow(Game.settings.stepEnergy, i);
         }
         return sum;
     }
@@ -88,10 +88,10 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
 
         // TODO: call canPerformEnergyAction(calories)
         // enough calories to put a trap
-        if (canPerformEnergyAction(Settings.getTrapRequiredEnergy())) {
+        if (canPerformEnergyAction(Game.settings.trapEnergy)) {
             System.out.println("Setting Trap");
             trap.setTrap(getCell());
-            reduceCalories(Settings.getTrapRequiredEnergy());
+            reduceCalories(Game.settings.trapEnergy);
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
                 player.playAudio("assets/place_trap.wav");

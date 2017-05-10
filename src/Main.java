@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
  */
 public class Main {
 
-    private static boolean showLogin(){
+    private static User showLogin(){
         JPanel loginPanel = new JPanel(new BorderLayout(5,1));
 
         JPanel labelsPanel = new JPanel(new GridLayout(0,1,2,2));
@@ -27,65 +27,54 @@ public class Main {
 
         JOptionPane.showOptionDialog(null, loginPanel, "User login", JOptionPane.OK_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, options, null);
-        System.out.println("Username: " + username.getText());
-        String passText = new String(password.getPassword());
-        System.out.println("Password: " + passText);
+
+        String usr = username.getText();
+        String pass = new String(password.getPassword());
 
         // user does not exists
-        // TODO: link with khalid's methid
-        if (true){
-            int answer = JOptionPane.showConfirmDialog(null,"User does not exist, do you want to register using the provided information?","Unknow username",JOptionPane.YES_NO_OPTION);
+        User user = User.login(usr,pass);
+
+        if (user==null){
+            int answer = JOptionPane.showConfirmDialog(null,"Unknown user, do you want to register using the provided information?","Unknow username",JOptionPane.YES_NO_OPTION);
             if (answer==JOptionPane.YES_OPTION) // TODO: register user
             {
-                boolean status=true;
-                // TODO: register the user and check the results
-                if (status){
+                if (Database.getInstance().register(usr,pass)){
                     JOptionPane.showMessageDialog(null,"User created successfully :D","Registerd", JOptionPane.INFORMATION_MESSAGE);
-                    return true;
+                    return user;
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"Could not register :(","Error", JOptionPane.ERROR_MESSAGE);
-                    return false;
+                    return null;
                 }
             }
             else
-                return false;
+                return null;
         }
-        return true;
-    }
-
-    private static Game getSavedGameObject() throws Exception {
-        FileInputStream fis = new FileInputStream("mybean.ser");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        Game game = (Game) ois.readObject();
-        ois.close();
-        return game;
+        return user;
     }
 
     public static void main(String args[]) throws Exception {
 
-
         // login or register a user
-//        while (!showLogin()){}
-
+        User user;
+        while ((user = showLogin()) ==null);
 
         String status = "";
         Game game=null;
         do {
-
             // load new game
             if ((status.compareTo("") == 0)){
-                game= new Game();
+                game= new Game(user);
             }
             else if (status.compareTo("restart") == 0){
                 game.resetGameObjects();
             }
             else if (status.compareTo("load") == 0) {
                 System.out.println("load");
-                game = getSavedGameObject();
+                game = user.loadGame();
             }
             game.loadSettingsToView();
-            game.updateSettingsVariables();
+//            game.updateSettingsVariables();
             game.setTitle("Monster Game");
             game.setSize(700, 750);
             game.setLocationRelativeTo(null);  // center the frame

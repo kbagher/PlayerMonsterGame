@@ -70,7 +70,7 @@ public class Grid implements Serializable {
 
     /* Returns the cell in the specified direction of the given cell.
        Valid direction must be either 'R', 'L', 'U', 'D' or ' '.
-       A null value will be returned if attempt to get a non-existent cell.
+       A null value will be returned if attempt to instance a non-existent cell.
     */
     public Cell getCell(Cell cell, char direction, int steps) {
         Cell tempCell = null;
@@ -145,7 +145,7 @@ public class Grid implements Serializable {
             // Visit each edge exiting currentNode
             for (Edge edge : currentNode.linkedNodes) {
                 SpriteNode linkedNode = edge.getTargetNode();
-                double trapWeight = edge.getTargetNode().getCell().equals(trap.getCell()) ? trap.getAffectTime() + trap.getDurationTime() : 0;
+                double trapWeight = edge.getTargetNode().getCell().equals(trap.getCell()) ? trap.getEffectTime() + trap.getDurationTime() : 0;
                 double calculatedWeight = trapWeight + edge.getWeight();
                 double distanceThroughLinkedNode = currentNode.distance + calculatedWeight;
                 if (distanceThroughLinkedNode < linkedNode.distance) {
@@ -158,11 +158,13 @@ public class Grid implements Serializable {
         }
     }
 
-    private Cell getPathCell(SpriteNode fromNode, SpriteNode toNode) {
+    private Cell getPathToCell(SpriteNode fromNode, SpriteNode toNode) {
         LinkedList<SpriteNode> path = new LinkedList<>();
         for (SpriteNode spriteNode = toNode; spriteNode != null; spriteNode = spriteNode.previous) {
             path.add(spriteNode);
         }
+        if (path.size()==1)
+            return path.get(0).getCell();
         return path.get(path.size() - 2).getCell();
     }
 
@@ -171,14 +173,14 @@ public class Grid implements Serializable {
      * Assumed cells passed are valid cells in the grid.
      * you need to verify this method 
      */
-    public char getBestDirection(Cell from, Cell to, Trap trap) {
+    public char getMoveDirection(Cell from, Cell to, Trap trap) {
         /*
         compute path from the monster to all node
          taking into consideration available traps
          */
         clearGraph();
         computePaths(spriteNodes[from.row][from.col], trap);
-        Cell newTo = getPathCell(spriteNodes[from.row][from.col], spriteNodes[to.row][to.col]);
+        Cell newTo = getPathToCell(spriteNodes[from.row][from.col], spriteNodes[to.row][to.col]);
 
         if (from.row == newTo.row) {
             if (from.col < newTo.col)
@@ -191,24 +193,23 @@ public class Grid implements Serializable {
             else if (from.row > newTo.row)
                 return 'U';
         }
-
         return ' ';
     }
 
-    /* A helper method to get the absolute value */
+    /* A helper method to instance the absolute value */
     private int abs(int x) {
         if (x >= 0) return x;
         else return -x;
     }
 
-    /* A helper method to get the minimum of three values */
+    /* A helper method to instance the minimum of three values */
     private int min(int x, int y, int z) {
         if (x <= y && x <= z) return x;
         if (y <= z && y <= x) return y;
         return z;
     }
 
-    /* A method to get the shortest distance from one cell to another
+    /* A method to instance the shortest distance from one cell to another
      * Assumed cells are valid cells in the grid
      */
     public int distance(Cell from, Cell to) {
@@ -243,8 +244,8 @@ public class Grid implements Serializable {
                 + grid.distance(c1, c5));
 
         System.out.println("From (0,0) to (0,2) best direction is "
-                + grid.getBestDirection(c1, c3, new Trap(null)));
+                + grid.getMoveDirection(c1, c3, new Trap(null)));
         System.out.println("From (0,0) to (2,0) best direction is "
-                + grid.getBestDirection(c1, c4, new Trap(null)));
+                + grid.getMoveDirection(c1, c4, new Trap(null)));
     }
 }

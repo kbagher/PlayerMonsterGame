@@ -33,7 +33,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         }
         if (currentCell.equals(player.getCell()))
             return currentCell;
-        currentDirection = grid.getBestDirection(currentCell, player.getCell(),trap);
+        currentDirection = grid.getMoveDirection(currentCell, grid.getCell(player.getCell(),player.getDirection()),trap);
         currentCell = (grid.getCell(getCell(), getDirection()));
         return currentCell;
     }

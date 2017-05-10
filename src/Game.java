@@ -2,7 +2,6 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.io.*;
-import java.util.Properties;
 
 
 /* This class is the main System level class which creates all the objects 
@@ -12,8 +11,6 @@ import java.util.Properties;
 
 public class Game extends JFrame {
     // labels
-    private JLabel mLabel = new JLabel("Time Remaining : " + Settings.getTimeAllowed());
-
     JPanel pnMain;
     JTabbedPane tbpControl;
 
@@ -67,6 +64,7 @@ public class Game extends JFrame {
     private GameAudioPlayer audio;
     private Grid grid;
     private Player player;
+    private User user;
     private Trap trap;
     private Monster monster;
     private BoardPanel bp;
@@ -74,13 +72,13 @@ public class Game extends JFrame {
     private boolean restart;
     private boolean load;
     private int time;
+    public static Settings settings;
 
     public void setupControls() {
         pnMain = new JPanel();
         GridBagLayout gbMain = new GridBagLayout();
         GridBagConstraints gbcMain = new GridBagConstraints();
         pnMain.setLayout(gbMain);
-
         tbpControl = new JTabbedPane();
 
         pnDashboard = new JPanel();
@@ -214,7 +212,7 @@ public class Game extends JFrame {
         pnDashboard.add(lbLabel15);
 
         lbTime = new JLabel("");
-        lbTime.setText("" + Settings.getTimeAllowed());
+        lbTime.setText("" + Game.settings.timeAllowed);
         gbcDashboard.gridx = 4;
         gbcDashboard.gridy = 0;
         gbcDashboard.gridwidth = 1;
@@ -238,7 +236,7 @@ public class Game extends JFrame {
         gbDashboard.setConstraints(lbEnergy, gbcDashboard);
         pnDashboard.add(lbEnergy);
 
-        lbStatus = new JLabel("Welcome Kassem");
+        lbStatus = new JLabel("Welcome "+user.getUsername());
         lbStatus.setForeground(new Color(114, 0, 0));
         gbcDashboard.gridx = 3;
         gbcDashboard.gridy = 2;
@@ -582,16 +580,16 @@ public class Game extends JFrame {
     }
 
     public void loadSettingsToView() {
-        tfSpeed.setText("" + Settings.getGameSpeed());
-        tfTime.setText("" + Settings.getTimeAllowed());
-        tfInitialEnergy.setText("" + Settings.getCaloriesInitialValue());
-        tfStepEnergy.setText("" + Settings.getStepCalories());
-        tfCoinEnergy.setText("" + Settings.getNougatCalories());
-        tfTrapEnergy.setText("" + Settings.getTrapRequiredEnergy());
-        tfTrapEffectDuration.setText("" + Settings.getTrapEffectDuration());
-        tfTrapLifetime.setText("" + Settings.getTrapDuration());
-        lbTime.setText("" + Settings.getTimeAllowed());
-        lbEnergy.setText("" + Settings.getCaloriesInitialValue());
+        tfSpeed.setText("" + Game.settings.gameSpeed);
+        tfTime.setText("" + Game.settings.timeAllowed);
+        tfInitialEnergy.setText("" + Game.settings.initialEnergy);
+        tfStepEnergy.setText("" + Game.settings.stepEnergy);
+        tfCoinEnergy.setText("" + Game.settings.nougatEnergy);
+        tfTrapEnergy.setText("" + Game.settings.trapEnergy);
+        tfTrapEffectDuration.setText("" + Game.settings.trapEffectDuration);
+        tfTrapLifetime.setText("" + Game.settings.trapDuration);
+        lbTime.setText("" + Game.settings.timeAllowed);
+        lbEnergy.setText("" + Game.settings.initialEnergy);
 
         cbPlayerSkip.setSelected(player.hasSkill(PlayerSkills.PlayerSkillsType.SKIP));
         cbPlayerTrap.setSelected(player.hasSkill(PlayerSkills.PlayerSkillsType.TRAP));
@@ -601,14 +599,15 @@ public class Game extends JFrame {
 
 
     public void updateSettingsVariables() {
-        Settings.setGameSpeed(Integer.parseInt(tfSpeed.getText()));
-        Settings.setTimeAllowed(Integer.parseInt(tfTime.getText()));
-        Settings.setCaloriesInitialValue(Integer.parseInt(tfInitialEnergy.getText()));
-        Settings.setStepCalories(Integer.parseInt(tfStepEnergy.getText()));
-        Settings.setNougatCalories(Integer.parseInt(tfCoinEnergy.getText()));
-        Settings.setTrapRequiredEnergy(Integer.parseInt(tfTrapEnergy.getText()));
-        Settings.setTrapEffectDuration(Integer.parseInt(tfTrapEffectDuration.getText()));
-        Settings.setTrapDuration(Integer.parseInt(tfTrapLifetime.getText()));
+        Game.settings.gameSpeed = (Integer.parseInt(tfSpeed.getText()));
+        Game.settings.timeAllowed=(Integer.parseInt(tfTime.getText()));
+        Game.settings.initialEnergy=(Integer.parseInt(tfInitialEnergy.getText()));
+        Game.settings.stepEnergy=(Integer.parseInt(tfStepEnergy.getText()));
+        Game.settings.nougatEnergy=(Integer.parseInt(tfCoinEnergy.getText()));
+        Game.settings.trapEnergy=(Integer.parseInt(tfTrapEnergy.getText()));
+        Game.settings.trapEffectDuration=(Integer.parseInt(tfTrapEffectDuration.getText()));
+        Game.settings.trapDuration=(Integer.parseInt(tfTrapLifetime.getText()));
+        System.out.println(Game.settings.gameSpeed);
         updateSkills();
     }
 
@@ -639,9 +638,12 @@ public class Game extends JFrame {
     }
 
     private void prepareToStartGame() {
-        player.setCalories(Settings.getCaloriesInitialValue());
+        player.setCalories(Game.settings.initialEnergy);
         btStart.setText("Restart");
-        btPause.setText("Pause");
+        if (pause)
+            btPause.setText("Resume");
+        else
+            btPause.setText("Pause");
         updateSkills();
     }
 
@@ -649,14 +651,15 @@ public class Game extends JFrame {
      * It throws an exception if an attempt is made to place the player or the
      * monster in an invalid location.
      */
-    public Game() throws Exception {
+    public Game(User u) throws Exception {
         pause = false;
         restart = false;
         load = false;
+        user = u;
+        settings = new Settings();
         grid = new Grid();
         trap = new Trap(grid);
-        player = new Player(grid, trap, 0, 0, Settings.getCaloriesInitialValue());
-        player.addSkill(PlayerSkills.PlayerSkillsType.TRAP);
+        player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
         monster = new Monster(grid, player, trap, 5, 5);
         bp = new BoardPanel(grid, player, monster, trap, this);
 
@@ -666,16 +669,18 @@ public class Game extends JFrame {
         add(pnMain, BorderLayout.SOUTH);
     }
 
+
     public void resetGameObjects() throws Exception {
         pause = false;
         restart = false;
         load = false;
         grid = new Grid();
         trap = new Trap(grid);
-        player = new Player(grid, trap, 0, 0, Settings.getCaloriesInitialValue());
+        player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
         monster = new Monster(grid, player, trap, 5, 5);
         bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");
+        lbStatus.setText("Welcome "+user.getUsername());
         bp.repaint();
     }
 
@@ -692,15 +697,16 @@ public class Game extends JFrame {
         if (!pause)
             pause = true;
 
-        try {
-            FileOutputStream fos = new FileOutputStream("mybean.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this);
-            oos.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println("Saved");
+        if (user.saveGame(this,settings))
+            System.out.println("Saved");
+//        try {
+//            FileOutputStream fos = new FileOutputStream("mybean.ser");
+//            ObjectOutputStream oos = new ObjectOutputStream(fos);
+//            oos.writeObject(this);
+//            oos.close();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 
     public void pauseAnResumeGame() {
@@ -741,7 +747,7 @@ public class Game extends JFrame {
 
 
     private void updateStatusMessage(String message) {
-        if (time < Settings.getTimeAllowed()) {
+        if (time < Game.settings.timeAllowed) {
             // players has been eaten up
             message = "Player Lost";
             try {
@@ -768,6 +774,7 @@ public class Game extends JFrame {
      */
     public String play() {
 
+        System.out.println(Game.settings.gameSpeed);
         time = 0;
         String message = "";
         player.setDirection(' '); // set to no direction
@@ -788,6 +795,7 @@ public class Game extends JFrame {
             Cell newPlayerCell = player.move();
             if (newPlayerCell == monster.getCell() && !trap.isTrapped(monster.getCell()))
                 break;
+
             // reset to no direction
 //            player.setDirection(' ');
 
@@ -797,11 +805,11 @@ public class Game extends JFrame {
 
             // update time and repaint
             time++;
-            lbTime.setText("" + (Settings.getTimeAllowed() - time));
+            lbTime.setText("" + (Game.settings.timeAllowed - time));
             lbEnergy.setText("" + player.getCalories());
-            delay(Settings.getGameSpeed());
+            delay(Game.settings.gameSpeed);
             bp.repaint();
-        } while (time < Settings.getTimeAllowed() && !restart && !load);
+        } while (time < Game.settings.timeAllowed && !restart && !load);
 
         updateStatusMessage(message);
 

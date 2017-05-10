@@ -91,44 +91,44 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             gr.setColor(Color.black);
             gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
             if (!cell.nougat.isConsumed()) {
-//                ImageIcon icon = new ImageIcon("assets/coin.png");
-//                icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
-                gr.setColor(Color.YELLOW);
-                gr.fillOval(xCor(cell.col) + CELLWIDTH / 4, yCor(cell.row) + CELLWIDTH / 4, CELLWIDTH * 1 / 2, CELLHEIGHT * 1 / 2);
+                ImageIcon icon = new ImageIcon("assets/coin.png");
+                icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
+//                gr.setColor(Color.YELLOW);
+//                gr.fillOval(xCor(cell.col) + CELLWIDTH / 4, yCor(cell.row) + CELLWIDTH / 4, CELLWIDTH * 1 / 2, CELLHEIGHT * 1 / 2);
             }
 
         }
 
         if (trap.isSet()) {
             cell = trap.getCell();
-//            ImageIcon icon = new ImageIcon("assets/trap.png");
-//            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
-            gr.setColor(Color.BLUE);
-            gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
-            gr.setColor(Color.white);
-            gr.drawString("T", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
+            ImageIcon icon = new ImageIcon("assets/trap.png");
+            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 15);
+//            gr.setColor(Color.BLUE);
+//            gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
+//            gr.setColor(Color.white);
+//            gr.drawString("T", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
         }
 
         cell = player.getCell();
-//        ImageIcon icon = new ImageIcon("assets/player.png");
-//        icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
+        ImageIcon icon = new ImageIcon("assets/player.png");
+        icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
 
 
         cell = player.getCell();
-        gr.setColor(Color.red);
-        gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
-        gr.setColor(Color.white);
-        gr.drawString("P", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
+//        gr.setColor(Color.red);
+//        gr.fillOval(xCor(cell.col) + CELLWIDTH / 8, yCor(cell.row) + CELLWIDTH / 8, CELLWIDTH * 3 / 4, CELLHEIGHT * 3 / 4);
+//        gr.setColor(Color.white);
+//        gr.drawString("P", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
 
         if (monster.viewable()) {
             cell = monster.getCell();
-//            icon = new ImageIcon("assets/monster.png");
-//            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
+            icon = new ImageIcon("assets/monster.png");
+            icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
 
-            gr.setColor(Color.black);
-            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-            gr.setColor(Color.white);
-            gr.drawString("M", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
+//            gr.setColor(Color.black);
+//            gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+//            gr.setColor(Color.white);
+//            gr.drawString("M", xCor(cell.col) + CELLWIDTH / 3, yCor(cell.row) + 2 * CELLWIDTH / 3);
         }
     }
 
