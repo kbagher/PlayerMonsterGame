@@ -46,7 +46,6 @@ public class Main {
         String pass = new String(password.getPassword());
 
         // retrieve the user object using provided data
-
         User user = User.login(usr, pass);
 
         // user does not exist

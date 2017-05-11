@@ -43,7 +43,9 @@ public abstract class Moveable extends Sprite implements Serializable {
         return true;
     }
 
-
+    public boolean hasSkills(){
+        return skills.size()==0? false:true;
+    }
 
     public void removeSkill(Object skill) {
         if (skills.size()==0) return;

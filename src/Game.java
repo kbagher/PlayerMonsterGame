@@ -989,10 +989,8 @@ public class Game extends JFrame {
         prepareToStartGame();
 
         do {
-            if (pause) {
+            while (pause)
                 delay(1000);
-                continue;
-            }
 
             trap.update();
 

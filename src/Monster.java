@@ -7,12 +7,37 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * Monster class
+ */
 public class Monster extends Moveable implements MonsterSkills, Serializable {
+    /**
+     * Player reference
+     */
     private Player player;
+    /**
+     * Trap reference
+     */
     private Trap trap;
+    /**
+     * Invisible skill timer
+     */
     private int hideTime;
+    /**
+     * Determines if the monster has stepped over a trap or not
+     */
     private boolean steppedOverTrap;
 
+    /**
+     * Instantiates a new Monster.
+     *
+     * @param g   grid
+     * @param p   player
+     * @param t   trap
+     * @param row initial row on the grid
+     * @param col initial column on the grid
+     * @throws Exception the exception
+     */
     public Monster(Grid g, Player p, Trap t, int row, int col) throws Exception {
         super(g);
         player = p;
@@ -21,43 +46,66 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         steppedOverTrap = false;
     }
 
+    /**
+     * Move the monster
+     * @return
+     */
     public Cell move() {
-        // don't move if the monster is trapped
+        /**
+         * Avoid moving if trapped
+         */
         if (isTrapped()) {
-            return getCell();
+            return getCell(); // monster is trapped
         }
         steppedOverTrap=false;
 
+        /**
+         * Perform random skills
+         */
         if (canPerformSkill()) {
-            performRandomSkill();
+            performRandomSkill(); // perform random skill
         }
+
+        /**
+         * Monster leaped to user's cell
+         */
         if (currentCell.equals(player.getCell()))
             return currentCell;
+
         currentDirection = grid.getMoveDirection(currentCell, grid.getCell(player.getCell(),player.getDirection()),trap);
         currentCell = (grid.getCell(getCell(), getDirection()));
         return currentCell;
     }
 
+    /**
+     * Disable monster's current active skills.
+     *
+     * Any other active skills that can be disabled
+     * should be disabled here
+     */
     private void disableAllActiveSkills() {
-        /*
-        any other active skills that can be disabled
-        should be disabled here
-        */
-
         // disable the invisible skill
         hideTime = 0;
     }
 
+    /**
+     * Check if the monster is trapped or not
+     * @return true if monster is trapped
+     */
     private boolean isTrapped() {
+
         if (!trap.isSet())
-            return false;
+            return false; // trap is not placed
 
         if (!trap.isTrapped(getCell()))
-            return false;
+            return false; // not trapped
 
-        // monster is trapped
-        if (!steppedOverTrap){
-            trap.stepOver(); // first step
+
+        if (!steppedOverTrap){ // just got trapped
+            /**
+             * inform the trap that the monster has stepped over it
+             */
+            trap.stepOver();
             steppedOverTrap=true;
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
@@ -67,44 +115,69 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
             }
         }
 
-
-        // remove all active skills
+        // disable all active skill since monster is trapped
         disableAllActiveSkills();
         return true;
     }
 
+    /**
+     * Check if the monster's invisible skill is active or not
+     * @return true if invisible skill is active
+     */
     private boolean isHiding() {
         return hideTime != 0;
     }
 
+    /**
+     * Check if the monster can perform a skill or not
+     * @return true if the monster can perform any skill
+     */
     private boolean canPerformSkill() {
 
-        if (getSkills().size() == 0)
+        /**
+         * check if there are any skills available
+         */
+        if (!hasSkills())
             return false; // no skills available
 
+        /**
+         * Check if there are any currently active skills
+         *
+         * The monster can't have more than one active skill at the same time
+         */
         if (isHiding())
             return false; // invisible skill is active
 
-        return !isTrapped();
+        /**
+         * Check if the monster is no affected by any of the player's skills
+         *
+         * The monster can't use his skills if he is currently affected by any
+         * of the player's skills
+         */
+        if (isTrapped())
+            return false;
+
+        return true; // monster can perform any skill
     }
 
-
     /**
-     * perform random monster capability
+     * Perform a random monster skill
      */
     private void performRandomSkill() {
-        // no skills available
-        if (getSkills().size() == 0) return;
-        /*
-        random number between 1 and 10
-        if the number is 5, monstor will perform a random capability
+        if (!hasSkills()) return; // no skills available
+        /**
+         * probability of a monster to perform a skill
          */
         Random r = new Random();
-        int random = r.nextInt(20 - 1 + 1) + 1;
-        if (random == 5) {
+        int random = r.nextInt(100);
+        /**
+         * 10 = 10%
+         * 50 = 50%
+         * ...
+         */
+        if (random == 10) {
             // pick a random skill from the available skills
             random = r.nextInt(getSkills().size());
-
             MonsterSkillsType skill = (MonsterSkillsType) getSkills().get(random);
             switch (skill) {
                 case LEAP:
@@ -114,55 +187,62 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
                     invisible();
                     break;
             }
-
         }
     }
 
+    /**
+     * Viewable boolean.
+     *
+     * @return the boolean
+     */
     public boolean viewable() {
-        // not hiding or monster catched the player
+        // not hiding or monster already reached the player
         if (!isHiding() || getCell().equals(player.getCell())) {
             return true;
         }
-        hideTime--;
+        if (isHiding())
+            hideTime--;
         return false;
     }
 
     /**
-     * check if the monster is in the same row/column of the player
+     * check if the monster can perform leap skill
      *
-     * @return
+     * @return true if the monster can leap
      */
     private boolean canLeap() {
 
-        // row is legitimate for leaping
+        /**
+         * check if row is legitimate for leaping
+         */
         if (this.getCell().row % 5 == 0 && player.getCell().row % 5 == 0) {
-            // same row
             if (getCell().row == player.getCell().row)
-                return true;
+                return true; // monster and player are in the same row
         }
-        // column is legitimate for leaping
+        /**
+         * check if column is legitimate for leaping
+         */
         else if (this.getCell().col % 5 == 0 && player.getCell().col % 5 == 0) {
-            // same column
             if (getCell().col == player.getCell().col)
-                return true;
+                return true; // monster and player are in the same column
         }
-        return false;
+        return false; // can't not in same legitimate row or column
     }
 
     @Override
     public void leap() {
-        // monster can't leap to player's cell
-        if (!canLeap()) return;
+        if (!canLeap()) return; // monster can't leap to player's cell
 
-        System.out.println("LEAP :D");
-        // set the current cell to be the
-        currentCell = player.getCell();
+        currentCell = player.getCell(); // leap to user's sell
     }
 
     @Override
     public void invisible() {
-        if (isHiding()) return;
-        // random time between 5 and 10
+        if (isHiding()) return; // monster is already hiding
+
+        /**
+         * random hiding time between 5 to 10 game time units
+         */
         Random random = new Random();
         hideTime = random.nextInt(10 - 5 + 1) + 5;
     }
