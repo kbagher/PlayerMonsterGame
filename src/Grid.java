@@ -77,7 +77,6 @@ public class Grid implements Serializable {
         try {
             tempCell = getCell(cell.row, cell.col);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         for (int i = 1; i <= steps; i++) {

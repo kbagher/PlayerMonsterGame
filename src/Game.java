@@ -226,6 +226,9 @@ public class Game extends JFrame {
     private int time;
     /**
      * Current game settings
+     *
+     * This is accessible by all class to read
+     * current game settings variables
      */
     public static Settings settings;
 
@@ -813,7 +816,7 @@ public class Game extends JFrame {
      * Starting a new game <br>
      */
     private void prepareToStartGame() {
-        player.setCalories(Game.settings.initialEnergy);
+        player.setEnergy(Game.settings.initialEnergy);
         btStart.setText("Restart");
         if (pause)
             btPause.setText("Resume");
@@ -1008,7 +1011,7 @@ public class Game extends JFrame {
             // update time and repaint
             time++;
             lbTime.setText("" + (Game.settings.timeAllowed - time));
-            lbEnergy.setText("" + player.getCalories());
+            lbEnergy.setText("" + player.getEnergy());
             delay(Game.settings.gameSpeed);
             bp.repaint();
         } while (time < Game.settings.timeAllowed && !restart && !load);
