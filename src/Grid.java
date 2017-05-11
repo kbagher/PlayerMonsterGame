@@ -134,7 +134,7 @@ public class Grid implements Serializable {
             }
     }
 
-    private void computePaths(SpriteNode sourceNode, Trap trap) {
+    private void computePathsFromNode(SpriteNode sourceNode, Trap trap) {
         sourceNode.distance = 0.;
         PriorityQueue<SpriteNode> visitedNodes = new PriorityQueue<>();
         visitedNodes.add(sourceNode);
@@ -144,7 +144,7 @@ public class Grid implements Serializable {
             // Visit each edge exiting currentNode
             for (Edge edge : currentNode.linkedNodes) {
                 SpriteNode linkedNode = edge.getTargetNode();
-                double trapWeight = edge.getTargetNode().getCell().equals(trap.getCell()) ? trap.getEffectTime() + trap.getLifetime() : 0;
+                double trapWeight = edge.getTargetNode().getCell().equals(trap.getCell()) ? Math.abs(trap.getEffectTime() + trap.getLifetime()) : 0;
                 double calculatedWeight = trapWeight + edge.getWeight();
                 double distanceThroughLinkedNode = currentNode.distance + calculatedWeight;
                 if (distanceThroughLinkedNode < linkedNode.distance) {
@@ -157,7 +157,7 @@ public class Grid implements Serializable {
         }
     }
 
-    private Cell getPathToCell(SpriteNode fromNode, SpriteNode toNode) {
+    private Cell getPathCell(SpriteNode fromNode, SpriteNode toNode) {
         LinkedList<SpriteNode> path = new LinkedList<>();
         for (SpriteNode spriteNode = toNode; spriteNode != null; spriteNode = spriteNode.previous) {
             path.add(spriteNode);
@@ -178,8 +178,8 @@ public class Grid implements Serializable {
          taking into consideration available traps
          */
         clearGraph();
-        computePaths(spriteNodes[from.row][from.col], trap);
-        Cell newTo = getPathToCell(spriteNodes[from.row][from.col], spriteNodes[to.row][to.col]);
+        computePathsFromNode(spriteNodes[from.row][from.col], trap);
+        Cell newTo = getPathCell(spriteNodes[from.row][from.col], spriteNodes[to.row][to.col]);
 
         if (from.row == newTo.row) {
             if (from.col < newTo.col)

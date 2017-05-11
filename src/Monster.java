@@ -137,16 +137,14 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         /**
          * check if there are any skills available
          */
-        if (!hasSkills())
-            return false; // no skills available
+        if (!hasSkills()) return false; // no skills available
 
         /**
          * Check if there are any currently active skills
          *
          * The monster can't have more than one active skill at the same time
          */
-        if (isHiding())
-            return false; // invisible skill is active
+        if (isHiding()) return false; // invisible skill is active
 
         /**
          * Check if the monster is no affected by any of the player's skills
@@ -154,8 +152,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
          * The monster can't use his skills if he is currently affected by any
          * of the player's skills
          */
-        if (isTrapped())
-            return false;
+        if (isTrapped()) return false;
 
         return true; // monster can perform any skill
     }

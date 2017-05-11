@@ -760,10 +760,11 @@ public class Game extends JFrame {
         tfTrapLifetime.setText("" + Game.settings.trapDuration);
         lbTime.setText("" + Game.settings.timeAllowed);
         lbEnergy.setText("" + Game.settings.initialEnergy);
+
         cbPlayerSkip.setSelected(Game.settings.pSkills.contains(PlayerSkills.PlayerSkillsType.SKIP));
         cbPlayerTrap.setSelected(Game.settings.pSkills.contains(PlayerSkills.PlayerSkillsType.TRAP));
         cbMonsterLeap.setSelected(Game.settings.mSkills.contains(MonsterSkills.MonsterSkillsType.LEAP));
-        cbMonsterHide.setSelected(Game.settings.mSkills.contains(MonsterSkills.MonsterSkillsType.LEAP));
+        cbMonsterHide.setSelected(Game.settings.mSkills.contains(MonsterSkills.MonsterSkillsType.INVISIBLE));
 
         player.replaceSkills(Game.settings.pSkills);
         monster.replaceSkills(Game.settings.mSkills);
@@ -952,6 +953,7 @@ public class Game extends JFrame {
         if (time < Game.settings.timeAllowed) {
             // players has been eaten up
             message = "Player Lost";
+            user.increaseLoss();
             try {
                 audio.stopAudio();
                 audio.playAudio("lost.wav");
@@ -960,6 +962,7 @@ public class Game extends JFrame {
             }
         } else {
             message = "Player Won";
+            user.increaseWins();
             try {
                 audio.stopAudio();
                 audio.playAudio("win.wav");
@@ -988,6 +991,7 @@ public class Game extends JFrame {
 
         while (!player.isReady())
             delay(100);
+
 
         prepareToStartGame();
 

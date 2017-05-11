@@ -64,6 +64,25 @@ public class User implements Serializable {
         return false;
     }
 
+
+    public boolean increaseLoss(){
+        try {
+            return Database.getInstance().increaseLoss(username);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean increaseWins(){
+        try {
+            return Database.getInstance().increaseWins(username);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
     public boolean saveSettings(Settings s) {
         try {
             ByteArrayOutputStream bStream = new ByteArrayOutputStream();

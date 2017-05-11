@@ -97,7 +97,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
      * Check if the player have enough energy to perform
      * an action based on the given energy
      *
-     * @param requiredEnergy the required energy
+     * @param requiredEnergy action's required energy
      * @return true if the player have enough energy
      */
     public boolean canPerformEnergyAction(int requiredEnergy) {
