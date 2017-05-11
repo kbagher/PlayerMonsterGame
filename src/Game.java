@@ -765,8 +765,8 @@ public class Game extends JFrame {
         cbMonsterLeap.setSelected(Game.settings.mSkills.contains(MonsterSkills.MonsterSkillsType.LEAP));
         cbMonsterHide.setSelected(Game.settings.mSkills.contains(MonsterSkills.MonsterSkillsType.LEAP));
 
-        player.updateSkills(Game.settings.pSkills);
-        monster.updateSkills(Game.settings.mSkills);
+        player.replaceSkills(Game.settings.pSkills);
+        monster.replaceSkills(Game.settings.mSkills);
     }
 
 
