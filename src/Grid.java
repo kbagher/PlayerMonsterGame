@@ -145,7 +145,7 @@ public class Grid implements Serializable {
             // Visit each edge exiting currentNode
             for (Edge edge : currentNode.linkedNodes) {
                 SpriteNode linkedNode = edge.getTargetNode();
-                double trapWeight = edge.getTargetNode().getCell().equals(trap.getCell()) ? trap.getEffectTime() + trap.getDurationTime() : 0;
+                double trapWeight = edge.getTargetNode().getCell().equals(trap.getCell()) ? trap.getEffectTime() + trap.getLifetime() : 0;
                 double calculatedWeight = trapWeight + edge.getWeight();
                 double distanceThroughLinkedNode = currentNode.distance + calculatedWeight;
                 if (distanceThroughLinkedNode < linkedNode.distance) {
