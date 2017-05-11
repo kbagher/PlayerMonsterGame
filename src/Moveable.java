@@ -109,7 +109,7 @@ public abstract class Moveable extends Sprite implements Serializable {
      * @return true if it has the given skill
      */
     public boolean hasSkill(Object skill){
-        if (hasSkills()) return false; // no skills available
+        if (!hasSkills()) return false; // no skills available
 
         return getSkills().contains(skill);
     }

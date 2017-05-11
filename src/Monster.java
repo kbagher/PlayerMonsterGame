@@ -60,7 +60,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         steppedOverTrap=false;
 
         /**
-         * Perform random skills
+         * Perform a random skill
          */
         if (canPerformSkill()) {
             performRandomSkill(); // perform random skill
