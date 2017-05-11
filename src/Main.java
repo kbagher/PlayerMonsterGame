@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 
 /**
  * Created by kassem on 6/5/17.
@@ -65,16 +63,16 @@ public class Main {
             // load new game
             if ((status.compareTo("") == 0)){
                 game= new Game(user);
+                game.loadSettings();
             }
             else if (status.compareTo("restart") == 0){
                 game.resetGameObjects();
+                game.loadSettings();
             }
             else if (status.compareTo("load") == 0) {
                 System.out.println("load");
                 game = user.loadGame();
             }
-            game.loadSettingsToView();
-//            game.updateSettingsVariables();
             game.setTitle("Monster Game");
             game.setSize(700, 750);
             game.setLocationRelativeTo(null);  // center the frame

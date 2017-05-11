@@ -77,13 +77,13 @@ public class User implements Serializable {
         return false;
     }
 
-    public Game loadSettings() {
+    public Settings loadSettings() {
         try {
-            byte[] gameData = Base64.getDecoder().decode(Database.getInstance().loadGame(username));
-            ObjectInputStream oStream = new ObjectInputStream(new ByteArrayInputStream(gameData));
-            Game g = (Game) oStream.readObject();
+            byte[] settingsData = Base64.getDecoder().decode(Database.getInstance().loadSettings(username));
+            ObjectInputStream oStream = new ObjectInputStream(new ByteArrayInputStream(settingsData));
+            Settings s = (Settings) oStream.readObject();
             oStream.close();
-            return g;
+            return s;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

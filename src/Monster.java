@@ -100,7 +100,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
         if the number is 5, monstor will perform a random capability
          */
         Random r = new Random();
-        int random = r.nextInt(10 - 1 + 1) + 1;
+        int random = r.nextInt(20 - 1 + 1) + 1;
         if (random == 5) {
             // pick a random skill from the available skills
             random = r.nextInt(getSkills().size());

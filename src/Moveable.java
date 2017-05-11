@@ -22,9 +22,28 @@ public abstract class Moveable extends Sprite implements Serializable {
     public boolean addSkill(Object skill) {
         if (skills.size() == 2)
             return false;
+        if (hasSkill(skill))
+            return true;
         skills.add(skill);
         return true;
     }
+
+    public void removeSkills(){
+        skills.clear();
+    }
+
+    public boolean updateSkills(ArrayList skillsArr) {
+        if (skillsArr.size()>2)
+            return false;
+        skills.clear();
+        for (int x=0;x<skillsArr.size();x++){
+            if (!hasSkill(skillsArr.get(x)))
+                skills.add(skillsArr.get(x));
+        }
+        return true;
+    }
+
+
 
     public void removeSkill(Object skill) {
         if (skills.size()==0) return;

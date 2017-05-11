@@ -53,7 +53,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
         else if (((JButton) e.getSource()).getText().compareTo("Trap") == 0)
             player.putTrap();
         else if (((JButton) e.getSource()).getText().compareTo("Save Settings") == 0)
-            game.updateSettingsVariables();
+            game.saveSettings();
         else if (((JButton) e.getSource()).getText().compareTo("Restart") == 0)
             game.restartGame();
         else if (((JButton) e.getSource()).getText().compareTo("Pause") == 0)

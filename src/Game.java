@@ -2,79 +2,237 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 
 
-/* This class is the main System level class which creates all the objects 
- * representing the game logic (model) and the panel for user interaction. 
- * It also implements the main game loop 
+/* This class is the main System level class which creates all the objects
+ * representing the game logic (model) and the panel for user interaction.
+ * It also implements the main game loop
  */
 
+/**
+ * The type Game.
+ */
 public class Game extends JFrame {
-    // labels
+    /**
+     * Main JPanel holding all controls and settings
+     */
     JPanel pnMain;
+    /**
+     * The Tabbed Pane to hold the control,settings and results panels.
+     */
     JTabbedPane tbpControl;
 
+    /**
+     * The dashboard panel
+     */
     JPanel pnDashboard;
+    /**
+     * Move player left button
+     */
     JButton btLeft;
+    /**
+     * Move player up button
+     */
     JButton btUp;
+    /**
+     * Move player right button
+     */
     JButton btRight;
+    /**
+     * Move player down button
+     */
     JButton btDown;
+    /**
+     * Save game button
+     */
     JButton btSave;
+    /**
+     * Start game button
+     */
     JButton btStart;
+    /**
+     * Pause game buton
+     */
     JButton btPause;
-    JLabel lbLabel14;
-    JLabel lbLabel15;
+    /**
+     * Time title
+     */
+    JLabel lbTimeTitle;
+    /**
+     * Energy title
+     */
+    JLabel lbEnergyTitle;
+    /**
+     * Time label to show the current time countdown
+     */
     JLabel lbTime;
+    /**
+     * Energy label to show the player's current energy
+     */
     JLabel lbEnergy;
+    /**
+     * Status label to show the current game status and any other messages to the user
+     */
     JLabel lbStatus;
 
+    /**
+     * The Settings panel
+     */
     JPanel pnSettings;
-    JLabel lbLabel1;
-    JLabel lbLabel2;
-    JLabel lbLabel3;
-    JLabel lbLabel4;
+    /**
+     * Game settings - speed title
+     */
+    JLabel lbSpeedTitle;
+    /**
+     * Game settings - time title
+     */
+    JLabel lbTimeSettingsTitle;
+    /**
+     * Game settings - initial energy title
+     */
+    JLabel lbinitialEnergySettingsTitle;
+    /**
+     * Game settings - step energy title
+     */
+    JLabel lbStepEnergySettingsTitle;
+    /**
+     * Game settings - game speed
+     */
     JTextField tfSpeed;
+    /**
+     * Game settings - Game allowed time
+     */
     JTextField tfTime;
+    /**
+     * Game settings - Initial player energy
+     */
     JTextField tfInitialEnergy;
+    /**
+     * Game settings - Step energy
+     */
     JTextField tfStepEnergy;
-    JTextField tfCoinEnergy;
+    /**
+     * Game settings - Nougat energy
+     */
+    JTextField tfNougatEnergy;
+    /**
+     * Game settings - Trap required energy
+     */
     JTextField tfTrapEnergy;
+    /**
+     * Game settings - Trap effect duration
+     */
     JTextField tfTrapEffectDuration;
+    /**
+     * Game settings - Trap lifetime
+     */
     JTextField tfTrapLifetime;
-    JLabel lbLabel6;
-    JLabel lbLabel7;
-    JLabel lbLabel8;
-    JLabel lbLabel9;
-    JLabel lbLabel10;
-    JLabel lbLabel11;
+    /**
+     * Game settings - coin energy title
+     */
+    JLabel lbCoinEnergySettingsTitle;
+    /**
+     * Game settings - trap energy title
+     */
+    JLabel lbTrapEnergySettingsTitle;
+    /**
+     * Game settings - trap effect duration title
+     */
+    JLabel lbTrapEffecDurationSettingsTitle;
+    /**
+     * Game settings - trap lifetime title
+     */
+    JLabel lbTrapLifetimeSettingsTitle;
+    /**
+     * Game settings - player skills title
+     */
+    JLabel lbPlayerSkillsSettingsTitle;
+    /**
+     * Game settings - monster skills title
+     */
+    JLabel lbMonsterSkillsSettingsTitle;
+    /**
+     * Game settings - player skip skill checkbox
+     */
     JCheckBox cbPlayerSkip;
+    /**
+     * Game settings - player trap skill checkbox
+     */
     JCheckBox cbPlayerTrap;
+    /**
+     * Game settings - monster leap skill checkbox
+     */
     JCheckBox cbMonsterLeap;
+    /**
+     * Game settings - monster hide skill checkbox
+     */
     JCheckBox cbMonsterHide;
+    /**
+     * Save settings button
+     */
     JButton btSaveSettings;
-
-    JTextField tfUsername;
-    JTextField tfPassword;
-
-
+    /**
+     * The results panel
+     */
     JPanel pnResults;
+    /**
+     * Score list
+     */
     JTextArea taScoreResults;
-
-    // class variables
+    /**
+     * Audio player for game music and sound fx
+     */
     private GameAudioPlayer audio;
+    /**
+     * Game grid containing cells and graph nodes
+     */
     private Grid grid;
+    /**
+     * Game player sprite
+     */
     private Player player;
+    /**
+     * The current logged in user
+     */
     private User user;
+    /**
+     * The trap sprite
+     */
     private Trap trap;
+    /**
+     * Game monster sprite
+     */
     private Monster monster;
+    /**
+     * Board panel to draw the game rooms,sprites and backgrounds
+     */
     private BoardPanel bp;
+    /**
+     * Stores the users pause action
+     */
     private boolean pause;
+    /**
+     * Stores the users restart action
+     */
     private boolean restart;
+    /**
+     * Stores the users load game action
+     */
     private boolean load;
+    /**
+     * Current time countdown
+     */
     private int time;
+    /**
+     * Current game settings
+     */
     public static Settings settings;
 
-    public void setupControls() {
+    /**
+     * Setup the game control panel
+     */
+    private void setupControls() {
         pnMain = new JPanel();
         GridBagLayout gbMain = new GridBagLayout();
         GridBagConstraints gbcMain = new GridBagConstraints();
@@ -185,7 +343,7 @@ public class Game extends JFrame {
         gbDashboard.setConstraints(btPause, gbcDashboard);
         pnDashboard.add(btPause);
 
-        lbLabel14 = new JLabel("Time");
+        lbTimeTitle = new JLabel("Time");
         gbcDashboard.gridx = 3;
         gbcDashboard.gridy = 0;
         gbcDashboard.gridwidth = 1;
@@ -195,10 +353,10 @@ public class Game extends JFrame {
         gbcDashboard.weighty = 1;
         gbcDashboard.anchor = GridBagConstraints.NORTH;
         gbcDashboard.insets = new Insets(0, 20, 0, 0);
-        gbDashboard.setConstraints(lbLabel14, gbcDashboard);
-        pnDashboard.add(lbLabel14);
+        gbDashboard.setConstraints(lbTimeTitle, gbcDashboard);
+        pnDashboard.add(lbTimeTitle);
 
-        lbLabel15 = new JLabel("Energy");
+        lbEnergyTitle = new JLabel("Energy");
         gbcDashboard.gridx = 3;
         gbcDashboard.gridy = 1;
         gbcDashboard.gridwidth = 1;
@@ -208,8 +366,8 @@ public class Game extends JFrame {
         gbcDashboard.weighty = 1;
         gbcDashboard.anchor = GridBagConstraints.NORTH;
         gbcDashboard.insets = new Insets(0, 20, 0, 0);
-        gbDashboard.setConstraints(lbLabel15, gbcDashboard);
-        pnDashboard.add(lbLabel15);
+        gbDashboard.setConstraints(lbEnergyTitle, gbcDashboard);
+        pnDashboard.add(lbEnergyTitle);
 
         lbTime = new JLabel("");
         lbTime.setText("" + Game.settings.timeAllowed);
@@ -256,7 +414,7 @@ public class Game extends JFrame {
         GridBagConstraints gbcSettings = new GridBagConstraints();
         pnSettings.setLayout(gbSettings);
 
-        lbLabel1 = new JLabel("Speed");
+        lbSpeedTitle = new JLabel("Speed");
         gbcSettings.gridx = 0;
         gbcSettings.gridy = 0;
         gbcSettings.gridwidth = 1;
@@ -265,10 +423,10 @@ public class Game extends JFrame {
         gbcSettings.weightx = 1;
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
-        gbSettings.setConstraints(lbLabel1, gbcSettings);
-        pnSettings.add(lbLabel1);
+        gbSettings.setConstraints(lbSpeedTitle, gbcSettings);
+        pnSettings.add(lbSpeedTitle);
 
-        lbLabel2 = new JLabel("Time");
+        lbTimeSettingsTitle = new JLabel("Time");
         gbcSettings.gridx = 0;
         gbcSettings.gridy = 1;
         gbcSettings.gridwidth = 1;
@@ -277,10 +435,10 @@ public class Game extends JFrame {
         gbcSettings.weightx = 1;
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
-        gbSettings.setConstraints(lbLabel2, gbcSettings);
-        pnSettings.add(lbLabel2);
+        gbSettings.setConstraints(lbTimeSettingsTitle, gbcSettings);
+        pnSettings.add(lbTimeSettingsTitle);
 
-        lbLabel3 = new JLabel("Initial energy");
+        lbinitialEnergySettingsTitle = new JLabel("Initial energy");
         gbcSettings.gridx = 0;
         gbcSettings.gridy = 2;
         gbcSettings.gridwidth = 1;
@@ -289,10 +447,10 @@ public class Game extends JFrame {
         gbcSettings.weightx = 1;
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
-        gbSettings.setConstraints(lbLabel3, gbcSettings);
-        pnSettings.add(lbLabel3);
+        gbSettings.setConstraints(lbinitialEnergySettingsTitle, gbcSettings);
+        pnSettings.add(lbinitialEnergySettingsTitle);
 
-        lbLabel4 = new JLabel("Step Energy");
+        lbStepEnergySettingsTitle = new JLabel("Step Energy");
         gbcSettings.gridx = 0;
         gbcSettings.gridy = 3;
         gbcSettings.gridwidth = 1;
@@ -301,8 +459,8 @@ public class Game extends JFrame {
         gbcSettings.weightx = 1;
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
-        gbSettings.setConstraints(lbLabel4, gbcSettings);
-        pnSettings.add(lbLabel4);
+        gbSettings.setConstraints(lbStepEnergySettingsTitle, gbcSettings);
+        pnSettings.add(lbStepEnergySettingsTitle);
 
         tfSpeed = new JTextField();
         gbcSettings.gridx = 1;
@@ -352,7 +510,7 @@ public class Game extends JFrame {
         gbSettings.setConstraints(tfStepEnergy, gbcSettings);
         pnSettings.add(tfStepEnergy);
 
-        tfCoinEnergy = new JTextField();
+        tfNougatEnergy = new JTextField();
         gbcSettings.gridx = 3;
         gbcSettings.gridy = 0;
         gbcSettings.gridwidth = 1;
@@ -361,8 +519,8 @@ public class Game extends JFrame {
         gbcSettings.weightx = 1;
         gbcSettings.weighty = 0;
         gbcSettings.anchor = GridBagConstraints.NORTH;
-        gbSettings.setConstraints(tfCoinEnergy, gbcSettings);
-        pnSettings.add(tfCoinEnergy);
+        gbSettings.setConstraints(tfNougatEnergy, gbcSettings);
+        pnSettings.add(tfNougatEnergy);
 
         tfTrapEnergy = new JTextField();
         gbcSettings.gridx = 3;
@@ -400,7 +558,7 @@ public class Game extends JFrame {
         gbSettings.setConstraints(tfTrapLifetime, gbcSettings);
         pnSettings.add(tfTrapLifetime);
 
-        lbLabel6 = new JLabel("Coins energy");
+        lbCoinEnergySettingsTitle = new JLabel("Coins energy");
         gbcSettings.gridx = 2;
         gbcSettings.gridy = 0;
         gbcSettings.gridwidth = 1;
@@ -410,10 +568,10 @@ public class Game extends JFrame {
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
         gbcSettings.insets = new Insets(0, 20, 0, 0);
-        gbSettings.setConstraints(lbLabel6, gbcSettings);
-        pnSettings.add(lbLabel6);
+        gbSettings.setConstraints(lbCoinEnergySettingsTitle, gbcSettings);
+        pnSettings.add(lbCoinEnergySettingsTitle);
 
-        lbLabel7 = new JLabel("Trap energy");
+        lbTrapEnergySettingsTitle = new JLabel("Trap energy");
         gbcSettings.gridx = 2;
         gbcSettings.gridy = 1;
         gbcSettings.gridwidth = 1;
@@ -423,10 +581,10 @@ public class Game extends JFrame {
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
         gbcSettings.insets = new Insets(0, 20, 0, 0);
-        gbSettings.setConstraints(lbLabel7, gbcSettings);
-        pnSettings.add(lbLabel7);
+        gbSettings.setConstraints(lbTrapEnergySettingsTitle, gbcSettings);
+        pnSettings.add(lbTrapEnergySettingsTitle);
 
-        lbLabel8 = new JLabel("Trap effect duration");
+        lbTrapEffecDurationSettingsTitle = new JLabel("Trap effect duration");
         gbcSettings.gridx = 2;
         gbcSettings.gridy = 2;
         gbcSettings.gridwidth = 1;
@@ -436,10 +594,10 @@ public class Game extends JFrame {
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
         gbcSettings.insets = new Insets(0, 20, 0, 0);
-        gbSettings.setConstraints(lbLabel8, gbcSettings);
-        pnSettings.add(lbLabel8);
+        gbSettings.setConstraints(lbTrapEffecDurationSettingsTitle, gbcSettings);
+        pnSettings.add(lbTrapEffecDurationSettingsTitle);
 
-        lbLabel9 = new JLabel("Trap lifetime");
+        lbTrapLifetimeSettingsTitle = new JLabel("Trap lifetime");
         gbcSettings.gridx = 2;
         gbcSettings.gridy = 3;
         gbcSettings.gridwidth = 1;
@@ -449,10 +607,10 @@ public class Game extends JFrame {
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
         gbcSettings.insets = new Insets(0, 20, 0, 0);
-        gbSettings.setConstraints(lbLabel9, gbcSettings);
-        pnSettings.add(lbLabel9);
+        gbSettings.setConstraints(lbTrapLifetimeSettingsTitle, gbcSettings);
+        pnSettings.add(lbTrapLifetimeSettingsTitle);
 
-        lbLabel10 = new JLabel("Player Skills");
+        lbPlayerSkillsSettingsTitle = new JLabel("Player Skills");
         gbcSettings.gridx = 6;
         gbcSettings.gridy = 0;
         gbcSettings.gridwidth = 2;
@@ -462,10 +620,10 @@ public class Game extends JFrame {
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
         gbcSettings.insets = new Insets(0, 20, 0, 10);
-        gbSettings.setConstraints(lbLabel10, gbcSettings);
-        pnSettings.add(lbLabel10);
+        gbSettings.setConstraints(lbPlayerSkillsSettingsTitle, gbcSettings);
+        pnSettings.add(lbPlayerSkillsSettingsTitle);
 
-        lbLabel11 = new JLabel("Monster Skills");
+        lbMonsterSkillsSettingsTitle = new JLabel("Monster Skills");
         gbcSettings.gridx = 4;
         gbcSettings.gridy = 0;
         gbcSettings.gridwidth = 2;
@@ -475,8 +633,8 @@ public class Game extends JFrame {
         gbcSettings.weighty = 1;
         gbcSettings.anchor = GridBagConstraints.NORTH;
         gbcSettings.insets = new Insets(0, 20, 0, 0);
-        gbSettings.setConstraints(lbLabel11, gbcSettings);
-        pnSettings.add(lbLabel11);
+        gbSettings.setConstraints(lbMonsterSkillsSettingsTitle, gbcSettings);
+        pnSettings.add(lbMonsterSkillsSettingsTitle);
 
         cbPlayerSkip = new JCheckBox("Skip");
         gbcSettings.gridx = 6;
@@ -574,69 +732,86 @@ public class Game extends JFrame {
         gbcMain.anchor = GridBagConstraints.CENTER;
         gbMain.setConstraints(tbpControl, gbcMain);
         pnMain.add(tbpControl);
-
-        tfUsername = new JTextField(5);
-        tfPassword = new JTextField(5);
     }
 
-    public void loadSettingsToView() {
+    /**
+     * Load the game settings from the user into the game settings' object and display it on screen
+     */
+    public void loadSettings() {
+        /*
+         load user's settings into game settings
+         */
+        Settings tmpSettings = user.loadSettings(); // check if null
+        settings =  tmpSettings == null ? settings: tmpSettings;
+
+        /*
+        display settings
+        */
         tfSpeed.setText("" + Game.settings.gameSpeed);
         tfTime.setText("" + Game.settings.timeAllowed);
         tfInitialEnergy.setText("" + Game.settings.initialEnergy);
         tfStepEnergy.setText("" + Game.settings.stepEnergy);
-        tfCoinEnergy.setText("" + Game.settings.nougatEnergy);
+        tfNougatEnergy.setText("" + Game.settings.nougatEnergy);
         tfTrapEnergy.setText("" + Game.settings.trapEnergy);
         tfTrapEffectDuration.setText("" + Game.settings.trapEffectDuration);
         tfTrapLifetime.setText("" + Game.settings.trapDuration);
         lbTime.setText("" + Game.settings.timeAllowed);
         lbEnergy.setText("" + Game.settings.initialEnergy);
+        cbPlayerSkip.setSelected(Game.settings.pSkills.contains(PlayerSkills.PlayerSkillsType.SKIP));
+        cbPlayerTrap.setSelected(Game.settings.pSkills.contains(PlayerSkills.PlayerSkillsType.TRAP));
+        cbMonsterLeap.setSelected(Game.settings.mSkills.contains(MonsterSkills.MonsterSkillsType.LEAP));
+        cbMonsterHide.setSelected(Game.settings.mSkills.contains(MonsterSkills.MonsterSkillsType.LEAP));
 
-        cbPlayerSkip.setSelected(player.hasSkill(PlayerSkills.PlayerSkillsType.SKIP));
-        cbPlayerTrap.setSelected(player.hasSkill(PlayerSkills.PlayerSkillsType.TRAP));
-        cbMonsterLeap.setSelected(monster.hasSkill(MonsterSkills.MonsterSkillsType.LEAP));
-        cbMonsterHide.setSelected(monster.hasSkill(MonsterSkills.MonsterSkillsType.INVISIBLE));
+        player.updateSkills(Game.settings.pSkills);
+        monster.updateSkills(Game.settings.mSkills);
     }
 
 
-    public void updateSettingsVariables() {
+    /**
+     * Update settings variables.
+     */
+    public void saveSettings() {
         Game.settings.gameSpeed = (Integer.parseInt(tfSpeed.getText()));
         Game.settings.timeAllowed=(Integer.parseInt(tfTime.getText()));
         Game.settings.initialEnergy=(Integer.parseInt(tfInitialEnergy.getText()));
         Game.settings.stepEnergy=(Integer.parseInt(tfStepEnergy.getText()));
-        Game.settings.nougatEnergy=(Integer.parseInt(tfCoinEnergy.getText()));
+        Game.settings.nougatEnergy=(Integer.parseInt(tfNougatEnergy.getText()));
         Game.settings.trapEnergy=(Integer.parseInt(tfTrapEnergy.getText()));
         Game.settings.trapEffectDuration=(Integer.parseInt(tfTrapEffectDuration.getText()));
         Game.settings.trapDuration=(Integer.parseInt(tfTrapLifetime.getText()));
-        System.out.println(Game.settings.gameSpeed);
         updateSkills();
+        Game.settings.pSkills= new ArrayList<>(player.getSkills());
+        Game.settings.mSkills= new ArrayList<>(monster.getSkills());
+        user.saveSettings(settings);
     }
 
+    /**
+     * Update skills.
+     */
     public void updateSkills() {
+        player.removeSkills();
+        monster.removeSkills();
+
         // player skipp skill
         if (cbPlayerSkip.isSelected())
             player.addSkill(PlayerSkills.PlayerSkillsType.SKIP);
-        else
-            player.removeSkill(PlayerSkills.PlayerSkillsType.SKIP);
 
         // player trap skill
         if (cbPlayerTrap.isSelected())
             player.addSkill(PlayerSkills.PlayerSkillsType.TRAP);
-        else
-            player.removeSkill(PlayerSkills.PlayerSkillsType.TRAP);
 
         // monster leap skill
         if (cbMonsterLeap.isSelected())
             monster.addSkill(Monster.MonsterSkillsType.LEAP);
-        else
-            monster.removeSkill(Monster.MonsterSkillsType.LEAP);
 
         // monster invisible skill
         if (cbMonsterHide.isSelected())
             monster.addSkill(Monster.MonsterSkillsType.INVISIBLE);
-        else
-            monster.removeSkill(Monster.MonsterSkillsType.INVISIBLE);
     }
 
+    /**
+     * Starting a new game <br>
+     */
     private void prepareToStartGame() {
         player.setCalories(Game.settings.initialEnergy);
         btStart.setText("Restart");
@@ -644,10 +819,15 @@ public class Game extends JFrame {
             btPause.setText("Resume");
         else
             btPause.setText("Pause");
-        updateSkills();
     }
 
-    /* This constructor creates the main model objects and the panel used for UI.
+    /**
+     * Instantiates a new Game.
+     *
+     * @param u the u
+     * @throws Exception the exception
+     */
+/* This constructor creates the main model objects and the panel used for UI.
      * It throws an exception if an attempt is made to place the player or the
      * monster in an invalid location.
      */
@@ -670,6 +850,11 @@ public class Game extends JFrame {
     }
 
 
+    /**
+     * Reset game objects.
+     *
+     * @throws Exception the exception
+     */
     public void resetGameObjects() throws Exception {
         pause = false;
         restart = false;
@@ -684,7 +869,12 @@ public class Game extends JFrame {
         bp.repaint();
     }
 
-    // method to delay by specified time in ms
+    /**
+     * Delay.
+     *
+     * @param time the time
+     */
+// method to delay by specified time in ms
     public void delay(int time) {
         try {
             Thread.sleep(time);
@@ -693,22 +883,19 @@ public class Game extends JFrame {
         }
     }
 
+    /**
+     * Save game.
+     */
     public void saveGame() {
         if (!pause)
             pause = true;
-
         if (user.saveGame(this,settings))
             System.out.println("Saved");
-//        try {
-//            FileOutputStream fos = new FileOutputStream("mybean.ser");
-//            ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.writeObject(this);
-//            oos.close();
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
     }
 
+    /**
+     * Pause an resume game.
+     */
     public void pauseAnResumeGame() {
         if (!pause) {
             pause = true;
@@ -719,15 +906,24 @@ public class Game extends JFrame {
         }
     }
 
+    /**
+     * Restart game.
+     */
     public void restartGame() {
         restart = true;
     }
 
+    /**
+     * Load game.
+     */
     public void loadGame() {
         player.setReady(true);
         load = true;
     }
 
+    /**
+     * Play background music.
+     */
     public void playBackgroundMusic() {
         try {
             audio = new GameAudioPlayer();
@@ -737,6 +933,9 @@ public class Game extends JFrame {
         }
     }
 
+    /**
+     * Stop background music.
+     */
     public void stopBackgroundMusic() {
         try {
             audio.stopAudio();
@@ -768,7 +967,12 @@ public class Game extends JFrame {
         lbStatus.setText(message);
     }
 
-    /* This method waits until play is ready (until start button is pressed)
+    /**
+     * Play string.
+     *
+     * @return the string
+     */
+/* This method waits until play is ready (until start button is pressed)
      * after which it updates the moves in turn until time runs out (player won)
      * or player is eaten up (player lost).
      */
