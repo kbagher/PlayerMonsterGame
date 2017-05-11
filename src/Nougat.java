@@ -4,7 +4,6 @@ import java.io.Serializable;
  * Nougat
  */
 public class Nougat implements Serializable {
-
     /**
      * Nougat consumption status
      */

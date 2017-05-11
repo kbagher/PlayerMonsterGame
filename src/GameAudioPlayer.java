@@ -1,25 +1,34 @@
+import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.io.*;
+import java.net.URL;
 
 /**
  * Created by kassem on 4/5/17.
  */
 public class GameAudioPlayer implements Serializable {
-    private transient AudioStream audio;
+
+    AudioClip audio;
+
+    public void playLoopAudio(String fileName) throws FileNotFoundException, IOException {
+        URL url = GameAudioPlayer.class.getResource(fileName);
+        audio = Applet.newAudioClip(url);
+        audio.loop();
+    }
 
     public void playAudio(String fileName) throws FileNotFoundException, IOException {
-        InputStream in = null;
-        in = new FileInputStream("./" + fileName);
-        audio = new AudioStream(in);
-        sun.audio.AudioPlayer.player.start(audio);
+        URL url = GameAudioPlayer.class.getResource(fileName);
+        audio = Applet.newAudioClip(url);
+        audio.play();
     }
 
     public void stopAudio() {
         if (audio != null) {
-            System.out.println("stop");
-            sun.audio.AudioPlayer.player.stop(audio);
+            audio.stop();
         }
     }
 }

@@ -185,7 +185,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
 
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
-                player.playAudio("assets/place_trap.wav");
+                player.playAudio("place_trap.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }

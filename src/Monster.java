@@ -109,7 +109,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
             steppedOverTrap=true;
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
-                player.playAudio("assets/monster_trapped.wav");
+                player.playAudio("monster_trapped.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -175,7 +175,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
          * 50 = 50%
          * ...
          */
-        if (random == 10) {
+        if (random == 50) {
             // pick a random skill from the available skills
             random = r.nextInt(getSkills().size());
             MonsterSkillsType skill = (MonsterSkillsType) getSkills().get(random);

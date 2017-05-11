@@ -226,7 +226,7 @@ public class Game extends JFrame {
     private int time;
     /**
      * Current game settings
-     *
+     * <p>
      * This is accessible by all class to read
      * current game settings variables
      */
@@ -397,7 +397,7 @@ public class Game extends JFrame {
         gbDashboard.setConstraints(lbEnergy, gbcDashboard);
         pnDashboard.add(lbEnergy);
 
-        lbStatus = new JLabel("Welcome "+user.getUsername());
+        lbStatus = new JLabel("Welcome " + user.getUsername());
         lbStatus.setForeground(new Color(114, 0, 0));
         gbcDashboard.gridx = 3;
         gbcDashboard.gridy = 2;
@@ -745,7 +745,7 @@ public class Game extends JFrame {
          load user's settings into game settings
          */
         Settings tmpSettings = user.loadSettings(); // check if null
-        settings =  tmpSettings == null ? settings: tmpSettings;
+        settings = tmpSettings == null ? settings : tmpSettings;
 
         /*
         display settings
@@ -775,16 +775,16 @@ public class Game extends JFrame {
      */
     public void saveSettings() {
         Game.settings.gameSpeed = (Integer.parseInt(tfSpeed.getText()));
-        Game.settings.timeAllowed=(Integer.parseInt(tfTime.getText()));
-        Game.settings.initialEnergy=(Integer.parseInt(tfInitialEnergy.getText()));
-        Game.settings.stepEnergy=(Integer.parseInt(tfStepEnergy.getText()));
-        Game.settings.nougatEnergy=(Integer.parseInt(tfNougatEnergy.getText()));
-        Game.settings.trapEnergy=(Integer.parseInt(tfTrapEnergy.getText()));
-        Game.settings.trapEffectDuration=(Integer.parseInt(tfTrapEffectDuration.getText()));
-        Game.settings.trapDuration=(Integer.parseInt(tfTrapLifetime.getText()));
+        Game.settings.timeAllowed = (Integer.parseInt(tfTime.getText()));
+        Game.settings.initialEnergy = (Integer.parseInt(tfInitialEnergy.getText()));
+        Game.settings.stepEnergy = (Integer.parseInt(tfStepEnergy.getText()));
+        Game.settings.nougatEnergy = (Integer.parseInt(tfNougatEnergy.getText()));
+        Game.settings.trapEnergy = (Integer.parseInt(tfTrapEnergy.getText()));
+        Game.settings.trapEffectDuration = (Integer.parseInt(tfTrapEffectDuration.getText()));
+        Game.settings.trapDuration = (Integer.parseInt(tfTrapLifetime.getText()));
         updateSkills();
-        Game.settings.pSkills= new ArrayList<>(player.getSkills());
-        Game.settings.mSkills= new ArrayList<>(monster.getSkills());
+        Game.settings.pSkills = new ArrayList<>(player.getSkills());
+        Game.settings.mSkills = new ArrayList<>(monster.getSkills());
         user.saveSettings(settings);
     }
 
@@ -868,7 +868,7 @@ public class Game extends JFrame {
         monster = new Monster(grid, player, trap, 5, 5);
         bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");
-        lbStatus.setText("Welcome "+user.getUsername());
+        lbStatus.setText("Welcome " + user.getUsername());
         bp.repaint();
     }
 
@@ -892,7 +892,7 @@ public class Game extends JFrame {
     public void saveGame() {
         if (!pause)
             pause = true;
-        if (user.saveGame(this,settings))
+        if (user.saveGame(this, settings))
             System.out.println("Saved");
     }
 
@@ -930,7 +930,7 @@ public class Game extends JFrame {
     public void playBackgroundMusic() {
         try {
             audio = new GameAudioPlayer();
-            audio.playAudio("assets/background.wav");
+            audio.playLoopAudio("background.wav");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -954,7 +954,7 @@ public class Game extends JFrame {
             message = "Player Lost";
             try {
                 audio.stopAudio();
-                audio.playAudio("assets/lost.wav");
+                audio.playAudio("lost.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -962,7 +962,7 @@ public class Game extends JFrame {
             message = "Player Won";
             try {
                 audio.stopAudio();
-                audio.playAudio("assets/win.wav");
+                audio.playAudio("win.wav");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -1016,7 +1016,8 @@ public class Game extends JFrame {
             bp.repaint();
         } while (time < Game.settings.timeAllowed && !restart && !load);
 
-        updateStatusMessage(message);
+        if (!load)
+            updateStatusMessage(message);
 
         delay(2500);
 
