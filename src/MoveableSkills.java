@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * Moveable skills.
- *
+ * <p>
  * The use of this interface will allow moveable objects to have all required operations
  * to handle it's available skills.
  */
@@ -13,9 +13,23 @@ public interface MoveableSkills {
      * A maximum of 2 skills can be loaded for each monster or player
      *
      * @param skill the skill
+     *
      * @return true if the skill is added
+     *
+     * @throws Exception the exception
      */
-    boolean addSkill(Object skill);
+    boolean addSkill(Object skill) throws Exception;
+
+    /**
+     * Check if the current object can accept the passed skill type
+     *
+     * @param skill the skill to be checked
+     *
+     * @return true if the skill is suitable
+     *
+     * @throws Exception the exception
+     */
+    boolean isCompatibleSkill(Object skill);
 
     /**
      * Remove all the available skills
@@ -26,6 +40,7 @@ public interface MoveableSkills {
      * Replace the current skills with the given ones
      *
      * @param skillsArr the skills arr
+     *
      * @return the boolean
      */
     boolean replaceSkills(ArrayList skillsArr);
@@ -48,6 +63,7 @@ public interface MoveableSkills {
      * Check weather the moveable has a specific skill loaded or not
      *
      * @param skill the skill to be checked against
+     *
      * @return true if it has the given skill
      */
     boolean hasSkill(Object skill);

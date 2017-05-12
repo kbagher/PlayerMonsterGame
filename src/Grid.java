@@ -7,19 +7,45 @@
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Game board grid.
+ * <p>
+ * Represents the game grid and responsible of it's related
+ * operations, including building the grid and maintaining it's cells
+ */
 public class Grid implements Serializable {
 
+    /**
+     * All grid cells
+     */
     Cell cells[] = new Cell[57];
+    /**
+     * The Cells 2D representation.
+     */
     Cell cells2D[][] = new Cell[11][11];
+    /**
+     * Graph sprite nodes 2D representation
+     */
     SpriteNode spriteNodes[][] = new SpriteNode[11][11];
 
+    /**
+     * Instantiates a new Grid.
+     *
+     * @throws Exception the exception
+     */
     public Grid() throws Exception {
+
+        /*
+         * Building the grid and the cells'
+         * representation on the board
+         */
         int k = 0;
         for (int row = 0; row < 11; row++) {
             for (int column = 0; column < 11; column++) {
                 if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)) {
                     cells2D[row][column] = new Cell(row, column);
                     cells[k++] = cells2D[row][column];
+                    // track cell's graph node position representation on the 2D grid
                     spriteNodes[row][column] = new SpriteNode(this, row, column);
                 }
             }
@@ -28,50 +54,91 @@ public class Grid implements Serializable {
         buildGraph();
     }
 
+    /**
+     * Build a graph by linking all related nodes
+     * with each other to allow traveling between nodes.
+     * <p>
+     * i.e. node 0.0 will be linked to the following two nodes:
+     * 0.1 Right direction
+     * 1.0 Down direction
+     */
     private void buildGraph() {
         for (int row = 0; row < 11; row++)
             for (int column = 0; column < 11; column++) {
                 if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)) {
-                    SpriteNode v = spriteNodes[row][column];
-                    if (column % 5 == 0 && row > 0) {     // up cell
-                        v.addEdge(new Edge(spriteNodes[row - 1][column], 1));
+                    SpriteNode node = spriteNodes[row][column];
+                    if (column % 5 == 0 && row > 0) {     // up node
+                        node.addEdge(new Edge(spriteNodes[row - 1][column], 1));
                     }
-                    if (column % 5 == 0 && row < 11 - 1) { // down cell
-                        v.addEdge(new Edge(spriteNodes[row + 1][column], 1));
+                    if (column % 5 == 0 && row < 11 - 1) { // down node
+                        node.addEdge(new Edge(spriteNodes[row + 1][column], 1));
                     }
-                    if (row % 5 == 0 && column > 0) {     // left cell
-                        v.addEdge(new Edge(spriteNodes[row][column - 1], 1));
+                    if (row % 5 == 0 && column > 0) {     // left node
+                        node.addEdge(new Edge(spriteNodes[row][column - 1], 1));
                     }
-                    if (row % 5 == 0 && (column < 11 - 1)) { // right cell
-                        v.addEdge(new Edge(spriteNodes[row][column + 1], 1));
+                    if (row % 5 == 0 && (column < 11 - 1)) { // right node
+                        node.addEdge(new Edge(spriteNodes[row][column + 1], 1));
                     }
                 }
             }
     }
 
-    /* Returns a reference to the specified cell.
-     * row and cell must be in the range 0 .. 10 and either row or col
+    /**
+     * Returns a reference to the specified cell.
+     * row and column must be in the range 0 .. 10 and either row or col
      * must be 0, 5 or 10.
-    */
+     *
+     * @param row cell row
+     * @param col cell column
+     *
+     * @return cell object reference
+     *
+     * @throws Exception the exception
+     */
     public Cell getCell(int row, int col) throws Exception {
         if ((row % 5 != 0 && col % 5 != 0) ||
                 row < 0 || row > 10 || col < 0 || col > 10)
-            throw new Exception("Invalid Coordiantes row = " + row + " column " + col);
+            throw new Exception("Invalid Coordinates row = " + row + " column " + col);
         return cells2D[row][col];
     }
 
+    /**
+     * Returns a reference to the specified node.
+     * row and column must be in the range 0 .. 10 and either row or col
+     * must be 0, 5 or 10
+     *
+     * @param row node row
+     * @param col node column
+     *
+     * @return node object reference
+     *
+     * @throws Exception the exception
+     */
     public SpriteNode getNode(int row, int col) throws Exception {
         if ((row % 5 != 0 && col % 5 != 0) ||
                 row < 0 || row > 10 || col < 0 || col > 10)
-            throw new Exception("Invalid Coordiantes row = " + row + " column " + col);
+            throw new Exception("Invalid Coordinates row = " + row + " column " + col);
         return spriteNodes[row][col];
     }
 
 
-    /* Returns the cell in the specified direction of the given cell.
-       Valid direction must be either 'R', 'L', 'U', 'D' or ' '.
-       A null value will be returned if attempt to instance a non-existent cell.
-    */
+    /**
+     * Returns the cell in the specified direction of the given cell
+     * and the number of steps in the given direction.
+     *
+     * Valid direction must be either 'R', 'L', 'U', 'D' or ' '.
+     *
+     * A null value will be returned if attempt to instance a non-existent cell.
+     *
+     * If the number of steps is invalid, the max number of possible steps
+     * (not exceeding the given number steps) will be considered
+     *
+     * @param cell      cell reference
+     * @param direction movement direction
+     * @param steps     movement steps in teh specified direction
+     *
+     * @return cell reference
+     */
     public Cell getCell(Cell cell, char direction, int steps) {
         Cell tempCell = null;
         try {
@@ -86,31 +153,46 @@ public class Grid implements Serializable {
                 tempCell = getCell(tempCell, direction);
         }
         return tempCell;
-
     }
 
+    /**
+     * Gets the next cell in the given direction
+     * according to the given cell
+     *
+     * @param cell      current cell
+     * @param direction movement direction
+     *
+     * @return cell reference
+     */
     public Cell getCell(Cell cell, char direction) {
-        if (direction == ' ') return cell;
-        if (direction == 'U') {
+
+        if (direction == ' ') return cell; // no direction
+
+        if (direction == 'U') { // up
             if (cell.col % 5 == 0 && cell.row > 0)
                 return cells2D[cell.row - 1][cell.col];
             return cell;
-        } else if (direction == 'D') {
+        } else if (direction == 'D') { // down
             if (cell.col % 5 == 0 && cell.row < 10)
                 return cells2D[cell.row + 1][cell.col];
             return cell;
-        } else if (direction == 'L') {
+        } else if (direction == 'L') { // left
             if (cell.row % 5 == 0 && cell.col > 0)
                 return cells2D[cell.row][cell.col - 1];
             return cell;
-        } else if (direction == 'R') {
+        } else if (direction == 'R') { // right
             if (cell.row % 5 == 0 && cell.col < 10)
                 return cells2D[cell.row][cell.col + 1];
             return cell;
         }
-        return null;
+        return null; // unknown direction
     }
 
+    /**
+     * Get all cells cell [ ].
+     *
+     * @return the cell [ ]
+     */
     public Cell[] getAllCells() {
         return cells;
     }
@@ -162,13 +244,22 @@ public class Grid implements Serializable {
         for (SpriteNode spriteNode = toNode; spriteNode != null; spriteNode = spriteNode.previous) {
             path.add(spriteNode);
         }
-        if (path.size()==1)
+        if (path.size() == 1)
             return path.get(0).getCell();
         return path.get(path.size() - 2).getCell();
     }
 
 
-    /* returns the best direction from source cell to the target cell.
+    /**
+     * Gets move direction.
+     *
+     * @param from the from
+     * @param to   the to
+     * @param trap the trap
+     *
+     * @return the move direction
+     */
+/* returns the best direction from source cell to the target cell.
      * Assumed cells passed are valid cells in the grid.
      * you need to verify this method 
      */
@@ -208,7 +299,15 @@ public class Grid implements Serializable {
         return z;
     }
 
-    /* A method to instance the shortest distance from one cell to another
+    /**
+     * Distance int.
+     *
+     * @param from the from
+     * @param to   the to
+     *
+     * @return the int
+     */
+/* A method to instance the shortest distance from one cell to another
      * Assumed cells are valid cells in the grid
      */
     public int distance(Cell from, Cell to) {
@@ -228,7 +327,14 @@ public class Grid implements Serializable {
         return d;
     }
 
-    /* Test harness for Grid*/
+    /**
+     * Main.
+     *
+     * @param args the args
+     *
+     * @throws Exception the exception
+     */
+/* Test harness for Grid*/
     public static void main(String args[]) throws Exception {
         Grid grid = new Grid();
         Cell c1 = grid.getCell(0, 0);

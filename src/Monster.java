@@ -36,6 +36,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
      * @param t   trap
      * @param row initial row on the grid
      * @param col initial column on the grid
+     *
      * @throws Exception the exception
      */
     public Monster(Grid g, Player p, Trap t, int row, int col) throws Exception {
@@ -48,38 +49,39 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
 
     /**
      * Move the monster
-     * @return
+     *
+     * @return next step cell
      */
     public Cell move() {
-        /**
-         * Avoid moving if trapped
+        /*
+          Avoid moving if trapped
          */
         if (isTrapped()) {
             return getCell(); // monster is trapped
         }
-        steppedOverTrap=false;
+        steppedOverTrap = false;
 
-        /**
-         * Perform a random skill
+        /*
+          Perform a random skill
          */
         if (canPerformSkill()) {
             performRandomSkill(); // perform random skill
         }
 
-        /**
-         * Monster leaped to user's cell
+        /*
+          Monster leaped to user's cell
          */
         if (currentCell.equals(player.getCell()))
             return currentCell;
 
-        currentDirection = grid.getMoveDirection(currentCell, grid.getCell(player.getCell(),player.getDirection()),trap);
+        currentDirection = grid.getMoveDirection(currentCell, grid.getCell(player.getCell(), player.getDirection()), trap);
         currentCell = (grid.getCell(getCell(), getDirection()));
         return currentCell;
     }
 
     /**
      * Disable monster's current active skills.
-     *
+     * <p>
      * Any other active skills that can be disabled
      * should be disabled here
      */
@@ -90,6 +92,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
 
     /**
      * Check if the monster is trapped or not
+     *
      * @return true if monster is trapped
      */
     private boolean isTrapped() {
@@ -101,12 +104,12 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
             return false; // not trapped
 
 
-        if (!steppedOverTrap){ // just got trapped
-            /**
-             * inform the trap that the monster has stepped over it
+        if (!steppedOverTrap) { // just got trapped
+            /*
+              inform the trap that the monster has stepped over it
              */
             trap.stepOver();
-            steppedOverTrap=true;
+            steppedOverTrap = true;
             try {
                 GameAudioPlayer player = new GameAudioPlayer();
                 player.playAudio("monster_trapped.wav");
@@ -122,6 +125,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
 
     /**
      * Check if the monster's invisible skill is active or not
+     *
      * @return true if invisible skill is active
      */
     private boolean isHiding() {
@@ -130,29 +134,29 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
 
     /**
      * Check if the monster can perform a skill or not
+     *
      * @return true if the monster can perform any skill
      */
     private boolean canPerformSkill() {
 
-        /**
+        /*
          * check if there are any skills available
          */
         if (!hasSkills()) return false; // no skills available
 
-        /**
+        /*
          * Check if there are any currently active skills
          *
          * The monster can't have more than one active skill at the same time
          */
         if (isHiding()) return false; // invisible skill is active
 
-        /**
+        /*
          * Check if the monster is no affected by any of the player's skills
-         *
          * The monster can't use his skills if he is currently affected by any
          * of the player's skills
          */
-        if (isTrapped()) return false;
+        if (isTrapped()) return false; // trapped
 
         return true; // monster can perform any skill
     }
@@ -162,20 +166,22 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
      */
     private void performRandomSkill() {
         if (!hasSkills()) return; // no skills available
-        /**
+        /*
          * probability of a monster to perform a skill
          */
         Random r = new Random();
         int random = r.nextInt(100);
-        /**
+        /*
+         * 5  = 5%
          * 10 = 10%
          * 50 = 50%
          * ...
          */
-        if (random <= 10) {
+        if (random <= 5) {
             // pick a random skill from the available skills
             random = r.nextInt(getSkills().size());
             MonsterSkillsType skill = (MonsterSkillsType) getSkills().get(random);
+
             switch (skill) {
                 case LEAP:
                     leap();
@@ -188,7 +194,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
     }
 
     /**
-     * Viewable boolean.
+     * Is the monster visible ror not.
      *
      * @return the boolean
      */
@@ -198,7 +204,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
             return true;
         }
         if (isHiding())
-            hideTime--;
+            hideTime--; // reduce hiding timer
         return false;
     }
 
@@ -209,21 +215,21 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
      */
     private boolean canLeap() {
 
-        /**
+        /*
          * check if row is legitimate for leaping
          */
         if (this.getCell().row % 5 == 0 && player.getCell().row % 5 == 0) {
             if (getCell().row == player.getCell().row)
                 return true; // monster and player are in the same row
         }
-        /**
+        /*
          * check if column is legitimate for leaping
          */
         else if (this.getCell().col % 5 == 0 && player.getCell().col % 5 == 0) {
             if (getCell().col == player.getCell().col)
                 return true; // monster and player are in the same column
         }
-        return false; // can't not in same legitimate row or column
+        return false; // can't leap, not in same row or column
     }
 
     @Override
@@ -236,8 +242,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
     @Override
     public void invisible() {
         if (isHiding()) return; // monster is already hiding
-
-        /**
+        /*
          * random hiding time between 5 to 10 game time units
          */
         Random random = new Random();

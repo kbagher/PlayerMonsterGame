@@ -156,7 +156,6 @@ public class Database {
             user.setName(rs.getString("Name"));
             user.setAddress(rs.getString("Address"));
             user.setUsername(rs.getString("Username"));
-            user.setPassword(rs.getString("Password"));
             user.setLoss(rs.getInt("Loss"));
             user.setWin(rs.getInt("Win"));
             stmt.close();
@@ -277,7 +276,7 @@ public class Database {
      */
     private String loadSerializedData(String username, String fieldName) throws SQLException, ClassNotFoundException, UserNotFoundException, DataLoadingException {
         /*
-          check if the given username exists or not
+         * check if the given username exists or not
          */
         if (!usernameExists(username))
             throw new UserNotFoundException();
@@ -286,7 +285,9 @@ public class Database {
         stmt = conn.createStatement();
 
         ResultSet rs = stmt.executeQuery("SELECT " + fieldName + " FROM User WHERE Username='" + username + "';");
+
         String serData = rs.getString(fieldName);
+
         rs.close();
         stmt.close();
         conn.close();
@@ -329,9 +330,10 @@ public class Database {
     public String loadSettings(String username) throws UserNotFoundException, SQLException, ClassNotFoundException, DataLoadingException {
         try {
             return loadSerializedData(username, "Settings");
-        } catch (DataLoadingException e) {
-            throw new DataLoadingException("No game data is available");
+        } catch (Exception e) {
+            throw new DataLoadingException("No Settings data is available");
         }
+
     }
 
     /**

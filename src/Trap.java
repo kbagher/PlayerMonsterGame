@@ -56,8 +56,7 @@ public class Trap extends Sprite implements Serializable {
      * @return the boolean
      */
     public boolean isTrapped(Cell cell) {
-        // trap is not set
-        if (getCell() == null) return false;
+        if (getCell() == null) return false; // trap is not set
 
         // compare passed cell with the trap cell
         if (getCell().equals(cell)) {

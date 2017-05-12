@@ -35,35 +35,36 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
         super(g);
         currentCell = grid.getCell(row, col);
         currentDirection = ' ';
+        if(caloriesValue<=0 || caloriesValue<= Game.settings.stepEnergy) throw new Exception("Invalid user energy");
         energy = caloriesValue;
         trap = t;
     }
 
     /**
      * Moves the player on the grid
-     * @return
+     * @return the next step cell
      */
     public Cell move() {
         // consume the nougat on the current cell if available
         increaseEnergy(currentCell.nougat.consume());
-        /**
-         * check if the player have enough energy to move
+        /*
+          check if the player have enough energy to move
          */
         if (canPerformEnergyAction(calculateCalories(steps))) { // have enough energy to move
             if (currentDirection != ' ') { // player have a direction to move
-                /**
-                 * Determine the max cell that can be reached according
-                 * to the user's provided steps.
-                 * Some cases where the user want's to move more than one step where
-                 * he can only perform one step as he will reach the end of the grid
+                /*
+                  Determine the max cell that can be reached according
+                  to the user's provided steps.
+                  Some cases where the user want's to move more than one step where
+                  he can only perform one step as he will reach the end of the grid
                  */
                 Cell tempCell = grid.getCell(currentCell, currentDirection, steps);
-                /**
-                 * Recalculate the steps to reflect the new max cell which wil be reached
+                /*
+                  Recalculate the steps to reflect the new max cell which wil be reached
                  */
                 steps = grid.distance(currentCell, tempCell);
-                /**
-                 * Deduct energy from the user after updating the possible steps
+                /*
+                  Deduct energy from the user after updating the possible steps
                  */
                 decreaseEnergy(calculateCalories(steps));
                 if (tempCell != null)
@@ -85,7 +86,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
      * @param steps movement steps
      * @return energy required
      */
-    public int calculateCalories(int steps) {
+    private int calculateCalories(int steps) {
         int sum = 0;
         for (int i = 1; i <= steps; i++) {
             sum += Math.pow(Game.settings.stepEnergy, i);
@@ -100,7 +101,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
      * @param requiredEnergy action's required energy
      * @return true if the player have enough energy
      */
-    public boolean canPerformEnergyAction(int requiredEnergy) {
+    private boolean canPerformEnergyAction(int requiredEnergy) {
         return requiredEnergy <= energy;
     }
 
@@ -127,7 +128,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
      *
      * @param value the value
      */
-    public void decreaseEnergy(int value) {
+    private void decreaseEnergy(int value) {
         energy -= value;
     }
 
@@ -136,7 +137,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
      *
      * @param value the value
      */
-    public void increaseEnergy(int value) {
+    private void increaseEnergy(int value) {
         energy += value;
     }
 
@@ -168,17 +169,17 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
 
     @Override
     public void putTrap() {
-        if (!hasSkill(PlayerSkillsType.TRAP)) return; // player does not have the skilltrap.isSet()
+        if (!hasSkill(PlayerSkillsType.TRAP)) return; // player does not have the trap skill
 
         if (trap.isSet())
             return; // there is an active trap
 
-        /**
-         * Check if the player have enough energy
+        /*
+          Check if the player have enough energy
          */
         if (canPerformEnergyAction(Game.settings.trapEnergy)) { // have enough energy
-            /**
-             * place the trap and decrease the player's energy
+            /*
+              place the trap and decrease the player's energy
              */
             trap.setTrap(getCell());
             decreaseEnergy(Game.settings.trapEnergy);

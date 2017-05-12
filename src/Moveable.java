@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 /**
  * The abstract base class for Monster and Player.
+ * <p>
  * The abstract method move() must be overridden by Player and Monster classes
  */
 public abstract class Moveable extends Sprite implements MoveableSkills, Serializable {
@@ -41,9 +42,26 @@ public abstract class Moveable extends Sprite implements MoveableSkills, Seriali
         currentDirection = d;
     }
 
+    @Override
+    public boolean isCompatibleSkill(Object skill) {
+        /*
+         * Both Movable and Movable skill type should contain similar Movable name.
+         *
+         * i.e. Monster and MonsterSkillType contains "Monster", etc...
+         *
+         * This will be used to check if the passed skill type is compatible
+         * with the movable object or not
+         */
+        if(skill.getClass().getTypeName().toLowerCase().contains(
+                this.getClass().getTypeName().toLowerCase()))
+            return true;
+        return false;
+    }
 
     @Override
-    public boolean addSkill(Object skill) {
+    public boolean addSkill(Object skill) throws Exception {
+        if (!isCompatibleSkill(skill))
+            throw new Exception("Skill type mismatch");
         if (skills.size() == 2)
             return false; // max skills reached
         if (hasSkill(skill))
@@ -62,16 +80,16 @@ public abstract class Moveable extends Sprite implements MoveableSkills, Seriali
         if (skillsArr.size() > 2)
             return false; // new skills are more than the max allowed
         removeAllSkills();
-        for (int x = 0; x < skillsArr.size(); x++) {
-            if (!hasSkill(skillsArr.get(x)))
-                skills.add(skillsArr.get(x));
+        for (Object aSkillsArr : skillsArr) {
+            if (!hasSkill(aSkillsArr))
+                skills.add(aSkillsArr);
         }
         return true; // skills replaced
     }
 
     @Override
     public boolean hasSkills() {
-        return skills.size() == 0 ? false : true;
+        return skills.size() != 0;
     }
 
     @Override
@@ -84,9 +102,7 @@ public abstract class Moveable extends Sprite implements MoveableSkills, Seriali
 
     @Override
     public boolean hasSkill(Object skill) {
-        if (!hasSkills()) return false; // no skills available
-
-        return getSkills().contains(skill);
+        return hasSkills() && getSkills().contains(skill); // has the skill
     }
 
     @Override

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Monster skills type and methods.
  *
@@ -7,7 +5,7 @@ import java.util.ArrayList;
  * and should include all future added skills.
  *
  */
-public interface MonsterSkills  {
+public interface MonsterSkills {
     /**
      * List of all available skills
      */
