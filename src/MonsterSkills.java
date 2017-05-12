@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Monster skills type and methods.
  *
@@ -12,7 +14,6 @@ public interface MonsterSkills  {
     enum MonsterSkillsType{
         LEAP,INVISIBLE
     }
-
     /**
      * This monster can leap and eat any player in its
      * sight (horizontal and vertical)

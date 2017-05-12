@@ -10,10 +10,9 @@ class UserNotFoundException extends Exception {
     /**
      * Instantiates a new User not found exception.
      *
-     * @param message the message
      */
-    public UserNotFoundException(String message) {
-        super(message);
+    public UserNotFoundException() {
+        super("Invalid username");
     }
 }
 
@@ -25,10 +24,9 @@ class WrongPasswordException extends Exception {
     /**
      * Instantiates a new Wrong password exception.
      *
-     * @param message the message
      */
-    public WrongPasswordException(String message) {
-        super(message);
+    public WrongPasswordException() {
+        super("Provided password is incorrect");
     }
 }
 
@@ -40,10 +38,9 @@ class UsernameAlreadyExistsException extends Exception {
     /**
      * Instantiates a new Username already exists exception.
      *
-     * @param message the message
      */
-    public UsernameAlreadyExistsException(String message) {
-        super(message);
+    public UsernameAlreadyExistsException() {
+        super("Provided username already exists in the database");
     }
 }
 
@@ -97,8 +94,8 @@ public class Database {
      * Returns a database connection.
      *
      * @return database connection
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException SQL exception
+     * @throws ClassNotFoundException SQLite classpath issue
      */
     private Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
@@ -110,20 +107,23 @@ public class Database {
     /**
      * Check if the given username exists in the database or not
      *
-     * @param username
+     * @param username user's username
      * @return true if the username exists in the database
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException SQL Exception
+     * @throws ClassNotFoundException SQLite classpath issue
      */
     private boolean usernameExists(String username) throws SQLException, ClassNotFoundException {
         conn = getConnection();
         stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM User where username='" + username + "';");
+        if (rs.next()){
+            stmt.close();
+            conn.close();
+            return true;
+        }
         stmt.close();
         conn.close();
-        if (rs.next()) return true; // user exists
-
-        return false; // user doesn't exist
+        return false;
     }
 
     /**
@@ -140,11 +140,11 @@ public class Database {
      * @throws WrongPasswordException incorrect password
      */
     public User login(String username, String password) throws SQLException, ClassNotFoundException, UserNotFoundException, WrongPasswordException {
-        /**
-         * check if the given username exists or not
+        /*
+          check if the given username exists or not
          */
         if (!usernameExists(username))
-            throw new UserNotFoundException("Invalid username");
+            throw new UserNotFoundException();
 
         User user = new User();
         conn = getConnection();
@@ -165,13 +165,15 @@ public class Database {
         } else {
             stmt.close();
             conn.close();
-            throw new WrongPasswordException("Provided password is incorrect");
+            throw new WrongPasswordException();
         }
     }
 
     /**
      * Register a new user
      *
+     * @param name     the name
+     * @param address  the address
      * @param username username
      * @param password password
      * @return the boolean
@@ -185,17 +187,17 @@ public class Database {
 
         System.out.println("checking user");
         if (usernameExists(username))
-            throw new UsernameAlreadyExistsException("Provided username already exists in the database");
+            throw new UsernameAlreadyExistsException();
         System.out.println("done checking user");
         conn = getConnection();
         stmt = conn.createStatement();
         System.out.println("in insert");
         String sql = "INSERT INTO User (Name,Address,username, password) " + "VALUES ('"+name+"','"+address+"','" + username + "','" + password + "');";
         System.out.println("after insert");
-        /**
-         * Number of effected rows.
-         *
-         * Should be 1 if the insert operation is successful
+        /*
+          Number of effected rows.
+
+          Should be 1 if the insert operation is successful
          */
         int i = stmt.executeUpdate(sql);
 
@@ -212,11 +214,11 @@ public class Database {
     /**
      * Gets result.
      *
-     * @return
+     * @return results
      */
     public ArrayList<User> getResults() {
         User user = new User();
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<User> users = new ArrayList<>();
 
         try {
             conn = getConnection();
@@ -252,6 +254,7 @@ public class Database {
      * @throws SQLException           the sql exception
      * @throws ClassNotFoundException SQLite classpath exception
      * @throws UserNotFoundException  user not found exception
+     * @throws DataSavingException    the data saving exception
      */
     public boolean saveGame(String username, String dataGame) throws SQLException, ClassNotFoundException, UserNotFoundException, DataSavingException {
         try{
@@ -266,18 +269,18 @@ public class Database {
      *
      * @param username  user's username
      * @param fieldName database field containing the serialized data
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     * @throws UserNotFoundException
-     * @throws DataLoadingException
+     * @return serialized data object
+     * @throws SQLException SQL exception
+     * @throws ClassNotFoundException SQLite classpath issue
+     * @throws UserNotFoundException user not found exception
+     * @throws DataLoadingException loading user's data exception
      */
     private String loadSerializedData(String username, String fieldName) throws SQLException, ClassNotFoundException, UserNotFoundException, DataLoadingException {
-        /**
-         * check if the given username exists or not
+        /*
+          check if the given username exists or not
          */
         if (!usernameExists(username))
-            throw new UserNotFoundException("Invalid username");
+            throw new UserNotFoundException();
 
         conn = getConnection();
         stmt = conn.createStatement();
@@ -335,7 +338,8 @@ public class Database {
      * @param username  user's username
      * @param fieldName database field name
      * @return true if the field was increased successfully
-     * @throws Exception
+     * @throws SQLException SQL exception
+     * @throws ClassNotFoundException SQLite classpath issue
      */
     private boolean increaseFiled(String username, String fieldName) throws SQLException, ClassNotFoundException {
 
@@ -358,7 +362,9 @@ public class Database {
      * Increase user's loss.
      *
      * @param username user's username
-     * @return true if loss wass increased successfully
+     * @return true if loss was increased successfully
+     * @throws SQLException           the sql exception
+     * @throws ClassNotFoundException the class not found exception
      */
     public boolean increaseLoss(String username) throws SQLException, ClassNotFoundException {
         return increaseFiled(username, "Loss");
@@ -369,6 +375,8 @@ public class Database {
      *
      * @param username user's username
      * @return true if  win was increased successfully
+     * @throws SQLException           the sql exception
+     * @throws ClassNotFoundException the class not found exception
      */
     public boolean increaseWins(String username) throws SQLException, ClassNotFoundException {
         return increaseFiled(username, "Win");
@@ -377,13 +385,17 @@ public class Database {
     /**
      * Save user's settings
      *
-     * @param usernmame the usernmame
+     * @param username the username
      * @param settings  the settings
      * @return the boolean
+     * @throws ClassNotFoundException the class not found exception
+     * @throws SQLException           the sql exception
+     * @throws DataSavingException    the data saving exception
+     * @throws UserNotFoundException  the user not found exception
      */
-    public boolean saveSetings(String usernmame, String settings) throws ClassNotFoundException, SQLException, DataSavingException, UserNotFoundException {
+    public boolean saveSettings(String username, String settings) throws ClassNotFoundException, SQLException, DataSavingException, UserNotFoundException {
         try{
-            return saveUserData(usernmame,"Settings",settings);
+            return saveUserData(username,"Settings",settings);
         }
         catch (DataSavingException e){
             throw new DataSavingException("Cannot save user's settings");
@@ -395,18 +407,18 @@ public class Database {
      * @param username user's username
      * @param fieldName database field name
      * @param data serialized data
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     * @throws UserNotFoundException
-     * @throws DataSavingException
+     * @return serialized game data
+     * @throws SQLException SQL exception
+     * @throws ClassNotFoundException SQLite classpath issue
+     * @throws UserNotFoundException user not found exception
+     * @throws DataSavingException saving user's data exception
      */
     private boolean saveUserData(String username, String fieldName, String data) throws SQLException, ClassNotFoundException, UserNotFoundException, DataSavingException {
-        /**
-         * check if the given username exists or not
+        /*
+          check if the given username exists or not
          */
         if (!usernameExists(username))
-            throw new UserNotFoundException("Invalid username");
+            throw new UserNotFoundException();
 
         conn = getConnection();
         stmt = conn.createStatement();

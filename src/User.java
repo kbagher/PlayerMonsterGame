@@ -1,4 +1,3 @@
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.Base64;
@@ -81,7 +80,7 @@ public class User implements Serializable {
             oStream.writeObject(s);
             oStream.flush();
             oStream.close();
-            db.saveSetings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
+            db.saveSettings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -117,7 +116,7 @@ public class User implements Serializable {
             oStream.writeObject(s);
             oStream.close();
             Database db = new Database();
-            return db.saveSetings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
+            return db.saveSettings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

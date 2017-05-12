@@ -793,8 +793,8 @@ public class Game extends JFrame {
      * Update skills.
      */
     public void updateSkills() {
-        player.removeSkills();
-        monster.removeSkills();
+        player.removeAllSkills();
+        monster.removeAllSkills();
 
         // player skipp skill
         if (cbPlayerSkip.isSelected())
