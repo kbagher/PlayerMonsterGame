@@ -1,16 +1,25 @@
 import javax.xml.crypto.Data;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.Base64;
 
 public class User implements Serializable {
 
+    private String name;
+    private String address;
     private String username;
     private String password;
     private int win;
     private int loss;
 
-    public static User login(String username, String password) {
-        return Database.getInstance().login(username, password);
+    public static User login(String username, String password) throws ClassNotFoundException, SQLException, WrongPasswordException, UserNotFoundException {
+        Database db = new Database();
+        return db.login(username, password);
+    }
+
+    public static boolean register(String name,String address,String username, String password) throws ClassNotFoundException, SQLException, UsernameAlreadyExistsException {
+        Database db = new Database();
+        return db.register(name,address,username,password);
     }
 
     public String getUsername() {
@@ -41,22 +50,38 @@ public class User implements Serializable {
         this.loss = loss;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public boolean saveGame(Game g,Settings s) {
         try {
+            Database db = new Database();
             ByteArrayOutputStream bStream = new ByteArrayOutputStream();
             ObjectOutputStream oStream = new ObjectOutputStream(bStream);
             oStream.writeObject(g);
             oStream.flush();
             oStream.close();
-            Database.getInstance().saveGame(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
+            db.saveGame(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
 
             bStream = new ByteArrayOutputStream();
             oStream = new ObjectOutputStream(bStream);
             oStream.writeObject(s);
             oStream.flush();
             oStream.close();
-            Database.getInstance().saveSetings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
+            db.saveSetings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -67,7 +92,8 @@ public class User implements Serializable {
 
     public boolean increaseLoss(){
         try {
-            return Database.getInstance().increaseLoss(username);
+            Database db = new Database();
+            return db.increaseLoss(username);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -76,7 +102,8 @@ public class User implements Serializable {
 
     public boolean increaseWins(){
         try {
-            return Database.getInstance().increaseWins(username);
+            Database db = new Database();
+            return db.increaseWins(username);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -89,7 +116,8 @@ public class User implements Serializable {
             ObjectOutputStream oStream = new ObjectOutputStream(bStream);
             oStream.writeObject(s);
             oStream.close();
-            return Database.getInstance().saveSetings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
+            Database db = new Database();
+            return db.saveSetings(username, Base64.getEncoder().encodeToString(bStream.toByteArray()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -98,7 +126,8 @@ public class User implements Serializable {
 
     public Settings loadSettings() {
         try {
-            byte[] settingsData = Base64.getDecoder().decode(Database.getInstance().loadSettings(username));
+            Database db = new Database();
+            byte[] settingsData = Base64.getDecoder().decode(db.loadSettings(username));
             ObjectInputStream oStream = new ObjectInputStream(new ByteArrayInputStream(settingsData));
             Settings s = (Settings) oStream.readObject();
             oStream.close();
@@ -109,10 +138,10 @@ public class User implements Serializable {
         return null;
     }
 
-
     public Game loadGame() {
         try {
-            byte[] gameData = Base64.getDecoder().decode(Database.getInstance().loadGame(username));
+            Database db = new Database();
+            byte[] gameData = Base64.getDecoder().decode(db.loadGame(username));
             ObjectInputStream oStream = new ObjectInputStream(new ByteArrayInputStream(gameData));
             Game g = (Game) oStream.readObject();
             oStream.close();

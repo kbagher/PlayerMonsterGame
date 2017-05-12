@@ -12,7 +12,7 @@ public class Edge implements Serializable {
     private SpriteNode targetNode;
     /**
      * edge weight, will always be 1 as the grid has similar values.
-     * however, if theare are a trap at the target node, the weight will be the
+     * however, if there are a trap at the target node, the weight will be the
      * traps's duration + effective time
      */
     private double weight;

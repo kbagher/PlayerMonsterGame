@@ -863,9 +863,13 @@ public class Game extends JFrame {
         pause = false;
         restart = false;
         load = false;
+        grid=null;
         grid = new Grid();
+        trap=null;
         trap = new Trap(grid);
+        player=null;
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
+        monster=null;
         monster = new Monster(grid, player, trap, 5, 5);
         bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");

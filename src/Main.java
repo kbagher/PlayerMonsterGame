@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 /**
  * Created by kassem on 6/5/17.
@@ -7,28 +8,100 @@ import java.awt.*;
 public class Main {
 
     /**
+     * Show a registration dialog
+     *
+     * @return true if user has registered
+     */
+    private static boolean showRegister() {
+        /**
+         * Main panel to hold labels and textfields
+         */
+        JPanel loginPanel = new JPanel(new BorderLayout(5, 1));
+
+        /**
+         * Labels panel
+         */
+        JPanel labelsPanel = new JPanel(new GridLayout(0, 1, 2, 2));
+        labelsPanel.add(new JLabel("Full Name:", SwingConstants.LEFT));
+        labelsPanel.add(new JLabel("Address: ", SwingConstants.LEFT));
+        labelsPanel.add(new JLabel("Username: ", SwingConstants.LEFT));
+        labelsPanel.add(new JLabel("Password: ", SwingConstants.LEFT));
+        loginPanel.add(labelsPanel, BorderLayout.WEST);
+
+        /**
+         * Text fields panel
+         */
+        JPanel fieldsPanel = new JPanel(new GridLayout(0, 1, 2, 2));
+        // Full name
+        JTextField name = new JTextField(15);
+        fieldsPanel.add(name);
+        // Address
+        JTextField address = new JTextField(15);
+        fieldsPanel.add(address);
+        // Username
+        JTextField username = new JTextField(15);
+        fieldsPanel.add(username);
+        // Password
+        JPasswordField password = new JPasswordField(15);
+        fieldsPanel.add(password);
+
+        loginPanel.add(fieldsPanel, BorderLayout.CENTER);
+
+        /**
+         * Message buttons
+         * 0 Register
+         * 1 Cancel
+         */
+        Object[] options = new String[]{"Register", "Cancel"};
+
+        int option = JOptionPane.showOptionDialog(null, loginPanel, "User Registration", JOptionPane.OK_OPTION,
+                JOptionPane.INFORMATION_MESSAGE, null, options, null);
+        if (option == 1)
+            return false; // cancel
+
+        /**
+         * check if fields are empty or not
+         */
+        if (name.getText().isEmpty() || address.getText().isEmpty() || username.getText().isEmpty() || password.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "All fields are required", "incomplete fields", JOptionPane.OK_OPTION);
+            return false;
+        }
+
+        try {
+            User.register(name.getText(),address.getText(),username.getText(),new String(password.getPassword()));
+            JOptionPane.showMessageDialog(null, "User Registered Successfully", null, JOptionPane.INFORMATION_MESSAGE);
+            return true; // registered
+        } catch (UsernameAlreadyExistsException e) {
+            JOptionPane.showMessageDialog(null, "Username is already taken", "User Exists", JOptionPane.ERROR_MESSAGE);
+            return false; // username already exists
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Unknown Error", JOptionPane.ERROR_MESSAGE);
+            return false; // unknown error
+        }
+    }
+
+    /**
      * user login and register message
      *
      * @return the logged in or registered user
      */
     private static User showLogin() {
-
-        /*
-        Main panel to hold labels and textfields
-        */
+        /**
+         * Main panel to hold labels and text fields
+         */
         JPanel loginPanel = new JPanel(new BorderLayout(5, 1));
 
-        /*
-        Labels panel
-        */
+        /**
+         * Labels panel
+         */
         JPanel labelsPanel = new JPanel(new GridLayout(0, 1, 2, 2));
         labelsPanel.add(new JLabel("Username:", SwingConstants.LEFT));
         labelsPanel.add(new JLabel("Password: ", SwingConstants.LEFT));
         loginPanel.add(labelsPanel, BorderLayout.WEST);
 
-        /*
-        Textfields panel
-        */
+        /**
+         * Text fields panel
+         */
         JPanel fieldsPanel = new JPanel(new GridLayout(0, 1, 2, 2));
         JTextField username = new JTextField(10);
         fieldsPanel.add(username);
@@ -36,44 +109,64 @@ public class Main {
         fieldsPanel.add(password);
         loginPanel.add(fieldsPanel, BorderLayout.CENTER);
 
-        // message button options
-        Object[] options = new String[]{"Login/Register"};
+        /**
+         * Message buttons
+         * 0 Login
+         * 1 Register
+         * 2 Cancel
+         */
+        Object[] options = new String[]{"Login", "Register", "Cancel"};
 
-        JOptionPane.showOptionDialog(null, loginPanel, "User login", JOptionPane.OK_OPTION,
+        int option = JOptionPane.showOptionDialog(null, loginPanel, "User login", JOptionPane.OK_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, null, options, null);
 
-        String usr = username.getText();
-        String pass = new String(password.getPassword());
-
-        // retrieve the user object using provided data
-        User user = User.login(usr, pass);
-
-        // user does not exist
-        if (user == null) {
-            int answer = JOptionPane.showConfirmDialog(null, "Unknown user, do you want to register using the provided information?", "Unknow username", JOptionPane.YES_NO_OPTION);
-
-            // register new user using the provided date
-            if (answer == JOptionPane.YES_OPTION)
-                if (Database.getInstance().register(usr, pass)) {
-                    JOptionPane.showMessageDialog(null, "User created successfully :D", "Registerd", JOptionPane.INFORMATION_MESSAGE);
-                    return user;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Could not register :(", "Error", JOptionPane.ERROR_MESSAGE);
-                    return null;
-                }
+        /**
+         * handling pressed button
+         */
+        if (option == 2)
+            System.exit(0); // cancel
+        else if (option == 1) {
+            showRegister(); // register
+            return null;
         }
 
-        return user;
+        String usr = username.getText(); // username
+        String pass = new String(password.getPassword()); // password
+
+        /**
+         * Login user
+         */
+        try {
+            return User.login(usr, pass);
+        } catch (WrongPasswordException e) { // wrong password
+            JOptionPane.showMessageDialog(null, "Wrong password", null, JOptionPane.ERROR_MESSAGE);
+        } catch (UserNotFoundException e) { // user not found
+            JOptionPane.showMessageDialog(null, "Unknown username", null, JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) { // unknown error
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Unknown erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
     }
 
     public static void main(String args[]) throws Exception {
 
-        // login or register a user
+        /**
+         * login or register a user
+         */
         User user;
         while ((user = showLogin()) == null) ;
 
-        // game status, new, restart and reload
+        /**
+         * Game status
+         * - "new" for a new game
+         * - "restart" to restart the game after each round
+         * - "reload" to load a saved user game
+         */
         String status = "new";
+
+        /**
+         * Starting,restarting and loading the game
+         */
         Game game = null;
         do {
             // start a new game

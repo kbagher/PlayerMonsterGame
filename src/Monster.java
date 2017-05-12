@@ -172,7 +172,7 @@ public class Monster extends Moveable implements MonsterSkills, Serializable {
          * 50 = 50%
          * ...
          */
-        if (random == 50) {
+        if (random <= 10) {
             // pick a random skill from the available skills
             random = r.nextInt(getSkills().size());
             MonsterSkillsType skill = (MonsterSkillsType) getSkills().get(random);

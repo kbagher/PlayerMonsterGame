@@ -23,13 +23,13 @@ public class Cell implements Serializable{
     /**
      * Instantiates a new Cell.
      *
-     * @param i the
-     * @param j the j
+     * @param r grid row
+     * @param c grid column
      */
-    public Cell(int i, int j )
+    public Cell(int r, int c )
    {
 	  this.nougat= new Nougat();
-	  row = i;
-	  col = j;
+	  row = r;
+	  col = c;
    }
 }
