@@ -3,13 +3,13 @@ import java.util.LinkedList;
 
 /**
  * Graph node.
- *
+ * <p>
  * The node will hold all the linked nodes simulating a grid cell.
- *
+ * <p>
  * Although SpriteNode does not represent a bitmap object, we will inherit the sprite characteristics
  * to link it with a cell on the grid
  */
-public class SpriteNode extends Sprite implements Serializable,Comparable<SpriteNode> {
+public class SpriteNode extends Sprite implements Serializable, Comparable<SpriteNode> {
 
     /**
      * The Linked nodes.
@@ -32,16 +32,17 @@ public class SpriteNode extends Sprite implements Serializable,Comparable<Sprite
      * @param g      The grid
      * @param row    row on the grid
      * @param column column on the grid
+     *
      * @throws Exception exception
      */
     public SpriteNode(Grid g, int row, int column) throws Exception {
         super(g);
-        currentCell = grid.getCell(row,column);
+        currentCell = grid.getCell(row, column);
     }
 
     @Override
     public String toString() {
-        return ""+ currentCell.row+"."+currentCell.col;
+        return "" + currentCell.row + "." + currentCell.col;
     }
 
     @Override
@@ -57,7 +58,6 @@ public class SpriteNode extends Sprite implements Serializable,Comparable<Sprite
     public void addEdge(Edge edge) {
         linkedNodes.add(edge);
     }
-
 
 
 }

@@ -18,15 +18,15 @@ public class Grid implements Serializable {
     /**
      * All grid cells
      */
-    Cell cells[] = new Cell[57];
+    private Cell[] cells = new Cell[57];
     /**
      * The Cells 2D representation.
      */
-    Cell cells2D[][] = new Cell[11][11];
+    private Cell[][] cells2D = new Cell[11][11];
     /**
      * Graph sprite nodes 2D representation
      */
-    SpriteNode spriteNodes[][] = new SpriteNode[11][11];
+    private SpriteNode[][] spriteNodes = new SpriteNode[11][11];
 
     /**
      * Instantiates a new Grid.
@@ -125,11 +125,11 @@ public class Grid implements Serializable {
     /**
      * Returns the cell in the specified direction of the given cell
      * and the number of steps in the given direction.
-     *
+     * <p>
      * Valid direction must be either 'R', 'L', 'U', 'D' or ' '.
-     *
+     * <p>
      * A null value will be returned if attempt to instance a non-existent cell.
-     *
+     * <p>
      * If the number of steps is invalid, the max number of possible steps
      * (not exceeding the given number steps) will be considered
      *
@@ -142,6 +142,7 @@ public class Grid implements Serializable {
     public Cell getCell(Cell cell, char direction, int steps) {
         Cell tempCell = null;
         try {
+            // get a reference to the cell
             tempCell = getCell(cell.row, cell.col);
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,8 +157,11 @@ public class Grid implements Serializable {
     }
 
     /**
-     * Gets the next cell in the given direction
-     * according to the given cell
+     * Returns the cell in the specified direction of the given cell
+     * <p>
+     * Valid direction must be either 'R', 'L', 'U', 'D' or ' '.
+     * <p>
+     * A null value will be returned if attempt to instance a non-existent cell.
      *
      * @param cell      current cell
      * @param direction movement direction
@@ -189,23 +193,35 @@ public class Grid implements Serializable {
     }
 
     /**
-     * Get all cells cell [ ].
+     * Get all cells
      *
-     * @return the cell [ ]
+     * @return cells array
      */
     public Cell[] getAllCells() {
         return cells;
     }
 
-    /* helper method to check whether val is in the range a to b
+    /**
+     * helper method to check whether val is in the range a to b
+     *
+     * @param val value to be checked
+     * @param a   from value
+     * @param b   to value
+     *
+     * @return true if the given value is between the given two values
      */
     private boolean inBetween(int val, int a, int b) {
         if (val >= a && val <= b)
             return true;
         else return false;
-
     }
 
+    /**
+     * Reset all nodes' path links and calculated distance.
+     * <p>
+     * This method should be called if either the monster
+     * or player moved.
+     */
     private void clearGraph() {
         for (int row = 0; row < 11; row++)
             for (int column = 0; column < 11; column++) {
@@ -216,37 +232,111 @@ public class Grid implements Serializable {
             }
     }
 
+    /**
+     * Compute the path from the starting node to all available nodes.
+     * <p>
+     * Using Dijkstra's algorithm allows us to calculate the minimum path
+     * to all other nodes.
+     * <p>
+     * If a trap is set in the grid, the the trap life and effect duration
+     * is used calculate the distance.
+     * <p>
+     * The monster will avoid any path containing a trap. however,
+     * if moving over a trap is considered shorter than any other path,
+     * the monster will step over the trap
+     *
+     * @param sourceNode monster node
+     * @param trap       trap reference
+     */
     private void computePathsFromNode(SpriteNode sourceNode, Trap trap) {
+        // Always set starting node distance to be 0
         sourceNode.distance = 0.;
+
+        /*
+         * Priority queue of all visited nodes (following Dijkstra's Algorithm)
+         * to use the comparable method of the SpriteNode object.
+         *
+         * The queue will always contain the source node as the first element,
+         * Since it also has a distance value of 0.
+         *
+         * The list will store object ordered from low to high distance
+         */
         PriorityQueue<SpriteNode> visitedNodes = new PriorityQueue<>();
         visitedNodes.add(sourceNode);
 
+
         while (!visitedNodes.isEmpty()) {
             SpriteNode currentNode = visitedNodes.poll();
-            // Visit each edge exiting currentNode
+            /*
+             * Visit all linked nodes to calculate it's distance
+             * considering the trap weight
+             */
             for (Edge edge : currentNode.linkedNodes) {
                 SpriteNode linkedNode = edge.getTargetNode();
-                double trapWeight = edge.getTargetNode().getCell().equals(trap.getCell()) ? Math.abs(trap.getEffectTime() + trap.getLifetime()) : 0;
+                /*
+                 * calculate trap weight if it's set
+                 */
+                double trapWeight = 0;
+                if (trap.isSet()){ // traps is set
+                    if(edge.getTargetNode().getCell().equals(trap.getCell())) // trap is in same node
+                        trapWeight = trap.getLifetime() + trap.getEffectTime();
+                }
+                /*
+                 * Calculate the node's distance considering the trap's weight
+                 */
                 double calculatedWeight = trapWeight + edge.getWeight();
                 double distanceThroughLinkedNode = currentNode.distance + calculatedWeight;
+
+                /*
+                 * Update the current node's distance if the new calculated distance
+                 * is shorter.
+                 *
+                 * This will always update the node with the shortest path available
+                 */
                 if (distanceThroughLinkedNode < linkedNode.distance) {
+                    /*
+                     * remove the linked current node
+                     */
                     visitedNodes.remove(linkedNode);
+
+                    /*
+                     * update the current linked node
+                     */
                     linkedNode.distance = distanceThroughLinkedNode;
                     linkedNode.previous = currentNode;
+
+                    /*
+                     * add the node again to allow reordering using the
+                     * compareTo method
+                     */
                     visitedNodes.add(linkedNode);
                 }
             }
         }
     }
 
-    private Cell getPathCell(SpriteNode fromNode, SpriteNode toNode) {
-        LinkedList<SpriteNode> path = new LinkedList<>();
+    /**
+     * Get the next movement cell in the shortest path.
+     *
+     * This method will get the shortest calculated path
+     * to the player's node and return the next cell that
+     * which the monster needs to move to.
+     *
+     * @param toNode player's node
+     * @return monster's next movement cell
+     */
+    private Cell getPathToNode(SpriteNode toNode) {
+        /*
+         * Travel from the target node to the starting node (monster node)
+         *
+         * if the current node doesn't have 2 previous nodes, it means
+         * that the current cell the next step for the monster
+         */
         for (SpriteNode spriteNode = toNode; spriteNode != null; spriteNode = spriteNode.previous) {
-            path.add(spriteNode);
+            if (spriteNode.previous.previous==null)
+                return spriteNode.getCell();
         }
-        if (path.size() == 1)
-            return path.get(0).getCell();
-        return path.get(path.size() - 2).getCell();
+        return null;
     }
 
 
@@ -270,7 +360,7 @@ public class Grid implements Serializable {
          */
         clearGraph();
         computePathsFromNode(spriteNodes[from.row][from.col], trap);
-        Cell newTo = getPathCell(spriteNodes[from.row][from.col], spriteNodes[to.row][to.col]);
+        Cell newTo = getPathToNode(spriteNodes[to.row][to.col]);
 
         if (from.row == newTo.row) {
             if (from.col < newTo.col)
