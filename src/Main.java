@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 /**
@@ -181,7 +182,6 @@ public class Main {
             }
             // load user's saved game
             else if (status.compareTo("load") == 0) {
-                System.out.println("load");
                 game = user.loadGame();
             }
             game.setTitle("Monster Game");

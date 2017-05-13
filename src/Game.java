@@ -885,7 +885,7 @@ public class Game extends JFrame {
         grid = new Grid(gridStructure);
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
-        monster = new Monster(grid, player, trap, 0, 6);
+        monster = new Monster(grid, player, trap, 0, gridStructure.getSize()-1);
         bp = new BoardPanel(grid, player, monster, trap, this);
 
         // Create a separate panel and add all the buttons
@@ -917,7 +917,7 @@ public class Game extends JFrame {
         player = null;
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
         monster = null;
-        monster = new Monster(grid, player, trap, 0, 6);
+        monster = new Monster(grid, player, trap, 0, gridStructure.getSize()-1);
         bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");
         btPause.setText("Pause");
@@ -938,6 +938,13 @@ public class Game extends JFrame {
         }
     }
 
+    /**
+     * Change grid configuration.
+     *
+     * This method will help the user in building a Grid structure
+     * object, save it in his settings and restarting the game.
+     *
+     */
     public void changeGrid() {
 
         pause = true;
@@ -952,7 +959,8 @@ public class Game extends JFrame {
         }
 
         String columns = JOptionPane.showInputDialog(this, "Enter Columns indexes separated by comma." +
-                "\nKeep Space between column and don't add border columns such as 0.\n\nExample: 3,5");
+                "\nKeep Space between columns." +
+                "\nIndex starts from 0 to "+(gs.getSize()-1)+".\n\nExample: 3,5");
         try {
             String[] cols = columns.split(",");
             for (int x = 0; x < cols.length; x++) {
@@ -964,7 +972,8 @@ public class Game extends JFrame {
         }
 
         String rows = JOptionPane.showInputDialog(this, "Enter Rows indexes separated by comma." +
-                "\nKeep Space between Rows and don't add border rows such as 0.\n\nExample: 3,5");
+                "\nKeep Space between rows." +
+                "\nIndex starts from 0 to "+(gs.getSize()-1)+".\n\nExample: 3,5");
         try {
             String[] ros = rows.split(",");
             for (int x = 0; x < ros.length; x++) {
