@@ -11,14 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1758c46-aa22-42f4-ba81-88503cc3a222" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GridStructure.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database.db" afterPath="$PROJECT_DIR$/Database.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BoardPanel.java" afterPath="$PROJECT_DIR$/src/BoardPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.java" afterPath="$PROJECT_DIR$/src/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Grid.java" afterPath="$PROJECT_DIR$/src/Grid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Settings.java" afterPath="$PROJECT_DIR$/src/Settings.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,8 +64,36 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="966" column="8" lean-forward="false" selection-start-line="966" selection-start-column="8" selection-end-line="966" selection-end-column="8" />
+            <state relative-caret-position="590">
+              <caret line="913" column="37" lean-forward="false" selection-start-line="913" selection-start-column="37" selection-end-line="913" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Database.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="333" column="0" lean-forward="false" selection-start-line="333" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
+              <folding>
+                <marker date="1494635558000" expanded="true" signature="2628:2680" ph="SELECT * FRO... User" />
+                <marker date="1494635558000" expanded="true" signature="3803:3889" ph="SELECT * FRO... User" />
+                <marker date="1494635558000" expanded="true" signature="5480:5607" ph="INSERT INTO User... " />
+                <marker date="1494635558000" expanded="true" signature="6379:6415" ph="SELECT * FRO... User" />
+                <marker date="1494635558000" expanded="true" signature="8625:8693" ph="SELECT missi... User" />
+                <marker date="1494635558000" expanded="true" signature="10846:10936" ph="UPDATE User " />
+                <marker date="1494635558000" expanded="true" signature="13715:13800" ph="UPDATE User " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="235" column="0" lean-forward="false" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -961,11 +984,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494646629330</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="dynamic grid and saved to user's settings">
+      <created>1494653889329</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1494653889330</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="246396000" />
+    <option name="totallyTimeSpent" value="246556000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1095,14 +1125,15 @@
     <MESSAGE value="documentation" />
     <MESSAGE value="completed documentation" />
     <MESSAGE value="dynamic grid" />
-    <option name="LAST_COMMIT_MESSAGE" value="dynamic grid" />
+    <MESSAGE value="dynamic grid and saved to user's settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="dynamic grid and saved to user's settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Game.java</url>
-          <line>150</line>
+          <line>151</line>
           <properties />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
@@ -1722,8 +1753,8 @@
         <state relative-caret-position="201">
           <caret line="2420" column="20" lean-forward="false" selection-start-line="2420" selection-start-column="20" selection-end-line="2420" selection-end-column="20" />
           <folding>
-            <element signature="e#94598#94599#0" expanded="true" />
-            <element signature="e#94636#94637#0" expanded="true" />
+            <element signature="e#94598#94599#0" expanded="false" />
+            <element signature="e#94636#94637#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1740,22 +1771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="60" column="25" lean-forward="false" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="233" column="20" lean-forward="false" selection-start-line="233" selection-start-column="20" selection-end-line="233" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="329" column="18" lean-forward="false" selection-start-line="329" selection-start-column="18" selection-end-line="329" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1795,10 +1810,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="333" column="0" lean-forward="false" selection-start-line="333" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
+          <folding>
+            <marker date="1494635558000" expanded="true" signature="2628:2680" ph="SELECT * FRO... User" />
+            <marker date="1494635558000" expanded="true" signature="3803:3889" ph="SELECT * FRO... User" />
+            <marker date="1494635558000" expanded="true" signature="5480:5607" ph="INSERT INTO User... " />
+            <marker date="1494635558000" expanded="true" signature="6379:6415" ph="SELECT * FRO... User" />
+            <marker date="1494635558000" expanded="true" signature="8625:8693" ph="SELECT missi... User" />
+            <marker date="1494635558000" expanded="true" signature="10846:10936" ph="UPDATE User " />
+            <marker date="1494635558000" expanded="true" signature="13715:13800" ph="UPDATE User " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="235" column="0" lean-forward="false" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="966" column="8" lean-forward="false" selection-start-line="966" selection-start-column="8" selection-end-line="966" selection-end-column="8" />
+        <state relative-caret-position="590">
+          <caret line="913" column="37" lean-forward="false" selection-start-line="913" selection-start-column="37" selection-end-line="913" selection-end-column="37" />
           <folding />
         </state>
       </provider>

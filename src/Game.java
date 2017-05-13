@@ -2,6 +2,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -874,7 +875,12 @@ public class Game extends JFrame {
         restart = false;
         load = false;
         user = u;
-        settings = user.loadSettings();
+
+        try {
+            settings = user.loadSettings();
+        } catch (Exception e) {
+            settings =  new Settings();
+        }
         gridStructure = settings.gridStructure;
         grid = new Grid(gridStructure);
         trap = new Trap(grid);
@@ -899,9 +905,13 @@ public class Game extends JFrame {
         restart = false;
         load = false;
         grid = null;
-        settings = user.loadSettings();
+        try {
+            settings = user.loadSettings();
+        } catch (Exception e) {
+            settings =  new Settings();
+        }
         gridStructure = settings.gridStructure;
-        grid = new Grid(settings.gridStructure);
+        grid = new Grid(gridStructure);
         trap = null;
         trap = new Trap(grid);
         player = null;
