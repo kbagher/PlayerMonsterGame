@@ -93,6 +93,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             game.pauseAnResumeGame();
         else if (((JButton) e.getSource()).getText().compareTo("Save/Load") == 0)
             game.saveOrLoad();
+        else if (((JButton) e.getSource()).getText().compareTo("Grid Structure") == 0)
+            game.changeGrid();
     }
 
     /**
@@ -128,7 +130,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
         for (int i = 0; i < cells.size(); i++) {
             cell = cells.get(i);
-            if (cell.col % 5 == 0 && cell.row % 5 == 0)
+            if (grid.containsColumn(cell.col) && grid.containsRow(cell.row))
                 gr.setColor(Color.cyan);
             else
                 gr.setColor(Color.white);

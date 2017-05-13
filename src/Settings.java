@@ -54,7 +54,11 @@ public class Settings implements Serializable {
      */
     public ArrayList mSkills;
 
-    public int gridDimension;
+
+    /**
+     * Game grid structure
+     */
+    public GridStructure gridStructure;
 
     /**
      * Instantiates a new Settings.
@@ -72,7 +76,7 @@ public class Settings implements Serializable {
         trapEffectDuration = 5;
         initialEnergy = 40;
         stepEnergy = 2;
-        gridDimension = 11;
+        gridStructure = new GridStructure();
         pSkills = new ArrayList<>();
         mSkills = new ArrayList<>();
     }

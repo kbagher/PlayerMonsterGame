@@ -101,6 +101,10 @@ public class Game extends JFrame {
      */
     private Player player;
     /**
+     * Game grid structure
+     */
+    private GridStructure gridStructure;
+    /**
      * The current logged in user
      */
     private User user;
@@ -659,15 +663,34 @@ public class Game extends JFrame {
         gbSettings.setConstraints(cbMonsterHide, gbcSettings);
         pnSettings.add(cbMonsterHide);
 
+
         /*
-      Save settings button
-     */
+         * Grid Structure
+         */
+        JButton btGridStructure = new JButton("Grid Structure");
+        btGridStructure.setFocusable(false);
+        btGridStructure.addActionListener(bp);
+        gbcSettings.gridx = 4;
+        gbcSettings.gridy = 3;
+        gbcSettings.gridwidth = 2;
+        gbcSettings.gridheight = 1;
+        gbcSettings.fill = GridBagConstraints.BOTH;
+        gbcSettings.weightx = 1;
+        gbcSettings.weighty = 0;
+        gbcSettings.anchor = GridBagConstraints.NORTH;
+        gbSettings.setConstraints(btGridStructure, gbcSettings);
+        pnSettings.add(btGridStructure);
+        tbpControl.addTab("Settings", pnSettings);
+
+        /*
+         * Save settings button
+         */
         JButton btSaveSettings = new JButton("Save Settings");
         btSaveSettings.setFocusable(false);
         btSaveSettings.addActionListener(bp);
-        gbcSettings.gridx = 4;
+        gbcSettings.gridx = 6;
         gbcSettings.gridy = 3;
-        gbcSettings.gridwidth = 4;
+        gbcSettings.gridwidth = 2;
         gbcSettings.gridheight = 1;
         gbcSettings.fill = GridBagConstraints.BOTH;
         gbcSettings.weightx = 1;
@@ -770,6 +793,7 @@ public class Game extends JFrame {
         Game.settings.trapEnergy = (Integer.parseInt(tfTrapEnergy.getText()));
         Game.settings.trapEffectDuration = (Integer.parseInt(tfTrapEffectDuration.getText()));
         Game.settings.trapDuration = (Integer.parseInt(tfTrapLifetime.getText()));
+        Game.settings.gridStructure = gridStructure;
 
         /*
          * Read Player and monster skills from GUI
@@ -850,11 +874,12 @@ public class Game extends JFrame {
         restart = false;
         load = false;
         user = u;
-        settings = new Settings();
-        grid = new Grid();
+        settings = user.loadSettings();
+        gridStructure = settings.gridStructure;
+        grid = new Grid(gridStructure);
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
-        monster = new Monster(grid, player, trap, 0, 10);
+        monster = new Monster(grid, player, trap, 0, 6);
         bp = new BoardPanel(grid, player, monster, trap, this);
 
         // Create a separate panel and add all the buttons
@@ -874,13 +899,15 @@ public class Game extends JFrame {
         restart = false;
         load = false;
         grid = null;
-        grid = new Grid();
+        settings = user.loadSettings();
+        gridStructure = settings.gridStructure;
+        grid = new Grid(settings.gridStructure);
         trap = null;
         trap = new Trap(grid);
         player = null;
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
         monster = null;
-        monster = new Monster(grid, player, trap, 0, 10);
+        monster = new Monster(grid, player, trap, 0, 6);
         bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");
         btPause.setText("Pause");
@@ -899,6 +926,49 @@ public class Game extends JFrame {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void changeGrid() {
+
+        pause = true;
+
+        GridStructure gs = null;
+        String size = JOptionPane.showInputDialog(this, "Enter grid size bigger than 3.\n\nExample: 8");
+        try {
+            gs = new GridStructure(Integer.parseInt(size));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String columns = JOptionPane.showInputDialog(this, "Enter Columns indexes separated by comma." +
+                "\nKeep Space between column and don't add border columns such as 0.\n\nExample: 3,5");
+        try {
+            String[] cols = columns.split(",");
+            for (int x = 0; x < cols.length; x++) {
+                gs.addColumn(Integer.parseInt(cols[x]));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String rows = JOptionPane.showInputDialog(this, "Enter Rows indexes separated by comma." +
+                "\nKeep Space between Rows and don't add border rows such as 0.\n\nExample: 3,5");
+        try {
+            String[] ros = rows.split(",");
+            for (int x = 0; x < ros.length; x++) {
+                gs.addRow(Integer.parseInt(ros[x]));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        gridStructure=gs;
+        saveSettings();
+        player.setReady(true);
+        restart=true;
+        pause=false;
     }
 
     public void saveOrLoad() {
@@ -1020,8 +1090,10 @@ public class Game extends JFrame {
             delay(100);
 
         // loading a game
-        if (load)
+        if (load) {
+            audio.stopAudio();
             return "load";
+        }
 
         // reset game variables
         prepareToStartGame();
@@ -1062,7 +1134,7 @@ public class Game extends JFrame {
          * update game status, player loss and wins
          * if the player is not loading a saved game
          */
-        if (!load)
+        if (!load || !restart)
             updateStatusMessage();
 
         delay(2500);
