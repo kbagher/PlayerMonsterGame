@@ -1,3 +1,6 @@
+import sun.audio.AudioPlayer;
+
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -33,6 +36,12 @@ public class Nougat implements Serializable {
     public int consume() {
         if (!consumed) {
             consumed = true;
+            try {
+                GameAudioPlayer.playCoinAudio();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             return Game.settings.nougatEnergy;
         }
         return 0;
