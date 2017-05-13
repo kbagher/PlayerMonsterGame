@@ -249,7 +249,14 @@ public class Grid implements Serializable {
      * @param trap       trap reference
      */
     private void computePathsFromNode(SpriteNode sourceNode, Trap trap) {
-        // Always set starting node distance to be 0
+        /*
+         * clears the nodes values before computing the path
+         */
+        clearGraph();
+
+        /*
+         * Always set starting node distance to be 0
+         */
         sourceNode.distance = 0.;
 
         /*
@@ -277,8 +284,8 @@ public class Grid implements Serializable {
                  * calculate trap weight if it's set
                  */
                 double trapWeight = 0;
-                if (trap.isSet()){ // traps is set
-                    if(edge.getTargetNode().getCell().equals(trap.getCell())) // trap is in same node
+                if (trap.isSet()) { // traps is set
+                    if (edge.getTargetNode().getCell().equals(trap.getCell())) // trap is in same node
                         trapWeight = trap.getLifetime() + trap.getEffectTime();
                 }
                 /*
@@ -317,15 +324,16 @@ public class Grid implements Serializable {
 
     /**
      * Get the next movement cell in the shortest path.
-     *
+     * <p>
      * This method will get the shortest calculated path
      * to the player's node and return the next cell that
      * which the monster needs to move to.
      *
      * @param toNode player's node
+     *
      * @return monster's next movement cell
      */
-    private Cell getPathToNode(SpriteNode toNode) {
+    private Cell getPathToNode(SpriteNode toNode) throws Exception {
         /*
          * Travel from the target node to the starting node (monster node)
          *
@@ -333,56 +341,77 @@ public class Grid implements Serializable {
          * that the current cell the next step for the monster
          */
         for (SpriteNode spriteNode = toNode; spriteNode != null; spriteNode = spriteNode.previous) {
-            if (spriteNode.previous.previous==null)
+            if (spriteNode.previous.previous == null)
                 return spriteNode.getCell();
         }
-        return null;
+        throw new Exception("cannot find next step cell");
     }
 
 
     /**
-     * Gets move direction.
-     *
-     * @param from the from
-     * @param to   the to
-     * @param trap the trap
-     *
-     * @return the move direction
-     */
-/* returns the best direction from source cell to the target cell.
+     * Returns the best direction from source cell to the target cell.
      * Assumed cells passed are valid cells in the grid.
-     * you need to verify this method 
+     *
+     * @param from from cell
+     * @param to   to cell
+     * @param trap trap
+     *
+     * @return the next step move direction
      */
     public char getMoveDirection(Cell from, Cell to, Trap trap) {
         /*
-        compute path from the monster to all node
-         taking into consideration available traps
+         * compute path from the monster to all node
+         * taking into consideration available traps
          */
-        clearGraph();
         computePathsFromNode(spriteNodes[from.row][from.col], trap);
-        Cell newTo = getPathToNode(spriteNodes[to.row][to.col]);
 
+        /*
+         * Get the next step cell based on the computed path
+         */
+        Cell newTo;
+        try {
+            newTo = getPathToNode(spriteNodes[to.row][to.col]);
+        } catch (Exception e) {
+            e.printStackTrace();
+            newTo = to;
+        }
+
+        /*
+         * Determine the moving direction to the new destination cell
+         */
         if (from.row == newTo.row) {
             if (from.col < newTo.col)
-                return 'R';
+                return 'R'; // right
             else if (from.col > newTo.col)
-                return 'L';
+                return 'L'; // left
         } else if (from.col == newTo.col) {
             if (from.row < newTo.row)
-                return 'D';
+                return 'D'; // down
             else if (from.row > newTo.row)
-                return 'U';
+                return 'U'; // up
         }
-        return ' ';
+        return ' '; // unknown moving direction
     }
 
-    /* A helper method to instance the absolute value */
+    /**
+     * A helper method to instance the absolute value
+     *
+     * @param x value
+     * @return absolute value
+     */
     private int abs(int x) {
         if (x >= 0) return x;
         else return -x;
     }
 
-    /* A helper method to instance the minimum of three values */
+    /**
+     * A helper method to instance the minimum of three values
+     *
+     * @param x first number
+     * @param y second number
+     * @param z third number
+     * @return maximum of the three numbers
+     */
     private int min(int x, int y, int z) {
         if (x <= y && x <= z) return x;
         if (y <= z && y <= x) return y;
@@ -390,26 +419,28 @@ public class Grid implements Serializable {
     }
 
     /**
-     * Distance int.
-     *
-     * @param from the from
-     * @param to   the to
-     *
-     * @return the int
-     */
-/* A method to instance the shortest distance from one cell to another
+     * A method to instance the shortest distance from one cell to another
      * Assumed cells are valid cells in the grid
+     *
+     * @param from from cell
+     * @param to   to cell
+     *
+     * @return distance between the two cells
      */
     public int distance(Cell from, Cell to) {
         int d = 0;
-        // compute minimum horizontal distance:
+        /*
+         * compute minimum horizontal distance:
+         */
         if (from.row == to.row) d += abs(to.col - from.col);
         else
             d += min(from.col + to.col
                     , abs(from.col - 5) + abs(to.col - 5)
                     , abs(from.col - 10) + abs(to.col - 10));
 
-        // compute minimum vertical distance as follows:
+        /*
+         * compute minimum vertical distance as follows:
+         */
         if (from.col == to.col) d += abs(to.row - from.row);
         else d += min(from.row + to.row,
                 abs(from.row - 5) + abs(to.row - 5),
@@ -418,13 +449,12 @@ public class Grid implements Serializable {
     }
 
     /**
-     * Main.
+     * Test harness for Grid
      *
-     * @param args the args
+     * @param args main args
      *
      * @throws Exception the exception
      */
-/* Test harness for Grid*/
     public static void main(String args[]) throws Exception {
         Grid grid = new Grid();
         Cell c1 = grid.getCell(0, 0);

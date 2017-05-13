@@ -52,10 +52,8 @@ public abstract class Moveable extends Sprite implements MoveableSkills, Seriali
          * This will be used to check if the passed skill type is compatible
          * with the movable object or not
          */
-        if(skill.getClass().getTypeName().toLowerCase().contains(
-                this.getClass().getTypeName().toLowerCase()))
-            return true;
-        return false;
+        return skill.getClass().getTypeName().toLowerCase().contains(
+                this.getClass().getTypeName().toLowerCase());
     }
 
     @Override

@@ -214,8 +214,8 @@ public class Game extends JFrame {
         pnDashboard.add(btRight);
 
         /*
-      Move player down button
-     */
+        Move player down button
+        */
         JButton btDown = new JButton("Down");
         btDown.setFocusable(false);
         btDown.addActionListener(bp);
@@ -233,7 +233,7 @@ public class Game extends JFrame {
         /*
       Save game button
      */
-        JButton btSave = new JButton("Save");
+        JButton btSave = new JButton("Save/Load");
         btSave.setFocusable(false);
         btSave.addActionListener(bp);
         gbcDashboard.gridx = 0;
@@ -901,13 +901,34 @@ public class Game extends JFrame {
         }
     }
 
+    public void saveOrLoad() {
+        // pause the game
+        if (!pause)
+            pause = true;
+
+        /*
+         * display save or load message
+         */
+        Object[] options = new String[]{"Save Game", "Load Game", "Cancel"};
+        int option = JOptionPane.showOptionDialog(null, "Please select an option", "Save & Load", JOptionPane.OK_OPTION,
+                JOptionPane.INFORMATION_MESSAGE, null, options, null);
+        switch (option) {
+            case 0: // save
+                saveGame();
+                break;
+            case 1: // load
+                loadGame();
+                break;
+            default:
+                break;
+        }
+
+    }
+
     /**
      * Save the current game.
      */
     public void saveGame() {
-        // pause the game
-        if (!pause)
-            pause = true;
         try {
             user.saveGame(this, settings);
             JOptionPane.showMessageDialog(null, "Game Saved", null, JOptionPane.INFORMATION_MESSAGE);
@@ -997,6 +1018,10 @@ public class Game extends JFrame {
 
         while (!player.isReady())
             delay(100);
+
+        // loading a game
+        if (load)
+            return "load";
 
         // reset game variables
         prepareToStartGame();
