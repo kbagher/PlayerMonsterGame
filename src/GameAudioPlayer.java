@@ -16,7 +16,7 @@ public class GameAudioPlayer implements Serializable {
      * @param fileName the file name
      * @throws IOException the io exception
      */
-    public void playAudio(String fileName) throws IOException {
+    public synchronized void playAudio(String fileName) throws IOException {
         InputStream in;
         in = new FileInputStream("./assets/" + fileName);
         audio = new AudioStream(in);

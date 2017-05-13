@@ -167,13 +167,20 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
 
         cell = player.getCell();
-        ImageIcon icon;
+        ImageIcon icon = null;
 
         /*
          * Draw the Player
          */
         try {
-            icon = new ImageIcon("assets/player.png");
+            if (player.currentDirection=='R')
+                icon = new ImageIcon("assets/player_r.png");
+            else if (player.currentDirection=='L')
+                icon = new ImageIcon("assets/player_l.png");
+            else if (player.currentDirection=='U' || player.currentDirection=='D')
+                icon = new ImageIcon("assets/player.png");
+            else if (player.currentDirection==' ')
+                icon = new ImageIcon("assets/player_still.png");
             icon.paintIcon(this, gr, xCor(cell.col) + CELLWIDTH / 5, yCor(cell.row) + CELLWIDTH / 15);
         } catch (Exception e) {
             gr.setColor(Color.red);
