@@ -63,6 +63,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
                   Recalculate the steps to reflect the new max cell which wil be reached
                  */
                 steps = grid.distance(currentCell, tempCell);
+                System.out.println("Distance "+steps);
                 /*
                   Deduct energy from the user after updating the possible steps
                  */

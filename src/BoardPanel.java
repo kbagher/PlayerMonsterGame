@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * This panel represents the game board (grid)
@@ -122,11 +123,11 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
      */
     protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        Cell cells[] = grid.getAllCells();
+        ArrayList<Cell> cells = grid.getAllCells();
         Cell cell;
 
-        for (int i = 0; i < cells.length; i++) {
-            cell = cells[i];
+        for (int i = 0; i < cells.size(); i++) {
+            cell = cells.get(i);
             if (cell.col % 5 == 0 && cell.row % 5 == 0)
                 gr.setColor(Color.cyan);
             else

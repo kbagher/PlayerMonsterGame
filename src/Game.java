@@ -854,7 +854,7 @@ public class Game extends JFrame {
         grid = new Grid();
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
-        monster = new Monster(grid, player, trap, 5, 5);
+        monster = new Monster(grid, player, trap, 0, 10);
         bp = new BoardPanel(grid, player, monster, trap, this);
 
         // Create a separate panel and add all the buttons
@@ -880,7 +880,7 @@ public class Game extends JFrame {
         player = null;
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
         monster = null;
-        monster = new Monster(grid, player, trap, 5, 5);
+        monster = new Monster(grid, player, trap, 0, 10);
         bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");
         btPause.setText("Pause");

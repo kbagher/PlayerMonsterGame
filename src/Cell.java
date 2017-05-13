@@ -32,4 +32,9 @@ public class Cell implements Serializable{
 	  row = r;
 	  col = c;
    }
+
+    @Override
+    public String toString() {
+        return ""+ row+"."+col;
+    }
 }

@@ -4,6 +4,8 @@
  * 0 to 10. Furthermore, either row or column must be 0, 5 or 10.    
 */
 
+import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -15,18 +17,57 @@ import java.util.*;
  */
 public class Grid implements Serializable {
 
+    int size = 11;
+    ArrayList<Integer> columns = new ArrayList<>();
+    ArrayList<Integer> rows = new ArrayList<>();
+
     /**
      * All grid cells
      */
-    private Cell[] cells = new Cell[57];
+    private ArrayList<Cell> cells = new ArrayList<>();
     /**
      * The Cells 2D representation.
      */
-    private Cell[][] cells2D = new Cell[11][11];
+    private Cell[][] cells2D = new Cell[size][size];
     /**
      * Graph sprite nodes 2D representation
      */
-    private SpriteNode[][] spriteNodes = new SpriteNode[11][11];
+    private SpriteNode[][] spriteNodes = new SpriteNode[size][size];
+
+    /**
+     * Check if the grid contains the exact passed cell
+     * @param r cell row
+     * @param c cell column
+     * @return if the cell exists in the grid
+     */
+    public boolean containsCell(int r, int c) {
+        if (rows.contains(r) || columns.contains(c))
+            return true;
+        return false;
+    }
+
+    /**
+     * Check if the grid contains the passed column
+     * @param c column
+     * @return true if the grid contains the column
+     */
+    public boolean containsColumn(int c) {
+        if (columns.contains(c))
+            return true;
+        return false;
+    }
+
+    /**
+     * Check if the grid contains the passed column
+     * @param r row
+     * @return true if the grid contains the column
+     */
+    public boolean containsRow(int r) {
+        if (rows.contains(r))
+            return true;
+        return false;
+    }
+
 
     /**
      * Instantiates a new Grid.
@@ -35,16 +76,25 @@ public class Grid implements Serializable {
      */
     public Grid() throws Exception {
 
+        columns.add(0);
+        columns.add(size - 1);
+        columns.add(4);
+        columns.add(6);
+        rows.add(0);
+        rows.add(2);
+        rows.add(8);
+        rows.add(size - 1);
+
         /*
          * Building the grid and the cells'
          * representation on the board
          */
         int k = 0;
-        for (int row = 0; row < 11; row++) {
-            for (int column = 0; column < 11; column++) {
-                if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)) {
+        for (int row = 0; row < size; row++) {
+            for (int column = 0; column < size; column++) {
+                if (containsCell(row, column)) {
                     cells2D[row][column] = new Cell(row, column);
-                    cells[k++] = cells2D[row][column];
+                    cells.add(cells2D[row][column]);
                     // track cell's graph node position representation on the 2D grid
                     spriteNodes[row][column] = new SpriteNode(this, row, column);
                 }
@@ -63,20 +113,20 @@ public class Grid implements Serializable {
      * 1.0 Down direction
      */
     private void buildGraph() {
-        for (int row = 0; row < 11; row++)
-            for (int column = 0; column < 11; column++) {
-                if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)) {
+        for (int row = 0; row < size; row++)
+            for (int column = 0; column < size; column++) {
+                if (containsCell(row, column)) {
                     SpriteNode node = spriteNodes[row][column];
-                    if (column % 5 == 0 && row > 0) {     // up node
+                    if (containsColumn(column) && row > 0) {     // up node
                         node.addEdge(new Edge(spriteNodes[row - 1][column], 1));
                     }
-                    if (column % 5 == 0 && row < 11 - 1) { // down node
+                    if (containsColumn(column) && row < size - 1) { // down node
                         node.addEdge(new Edge(spriteNodes[row + 1][column], 1));
                     }
-                    if (row % 5 == 0 && column > 0) {     // left node
+                    if (containsRow(row) && column > 0) {     // left node
                         node.addEdge(new Edge(spriteNodes[row][column - 1], 1));
                     }
-                    if (row % 5 == 0 && (column < 11 - 1)) { // right node
+                    if (containsRow(row) && (column < size - 1)) { // right node
                         node.addEdge(new Edge(spriteNodes[row][column + 1], 1));
                     }
                 }
@@ -96,8 +146,7 @@ public class Grid implements Serializable {
      * @throws Exception the exception
      */
     public Cell getCell(int row, int col) throws Exception {
-        if ((row % 5 != 0 && col % 5 != 0) ||
-                row < 0 || row > 10 || col < 0 || col > 10)
+        if (!containsCell(row, col))
             throw new Exception("Invalid Coordinates row = " + row + " column " + col);
         return cells2D[row][col];
     }
@@ -115,8 +164,7 @@ public class Grid implements Serializable {
      * @throws Exception the exception
      */
     public SpriteNode getNode(int row, int col) throws Exception {
-        if ((row % 5 != 0 && col % 5 != 0) ||
-                row < 0 || row > 10 || col < 0 || col > 10)
+        if (!containsCell(row, col))
             throw new Exception("Invalid Coordinates row = " + row + " column " + col);
         return spriteNodes[row][col];
     }
@@ -173,22 +221,44 @@ public class Grid implements Serializable {
         if (direction == ' ') return cell; // no direction
 
         if (direction == 'U') { // up
-            if (cell.col % 5 == 0 && cell.row > 0)
+            if (containsColumn(cell.col) && cell.row > 0) {
                 return cells2D[cell.row - 1][cell.col];
+            }
             return cell;
         } else if (direction == 'D') { // down
-            if (cell.col % 5 == 0 && cell.row < 10)
+            if (containsColumn(cell.col) && cell.row < size - 1) {
                 return cells2D[cell.row + 1][cell.col];
+            }
             return cell;
         } else if (direction == 'L') { // left
-            if (cell.row % 5 == 0 && cell.col > 0)
+            if (containsRow(cell.row) && cell.col > 0) {
                 return cells2D[cell.row][cell.col - 1];
+            }
             return cell;
         } else if (direction == 'R') { // right
-            if (cell.row % 5 == 0 && cell.col < 10)
+            if (containsRow(cell.row) && cell.col < size - 1) {
                 return cells2D[cell.row][cell.col + 1];
+            }
             return cell;
         }
+
+//        if (direction == 'U') { // up
+//            if (containsRow(cell.row -1) && containsColumn(cell.col))
+//                return cells2D[cell.row - 1][cell.col];
+//            return cell;
+//        } else if (direction == 'D') { // down
+//            if (containsRow(cell.row + 1) && containsColumn(cell.col))
+//                return cells2D[cell.row + 1][cell.col];
+//            return cell;
+//        } else if (direction == 'L') { // left
+//            if (containsRow(cell.row) && containsColumn(cell.col-1))
+//                return cells2D[cell.row][cell.col - 1];
+//            return cell;
+//        } else if (direction == 'R') { // right
+//            if (containsRow(cell.row ) && containsColumn(cell.col+1))
+//                return cells2D[cell.row][cell.col + 1];
+//            return cell;
+//        }
         return null; // unknown direction
     }
 
@@ -197,7 +267,7 @@ public class Grid implements Serializable {
      *
      * @return cells array
      */
-    public Cell[] getAllCells() {
+    public ArrayList<Cell> getAllCells() {
         return cells;
     }
 
@@ -223,9 +293,9 @@ public class Grid implements Serializable {
      * or player moved.
      */
     private void clearGraph() {
-        for (int row = 0; row < 11; row++)
-            for (int column = 0; column < 11; column++) {
-                if ((row % 5 == 0) || (column % 5 == 0 && row % 5 != 0)) {
+        for (int row = 0; row < size; row++)
+            for (int column = 0; column < size; column++) {
+                if (containsCell(row, column)) {
                     spriteNodes[row][column].previous = null;
                     spriteNodes[row][column].distance = Double.POSITIVE_INFINITY;
                 }
@@ -341,8 +411,11 @@ public class Grid implements Serializable {
          * that the current cell the next step for the monster
          */
         for (SpriteNode spriteNode = toNode; spriteNode != null; spriteNode = spriteNode.previous) {
-            if (spriteNode.previous.previous == null)
+            if (spriteNode.previous == null)
                 return spriteNode.getCell();
+            else if (spriteNode.previous.previous == null)
+                return spriteNode.getCell();
+
         }
         throw new Exception("cannot find next step cell");
     }
@@ -371,6 +444,7 @@ public class Grid implements Serializable {
         Cell newTo;
         try {
             newTo = getPathToNode(spriteNodes[to.row][to.col]);
+            System.out.println("TO: " + newTo.row + "." + newTo.col);
         } catch (Exception e) {
             e.printStackTrace();
             newTo = to;
@@ -397,6 +471,7 @@ public class Grid implements Serializable {
      * A helper method to instance the absolute value
      *
      * @param x value
+     *
      * @return absolute value
      */
     private int abs(int x) {
@@ -410,12 +485,36 @@ public class Grid implements Serializable {
      * @param x first number
      * @param y second number
      * @param z third number
+     *
      * @return maximum of the three numbers
      */
     private int min(int x, int y, int z) {
         if (x <= y && x <= z) return x;
         if (y <= z && y <= x) return y;
         return z;
+    }
+
+
+    private int minColumnDistance(Cell from, Cell to) {
+        int dist = from.row + to.row;
+
+        for (int x = 0; x < columns.size(); x++) {
+            int tmp = abs(from.col - columns.get(x)) + abs(to.col - columns.get(x));
+            if (tmp < dist)
+                dist = tmp;
+        }
+        return dist;
+    }
+
+    private int minRowDistance(Cell from, Cell to) {
+        int dist = from.row + to.row;
+
+        for (int x = 0; x < rows.size(); x++) {
+            int tmp = abs(from.row - rows.get(x)) + abs(to.row - rows.get(x));
+            if (tmp < dist)
+                dist = tmp;
+        }
+        return dist;
     }
 
     /**
@@ -432,19 +531,20 @@ public class Grid implements Serializable {
         /*
          * compute minimum horizontal distance:
          */
-        if (from.row == to.row) d += abs(to.col - from.col);
-        else
-            d += min(from.col + to.col
-                    , abs(from.col - 5) + abs(to.col - 5)
-                    , abs(from.col - 10) + abs(to.col - 10));
+        if (from.row == to.row) {
+            d += abs(to.col - from.col);
+        } else {
+            d += minColumnDistance(from, to);
+        }
 
         /*
          * compute minimum vertical distance as follows:
          */
-        if (from.col == to.col) d += abs(to.row - from.row);
-        else d += min(from.row + to.row,
-                abs(from.row - 5) + abs(to.row - 5),
-                abs(from.row - 10) + abs(to.row - 10));
+        if (from.col == to.col) {
+            d += abs(to.row - from.row);
+        } else {
+            d += minRowDistance(from, to);
+        }
         return d;
     }
 
@@ -457,17 +557,15 @@ public class Grid implements Serializable {
      */
     public static void main(String args[]) throws Exception {
         Grid grid = new Grid();
-        Cell c1 = grid.getCell(0, 0);
-        Cell c2 = grid.getCell(10, 10);
+        Cell c1 = grid.getCell(8, 0);
+        Cell c2 = grid.getCell(8, 1);
         Cell c3 = grid.getCell(0, 2);
         Cell c4 = grid.getCell(2, 0);
         Cell c5 = grid.getCell(8, 5);
 
-        System.out.println("Distance from (0,0) to (10,10) is "
+        System.out.println("Distance from (" + c1 + ") to (" + c2 + ") is "
                 + grid.distance(c1, c2));
-        System.out.println("Distance from (0,0) to (8,5) is "
-                + grid.distance(c1, c5));
-
+//
         System.out.println("From (0,0) to (0,2) best direction is "
                 + grid.getMoveDirection(c1, c3, new Trap(null)));
         System.out.println("From (0,0) to (2,0) best direction is "
