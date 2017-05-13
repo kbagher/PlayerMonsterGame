@@ -10,12 +10,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1758c46-aa22-42f4-ba81-88503cc3a222" name="Default" comment="com">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database.db" afterPath="$PROJECT_DIR$/Database.db" />
+    <list default="true" id="a1758c46-aa22-42f4-ba81-88503cc3a222" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BoardPanel.java" afterPath="$PROJECT_DIR$/src/BoardPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.java" afterPath="$PROJECT_DIR$/src/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Grid.java" afterPath="$PROJECT_DIR$/src/Grid.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Moveable.java" afterPath="$PROJECT_DIR$/src/Moveable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -54,8 +50,8 @@
       <file leaf-file-name="Trap.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Trap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -897,7 +893,7 @@
       <workItem from="1494549921799" duration="21370000" />
       <workItem from="1494580979466" duration="1686000" />
       <workItem from="1494584223650" duration="2252000" />
-      <workItem from="1494590806862" duration="8304000" />
+      <workItem from="1494590806862" duration="8504000" />
     </task>
     <task id="LOCAL-00001" summary="added login screen">
       <created>1494137974843</created>
@@ -990,11 +986,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494629754333</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="completed documentation">
+      <created>1494634269200</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1494634269200</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231651000" />
+    <option name="totallyTimeSpent" value="231851000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1095,7 +1098,8 @@
     <MESSAGE value="- database documentation completed&#10;- database exception handling&#10;- main class documentation&#10;- main class exception handling&#10;- user registration and login using Name,Address,Username and password" />
     <MESSAGE value="added Moveable interface and implemented it in the Moveable class" />
     <MESSAGE value="documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="documentation" />
+    <MESSAGE value="completed documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="completed documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1796,8 +1800,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Trap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
           <folding />
         </state>
       </provider>
