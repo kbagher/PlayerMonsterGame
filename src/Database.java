@@ -1,3 +1,5 @@
+import com.sun.tools.javac.util.StringUtils;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -292,7 +294,7 @@ public class Database {
         stmt.close();
         conn.close();
 
-        if (serData.isEmpty())
+        if (serData == null || serData.isEmpty())
             throw new DataLoadingException(""); // no data available
 
         return serData;

@@ -245,17 +245,12 @@ public class User implements Serializable {
      *
      * @return the {Game} object
      */
-    public Game loadGame() {
-        try {
-            Database db = new Database();
-            byte[] gameData = Base64.getDecoder().decode(db.loadGame(username));
-            ObjectInputStream oStream = new ObjectInputStream(new ByteArrayInputStream(gameData));
-            Game g = (Game) oStream.readObject();
-            oStream.close();
-            return g;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+    public Game loadGame() throws IOException, ClassNotFoundException, UserNotFoundException, SQLException, DataLoadingException {
+        Database db = new Database();
+        byte[] gameData = Base64.getDecoder().decode(db.loadGame(username));
+        ObjectInputStream oStream = new ObjectInputStream(new ByteArrayInputStream(gameData));
+        Game g = (Game) oStream.readObject();
+        oStream.close();
+        return g;
     }
 }

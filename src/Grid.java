@@ -82,9 +82,9 @@ public class Grid implements Serializable {
      */
     public Grid(GridStructure gs) throws Exception {
 
-        this.gs =gs;
+        this.gs = gs;
         cells2D = new Cell[gs.getSize()][gs.getSize()];
-         spriteNodes = new SpriteNode[gs.getSize()][gs.getSize()];
+        spriteNodes = new SpriteNode[gs.getSize()][gs.getSize()];
         /*
          * Building the grid and the cells'
          * representation on the board
@@ -168,7 +168,6 @@ public class Grid implements Serializable {
             throw new Exception("Invalid Coordinates row = " + row + " column " + col);
         return spriteNodes[row][col];
     }
-
 
     /**
      * Returns the cell in the specified direction of the given cell

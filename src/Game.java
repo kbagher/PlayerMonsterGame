@@ -238,7 +238,7 @@ public class Game extends JFrame {
         /*
       Save game button
      */
-        JButton btSave = new JButton("Save/Load");
+        JButton btSave = new JButton("Save");
         btSave.setFocusable(false);
         btSave.addActionListener(bp);
         gbcDashboard.gridx = 0;
@@ -879,13 +879,13 @@ public class Game extends JFrame {
         try {
             settings = user.loadSettings();
         } catch (Exception e) {
-            settings =  new Settings();
+            settings = new Settings();
         }
         gridStructure = settings.gridStructure;
         grid = new Grid(gridStructure);
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
-        monster = new Monster(grid, player, trap, 0, gridStructure.getSize()-1);
+        monster = new Monster(grid, player, trap, 0, gridStructure.getSize() - 1);
         bp = new BoardPanel(grid, player, monster, trap, this);
 
         // Create a separate panel and add all the buttons
@@ -908,7 +908,7 @@ public class Game extends JFrame {
         try {
             settings = user.loadSettings();
         } catch (Exception e) {
-            settings =  new Settings();
+            settings = new Settings();
         }
         gridStructure = settings.gridStructure;
         grid = new Grid(gridStructure);
@@ -917,7 +917,7 @@ public class Game extends JFrame {
         player = null;
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
         monster = null;
-        monster = new Monster(grid, player, trap, 0, gridStructure.getSize()-1);
+        monster = new Monster(grid, player, trap, 0, gridStructure.getSize() - 1);
         bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");
         btPause.setText("Pause");
@@ -940,17 +940,19 @@ public class Game extends JFrame {
 
     /**
      * Change grid configuration.
-     *
+     * <p>
      * This method will help the user in building a Grid structure
      * object, save it in his settings and restarting the game.
-     *
      */
     public void changeGrid() {
 
-        pause = true;
+        pauseGame(true);
 
         GridStructure gs = null;
         String size = JOptionPane.showInputDialog(this, "Enter grid size bigger than 3.\n\nExample: 8");
+
+        if (size==null|| size.isEmpty())  return;
+
         try {
             gs = new GridStructure(Integer.parseInt(size));
         } catch (Exception e) {
@@ -960,7 +962,10 @@ public class Game extends JFrame {
 
         String columns = JOptionPane.showInputDialog(this, "Enter Columns indexes separated by comma." +
                 "\nKeep Space between columns." +
-                "\nIndex starts from 0 to "+(gs.getSize()-1)+".\n\nExample: 3,5");
+                "\nIndex starts from 0 to " + (gs.getSize() - 1) + ".\n\nExample: 3,5");
+
+        if (columns==null|| columns.isEmpty())  return;
+
         try {
             String[] cols = columns.split(",");
             for (int x = 0; x < cols.length; x++) {
@@ -973,7 +978,10 @@ public class Game extends JFrame {
 
         String rows = JOptionPane.showInputDialog(this, "Enter Rows indexes separated by comma." +
                 "\nKeep Space between rows." +
-                "\nIndex starts from 0 to "+(gs.getSize()-1)+".\n\nExample: 3,5");
+                "\nIndex starts from 0 to " + (gs.getSize() - 1) + ".\n\nExample: 3,5");
+
+        if (rows==null|| rows.isEmpty())  return;
+
         try {
             String[] ros = rows.split(",");
             for (int x = 0; x < ros.length; x++) {
@@ -983,17 +991,16 @@ public class Game extends JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        gridStructure=gs;
+        gridStructure = gs;
         saveSettings();
         player.setReady(true);
-        restart=true;
-        pause=false;
+        restart = true;
+        pauseGame(false);
     }
 
     public void saveOrLoad() {
         // pause the game
-        if (!pause)
-            pause = true;
+        pauseGame(true);
 
         /*
          * display save or load message
@@ -1018,12 +1025,22 @@ public class Game extends JFrame {
      * Save the current game.
      */
     public void saveGame() {
+        pauseGame(true);
         try {
             user.saveGame(this, settings);
-            JOptionPane.showMessageDialog(null, "Game Saved", null, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Game Saved\n" +
+                    "You can load the game the next time you login", null, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error while trying to save the game.\n\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void pauseGame(boolean pa) {
+        pause = pa;
+        if (pa)
+            btPause.setText("Resume");
+        else
+            btPause.setText("Pause");
     }
 
     /**
@@ -1038,6 +1055,7 @@ public class Game extends JFrame {
             btPause.setText("Pause");
         }
     }
+
 
     /**
      * Restart game.

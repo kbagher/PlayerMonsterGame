@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Cell class represents a grid cell
  */
-public class Cell implements Serializable{
+public class Cell implements Serializable {
     /**
      * The Row.
      */
@@ -26,15 +26,14 @@ public class Cell implements Serializable{
      * @param r grid row
      * @param c grid column
      */
-    public Cell(int r, int c )
-   {
-	  this.nougat= new Nougat();
-	  row = r;
-	  col = c;
-   }
+    public Cell(int r, int c) {
+        this.nougat = new Nougat();
+        row = r;
+        col = c;
+    }
 
     @Override
     public String toString() {
-        return ""+ row+"."+col;
+        return "(" + row + "." + col + ")";
     }
 }

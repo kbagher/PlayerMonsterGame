@@ -91,8 +91,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             game.pauseAnResumeGame();
         else if (((JButton) e.getSource()).getText().compareTo("Resume") == 0)
             game.pauseAnResumeGame();
-        else if (((JButton) e.getSource()).getText().compareTo("Save/Load") == 0)
-            game.saveOrLoad();
+        else if (((JButton) e.getSource()).getText().compareTo("Save") == 0)
+            game.saveGame();
         else if (((JButton) e.getSource()).getText().compareTo("Grid Structure") == 0)
             game.changeGrid();
     }

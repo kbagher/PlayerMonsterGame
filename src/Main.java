@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -81,6 +81,23 @@ public class Main {
         }
     }
 
+
+    private static boolean loadGameMenu(User u){
+
+        try {
+            u.loadGame();
+            int option = JOptionPane.showOptionDialog(null, "Do you want to load a saved game?", "Load game", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, null,null,null);
+            return option==0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        int option = JOptionPane.showOptionDialog(null, "You don't have any saved game :(" +
+                        "\n\nHint: You can always load a saved game after you login", "Load game", JOptionPane.OK_OPTION,
+                JOptionPane.INFORMATION_MESSAGE, null,new String[]{"ok"},null);
+        return false;
+    }
+
     /**
      * user login and register message
      *
@@ -119,7 +136,7 @@ public class Main {
         Object[] options = new String[]{"Login", "Register", "Cancel"};
 
         int option = JOptionPane.showOptionDialog(null, loginPanel, "User login", JOptionPane.OK_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, options, null);
+                JOptionPane.INFORMATION_MESSAGE, null, options, "Login");
 
         /**
          * handling pressed button
@@ -165,6 +182,9 @@ public class Main {
          */
         String status = "new";
 
+        if (loadGameMenu(user))
+            status="load";
+
         /**
          * Starting,restarting and loading the game
          */
@@ -173,17 +193,18 @@ public class Main {
             // start a new game
             if ((status.compareTo("new") == 0)) {
                 game = new Game(user);
-                game.loadSettings();
             }
             // restart game
             else if (status.compareTo("restart") == 0) {
                 game.resetGameObjects();
-                game.loadSettings();
+
             }
             // load user's saved game
             else if (status.compareTo("load") == 0) {
                 game = user.loadGame();
+                game.pauseGame(true);
             }
+            game.loadSettings();
             game.setTitle("Monster Game");
             game.setSize(700, 750);
             game.setLocationRelativeTo(null);  // center the frame
