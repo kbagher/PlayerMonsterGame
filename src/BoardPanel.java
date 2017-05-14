@@ -138,6 +138,9 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
             gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
             gr.setColor(Color.black);
             gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+            /*
+             * Draw nougat
+             */
             if (!cell.nougat.isConsumed()) {
                 try {
                     ImageIcon icon = new ImageIcon("assets/coin.png");

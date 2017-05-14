@@ -1,5 +1,3 @@
-import com.sun.tools.javac.util.StringUtils;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -11,7 +9,6 @@ class UserNotFoundException extends Exception {
 
     /**
      * Instantiates a new User not found exception.
-     *
      */
     public UserNotFoundException() {
         super("Invalid username");
@@ -25,7 +22,6 @@ class WrongPasswordException extends Exception {
 
     /**
      * Instantiates a new Wrong password exception.
-     *
      */
     public WrongPasswordException() {
         super("Provided password is incorrect");
@@ -39,7 +35,6 @@ class UsernameAlreadyExistsException extends Exception {
 
     /**
      * Instantiates a new Username already exists exception.
-     *
      */
     public UsernameAlreadyExistsException() {
         super("Provided username already exists in the database");
@@ -96,7 +91,8 @@ public class Database {
      * Returns a database connection.
      *
      * @return database connection
-     * @throws SQLException SQL exception
+     *
+     * @throws SQLException           SQL exception
      * @throws ClassNotFoundException SQLite classpath issue
      */
     private Connection getConnection() throws SQLException, ClassNotFoundException {
@@ -110,15 +106,17 @@ public class Database {
      * Check if the given username exists in the database or not
      *
      * @param username user's username
+     *
      * @return true if the username exists in the database
-     * @throws SQLException SQL Exception
+     *
+     * @throws SQLException           SQL Exception
      * @throws ClassNotFoundException SQLite classpath issue
      */
     private boolean usernameExists(String username) throws SQLException, ClassNotFoundException {
         conn = getConnection();
         stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM User where username='" + username + "';");
-        if (rs.next()){
+        if (rs.next()) {
             stmt.close();
             conn.close();
             return true;
@@ -135,7 +133,9 @@ public class Database {
      *
      * @param username username
      * @param password password
-     * @return user object or null
+     *
+     * @return user object
+     *
      * @throws SQLException           SQL error
      * @throws ClassNotFoundException SQLite class not found exception
      * @throws UserNotFoundException  username is incorrect
@@ -177,13 +177,15 @@ public class Database {
      * @param address  the address
      * @param username username
      * @param password password
+     *
      * @return the boolean
+     *
      * @throws SQLException                   SQLite exception
      * @throws ClassNotFoundException         SQLite class path not found
      * @throws UsernameAlreadyExistsException username already exists exception
      */
-    public boolean register(String name,String address,String username, String password) throws SQLException, ClassNotFoundException, UsernameAlreadyExistsException {
-        if (username.isEmpty() || password.isEmpty() || name.isEmpty() || address.isEmpty() )
+    public boolean register(String name, String address, String username, String password) throws SQLException, ClassNotFoundException, UsernameAlreadyExistsException {
+        if (username.isEmpty() || password.isEmpty() || name.isEmpty() || address.isEmpty())
             throw new SQLException("Cannot register user. Make sure all fields are filled");
 
         System.out.println("checking user");
@@ -193,12 +195,12 @@ public class Database {
         conn = getConnection();
         stmt = conn.createStatement();
         System.out.println("in insert");
-        String sql = "INSERT INTO User (Name,Address,username, password) " + "VALUES ('"+name+"','"+address+"','" + username + "','" + password + "');";
+        String sql = "INSERT INTO User (Name,Address,username, password) " + "VALUES ('" + name + "','" + address + "','" + username + "','" + password + "');";
         System.out.println("after insert");
         /*
-          Number of effected rows.
-
-          Should be 1 if the insert operation is successful
+         * Number of effected rows.
+         *
+         * Should be 1 if the insert operation is successful
          */
         int i = stmt.executeUpdate(sql);
 
@@ -213,37 +215,36 @@ public class Database {
     }
 
     /**
-     * Gets result.
+     * Gets all user's results ordered by the top wins
      *
-     * @return results
+     * @return list of users
+     *
+     * @throws SQLException           sql exception
+     * @throws ClassNotFoundException SQLite classpath issue
      */
-    public ArrayList<User> getResults() {
-        User user = new User();
+    public ArrayList<User> getResults() throws SQLException, ClassNotFoundException {
+        conn = getConnection();
+        stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT Name,Win,Loss FROM User ORDER BY Win DESC;");
+
+        // users list
         ArrayList<User> users = new ArrayList<>();
 
-        try {
-            conn = getConnection();
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM User ORDER BY Win DESC;");
-
-            while (rs.next()) {
-
-                user.setUsername(rs.getString("Username"));
-                user.setLoss(rs.getInt("Loss"));
-                user.setWin(rs.getInt("Win"));
-                users.add(user);
-            }
-            rs.close();
-            stmt.close();
-            conn.close();
-            return users;
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-            return null;
+        /*
+         * retrieve all users and add them to the list
+         */
+        while (rs.next()) {
+            User user = new User();
+            user.setName(rs.getString("Name"));
+            user.setLoss(rs.getInt("Loss"));
+            user.setWin(rs.getInt("Win"));
+            users.add(user);
         }
 
+        rs.close();
+        stmt.close();
+        conn.close();
+        return users;
     }
 
     /**
@@ -251,30 +252,34 @@ public class Database {
      *
      * @param username username
      * @param dataGame Game object
+     *
      * @return the boolean
+     *
      * @throws SQLException           the sql exception
      * @throws ClassNotFoundException SQLite classpath exception
      * @throws UserNotFoundException  user not found exception
      * @throws DataSavingException    the data saving exception
      */
     public boolean saveGame(String username, String dataGame) throws SQLException, ClassNotFoundException, UserNotFoundException, DataSavingException {
-        try{
-            return saveUserData(username,"GameData",dataGame);
-        }
-        catch (DataSavingException e){
+        try {
+            return saveUserData(username, "GameData", dataGame);
+        } catch (DataSavingException e) {
             throw new DataSavingException("Cannot save user's game data");
-        }    }
+        }
+    }
 
     /**
      * Load user's serialized data according to the given field
      *
      * @param username  user's username
      * @param fieldName database field containing the serialized data
+     *
      * @return serialized data object
-     * @throws SQLException SQL exception
+     *
+     * @throws SQLException           SQL exception
      * @throws ClassNotFoundException SQLite classpath issue
-     * @throws UserNotFoundException user not found exception
-     * @throws DataLoadingException loading user's data exception
+     * @throws UserNotFoundException  user not found exception
+     * @throws DataLoadingException   loading user's data exception
      */
     private String loadSerializedData(String username, String fieldName) throws SQLException, ClassNotFoundException, UserNotFoundException, DataLoadingException {
         /*
@@ -305,7 +310,9 @@ public class Database {
      * Load game user's data
      *
      * @param username user's username
+     *
      * @return serialized game data
+     *
      * @throws SQLException           sql exception
      * @throws ClassNotFoundException class not found exception
      * @throws UserNotFoundException  user not found exception
@@ -323,7 +330,9 @@ public class Database {
      * Load user's settings data
      *
      * @param username user's username
+     *
      * @return serialized settings data
+     *
      * @throws UserNotFoundException  user not found exception
      * @throws SQLException           sql exception
      * @throws ClassNotFoundException class not found exception
@@ -332,17 +341,21 @@ public class Database {
     public String loadSettings(String username) throws UserNotFoundException, SQLException, ClassNotFoundException, DataLoadingException {
         try {
             return loadSerializedData(username, "Settings");
-        } catch (Exception e) {
+        }catch (DataLoadingException e){
             throw new DataLoadingException("No Settings data is available");
         }
-
+        catch (Exception e) {
+            throw e;
+        }
     }
 
     /**
      * @param username  user's username
      * @param fieldName database field name
+     *
      * @return true if the field was increased successfully
-     * @throws SQLException SQL exception
+     *
+     * @throws SQLException           SQL exception
      * @throws ClassNotFoundException SQLite classpath issue
      */
     private boolean increaseFiled(String username, String fieldName) throws SQLException, ClassNotFoundException {
@@ -366,7 +379,9 @@ public class Database {
      * Increase user's loss.
      *
      * @param username user's username
+     *
      * @return true if loss was increased successfully
+     *
      * @throws SQLException           the sql exception
      * @throws ClassNotFoundException the class not found exception
      */
@@ -378,7 +393,9 @@ public class Database {
      * Increase user's wins.
      *
      * @param username user's username
+     *
      * @return true if  win was increased successfully
+     *
      * @throws SQLException           the sql exception
      * @throws ClassNotFoundException the class not found exception
      */
@@ -390,32 +407,36 @@ public class Database {
      * Save user's settings
      *
      * @param username the username
-     * @param settings  the settings
+     * @param settings the settings
+     *
      * @return the boolean
+     *
      * @throws ClassNotFoundException the class not found exception
      * @throws SQLException           the sql exception
      * @throws DataSavingException    the data saving exception
      * @throws UserNotFoundException  the user not found exception
      */
     public boolean saveSettings(String username, String settings) throws ClassNotFoundException, SQLException, DataSavingException, UserNotFoundException {
-        try{
-            return saveUserData(username,"Settings",settings);
-        }
-        catch (DataSavingException e){
+        try {
+            return saveUserData(username, "Settings", settings);
+        } catch (DataSavingException e) {
             throw new DataSavingException("Cannot save user's settings");
         }
     }
 
     /**
      * Save user's data in the given database column
-     * @param username user's username
+     *
+     * @param username  user's username
      * @param fieldName database field name
-     * @param data serialized data
+     * @param data      serialized data
+     *
      * @return serialized game data
-     * @throws SQLException SQL exception
+     *
+     * @throws SQLException           SQL exception
      * @throws ClassNotFoundException SQLite classpath issue
-     * @throws UserNotFoundException user not found exception
-     * @throws DataSavingException saving user's data exception
+     * @throws UserNotFoundException  user not found exception
+     * @throws DataSavingException    saving user's data exception
      */
     private boolean saveUserData(String username, String fieldName, String data) throws SQLException, ClassNotFoundException, UserNotFoundException, DataSavingException {
         /*

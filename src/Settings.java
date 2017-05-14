@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * in the code where needed.
  *
  * Loading the settings to the GUI and storing the settings requires manual coding.
- * Check loadSettings() and saveSettings() in the Game class.
+ * Check displaySettingsInUI() and saveSettings() in the Game class.
  *
  */
 public class Settings implements Serializable {

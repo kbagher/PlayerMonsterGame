@@ -2,6 +2,7 @@
   <dictionary name="kassem">
     <words>
       <w>moveable</w>
+      <w>sqlite</w>
     </words>
   </dictionary>
 </component>

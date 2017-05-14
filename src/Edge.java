@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 /**
  * Graph edge.
- *
+ * <p>
  * The edge will connect nodes together in order to build the graph
  */
 public class Edge implements Serializable {

@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * Created by kassem on 6/5/17.
@@ -204,7 +202,7 @@ public class Main {
                 game = user.loadGame();
                 game.pauseGame(true);
             }
-            game.loadSettings();
+            game.displaySettingsInUI();
             game.setTitle("Monster Game");
             game.setSize(700, 750);
             game.setLocationRelativeTo(null);  // center the frame

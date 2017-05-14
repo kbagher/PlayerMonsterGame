@@ -34,6 +34,10 @@ public class Cell implements Serializable {
 
     @Override
     public String toString() {
+        /*
+         * (row.column)
+         * i.e. (4.2)
+         */
         return "(" + row + "." + col + ")";
     }
 }

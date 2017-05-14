@@ -102,10 +102,6 @@ public class Game extends JFrame {
      */
     private Player player;
     /**
-     * Game grid structure
-     */
-    private GridStructure gridStructure;
-    /**
      * The current logged in user
      */
     private User user;
@@ -714,6 +710,7 @@ public class Game extends JFrame {
       Score list
      */
         JTextArea taScoreResults = new JTextArea(2, 10);
+        taScoreResults.setEditable(false);
         JScrollPane scpScoreResults = new JScrollPane(taScoreResults);
         gbcResults.gridx = 1;
         gbcResults.gridy = 0;
@@ -739,21 +736,29 @@ public class Game extends JFrame {
     }
 
     /**
-     * Load the game settings from the user into the game settings' object and display it on screen
+     * load user's settings into game settings object
      */
-    public void loadSettings() {
-        /*
-         * load user's settings into game settings
-         */
+    private void loadGameSettings() {
         try {
             settings = user.loadSettings();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
+    }
+
+    /**
+     * Load the game settings from the user into the game settings' object and display it on screen
+     */
+    public void displaySettingsInUI() {
+
+        // reload settings to reflect any possible changes
+        loadGameSettings();
+
         /*
          * display settings in GUI
          */
+
         // Text fields
         tfSpeed.setText("" + Game.settings.gameSpeed);
         tfTime.setText("" + Game.settings.timeAllowed);
@@ -794,8 +799,6 @@ public class Game extends JFrame {
         Game.settings.trapEnergy = (Integer.parseInt(tfTrapEnergy.getText()));
         Game.settings.trapEffectDuration = (Integer.parseInt(tfTrapEffectDuration.getText()));
         Game.settings.trapDuration = (Integer.parseInt(tfTrapLifetime.getText()));
-        Game.settings.gridStructure = gridStructure;
-
         /*
          * Read Player and monster skills from GUI
          * and store into player and monster objects
@@ -875,17 +878,11 @@ public class Game extends JFrame {
         restart = false;
         load = false;
         user = u;
-
-        try {
-            settings = user.loadSettings();
-        } catch (Exception e) {
-            settings = new Settings();
-        }
-        gridStructure = settings.gridStructure;
-        grid = new Grid(gridStructure);
+        loadGameSettings();
+        grid = new Grid(settings.gridStructure);
         trap = new Trap(grid);
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
-        monster = new Monster(grid, player, trap, 0, gridStructure.getSize() - 1);
+        monster = new Monster(grid, player, trap, 0, settings.gridStructure.getSize() - 1);
         bp = new BoardPanel(grid, player, monster, trap, this);
 
         // Create a separate panel and add all the buttons
@@ -894,6 +891,9 @@ public class Game extends JFrame {
         add(pnMain, BorderLayout.SOUTH);
     }
 
+    private void loadResults() {
+
+    }
 
     /**
      * Reset game objects.
@@ -905,19 +905,14 @@ public class Game extends JFrame {
         restart = false;
         load = false;
         grid = null;
-        try {
-            settings = user.loadSettings();
-        } catch (Exception e) {
-            settings = new Settings();
-        }
-        gridStructure = settings.gridStructure;
-        grid = new Grid(gridStructure);
+        loadGameSettings();
+        grid = new Grid(settings.gridStructure);
         trap = null;
         trap = new Trap(grid);
         player = null;
         player = new Player(grid, trap, 0, 0, Game.settings.initialEnergy);
         monster = null;
-        monster = new Monster(grid, player, trap, 0, gridStructure.getSize() - 1);
+        monster = new Monster(grid, player, trap, 0, settings.gridStructure.getSize() - 1);
         bp.update(grid, player, monster, trap, this);
         btStart.setText("Start");
         btPause.setText("Pause");
@@ -951,7 +946,7 @@ public class Game extends JFrame {
         GridStructure gs = null;
         String size = JOptionPane.showInputDialog(this, "Enter grid size bigger than 3.\n\nExample: 8");
 
-        if (size==null|| size.isEmpty())  return;
+        if (size == null || size.isEmpty()) return;
 
         try {
             gs = new GridStructure(Integer.parseInt(size));
@@ -964,7 +959,7 @@ public class Game extends JFrame {
                 "\nKeep Space between columns." +
                 "\nIndex starts from 0 to " + (gs.getSize() - 1) + ".\n\nExample: 3,5");
 
-        if (columns==null|| columns.isEmpty())  return;
+        if (columns == null || columns.isEmpty()) return;
 
         try {
             String[] cols = columns.split(",");
@@ -980,7 +975,7 @@ public class Game extends JFrame {
                 "\nKeep Space between rows." +
                 "\nIndex starts from 0 to " + (gs.getSize() - 1) + ".\n\nExample: 3,5");
 
-        if (rows==null|| rows.isEmpty())  return;
+        if (rows == null || rows.isEmpty()) return;
 
         try {
             String[] ros = rows.split(",");
@@ -991,7 +986,7 @@ public class Game extends JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        gridStructure = gs;
+        settings.gridStructure = gs;
         saveSettings();
         player.setReady(true);
         restart = true;
