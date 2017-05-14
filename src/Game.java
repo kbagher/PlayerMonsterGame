@@ -2,10 +2,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.io.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Locale;
 
 
 /* This class is the main System level class which creates all the objects
@@ -42,16 +39,18 @@ public class Game extends JFrame {
      * Status label to show the current game status and any other messages to the user
      */
     private JLabel lbStatus;
-
     /**
      * Users results
      */
     JTextArea taScoreResults;
-
     /**
      * Game settings - game speed
      */
     private JTextField tfSpeed;
+    /**
+     * Settings Panel
+     */
+    private JPanel pnSettings;
     /**
      * Game settings - Game allowed time
      */
@@ -358,7 +357,7 @@ public class Game extends JFrame {
         /*
       The Settings panel
      */
-        JPanel pnSettings = new JPanel();
+        pnSettings = new JPanel();
         GridBagLayout gbSettings = new GridBagLayout();
         GridBagConstraints gbcSettings = new GridBagConstraints();
         pnSettings.setLayout(gbSettings);
@@ -744,26 +743,67 @@ public class Game extends JFrame {
     }
 
     /**
+     * Validate settings textfield.
+     *
+     * This method will check all JTextfileds available in the settings
+     * and validate it's value.
+     *
+     * If any field is invalid, the field will be colored in pink.
+     *
+     * Field value must be integer bigger than 0
+     *
+     * @return true if all fields' values are valid
+     */
+    private boolean validateUserInput() {
+        // track validation status
+        boolean status = true;
+
+        /*
+         * loop through all available JTextField in the settings panel
+         */
+        for (Component cp : pnSettings.getComponents()) {
+            if (cp instanceof JTextField) {
+                try {
+                    /*
+                     * check if the value is integer and bigger than 0
+                     */
+                    int val = Integer.parseInt(((JTextField) cp).getText());
+                    if (val <= 0) {
+                        cp.setBackground(Color.pink);
+                        status = false;
+                    }
+                    else
+                        cp.setBackground(Color.white);
+                } catch (Exception e) {
+                    cp.setBackground(Color.pink);
+                    status = false;
+                }
+            }
+        }
+        return status;
+    }
+
+    /**
      * load user's settings into game settings object
      */
     private void loadGameSettings() {
         try {
             settings = user.loadSettings();
         } catch (Exception e) {
-            settings =new Settings();
+            settings = new Settings();
             System.err.println(e.getMessage());
         }
 
     }
 
-    private void displayResults(){
+    private void displayResults() {
         try {
             ArrayList<User> users = User.results();
 
             taScoreResults.setText("");
-            taScoreResults.append(String.format("  %-50s %-10s %-10s %n","Player","Wins","Loss"));
-            for (User usr : users){
-                taScoreResults.append(String.format("  %-50s %-10s %-10s %n",usr.getName(),usr.getWin(),usr.getLoss()));
+            taScoreResults.append(String.format("  %-50s %-10s %-10s %n", "Player", "Wins", "Loss"));
+            for (User usr : users) {
+                taScoreResults.append(String.format("  %-50s %-10s %-10s %n", usr.getName(), usr.getWin(), usr.getLoss()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -812,6 +852,12 @@ public class Game extends JFrame {
      * Save user settings.
      */
     public void saveSettings() {
+
+        if (!validateUserInput()) {
+            JOptionPane.showMessageDialog(null, "Please make sure all fields contains whole numbers", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         /*
          * Read settings from GUI and store it in the game settings object
          */
@@ -1188,9 +1234,9 @@ public class Game extends JFrame {
 
         /*
          * update game status, player loss and wins
-         * if the player is not loading a saved game
+         * if the player is not restarting
          */
-        if (!load || !restart)
+        if (!load && !restart)
             updateStatusMessage();
 
         delay(2500);

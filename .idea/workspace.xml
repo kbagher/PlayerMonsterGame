@@ -38,105 +38,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ObjectOutputStream.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/io/ObjectOutputStream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="347" column="0" lean-forward="false" selection-start-line="347" selection-start-column="0" selection-end-line="347" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JTable.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JTable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="647" column="11" lean-forward="false" selection-start-line="647" selection-start-column="11" selection-end-line="647" selection-end-column="11" />
-              <folding>
-                <element signature="e#23772#23773#0" expanded="true" />
-                <element signature="e#23836#23837#0" expanded="true" />
-                <element signature="e#183183#183184#0" expanded="true" />
-                <element signature="e#183227#183228#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ListSelectionListener.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/event/ListSelectionListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Scrollable.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/Scrollable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="42" column="17" lean-forward="false" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TableModelListener.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/event/TableModelListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="37" column="17" lean-forward="false" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Settings.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Settings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GridStructure.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GridStructure.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="759" column="13" lean-forward="true" selection-start-line="759" selection-start-column="13" selection-end-line="759" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1494757025000" expanded="false" signature="36236:36247" ph=" { " />
-                <marker date="1494757025000" expanded="false" signature="36262:36268" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BoardPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BoardPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DefaultTableModel.java" pinned="false" current-in-tab="false">
         <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/table/DefaultTableModel.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -146,6 +47,51 @@
                 <element signature="e#2103#2104#0" expanded="true" />
                 <element signature="e#2129#2130#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="709">
+              <caret line="768" column="21" lean-forward="true" selection-start-line="768" selection-start-column="21" selection-end-line="768" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Component.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/awt/Component.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="1241" column="19" lean-forward="false" selection-start-line="1241" selection-start-column="19" selection-end-line="1241" selection-end-column="19" />
+              <folding>
+                <element signature="e#41124#41125#0" expanded="true" />
+                <element signature="e#41170#41171#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JComponent.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JComponent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="1931" column="16" lean-forward="false" selection-start-line="1931" selection-start-column="16" selection-end-line="1931" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Container.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/awt/Container.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="163">
+              <caret line="345" column="23" lean-forward="false" selection-start-line="345" selection-start-column="23" selection-end-line="345" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -163,8 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>system.out</find>
-      <find>&quot;saved</find>
       <find>save</find>
       <find>setpa</find>
       <find>getuser</find>
@@ -190,9 +134,11 @@
       <find>pauseG</find>
       <find>saveg</find>
       <find>save/</find>
-      <find>result</find>
       <find>gridStructure</find>
       <find>initva</find>
+      <find>result</find>
+      <find>gamesp</find>
+      <find>tfSpeed</find>
     </findStrings>
     <replaceStrings>
       <replace>6</replace>
@@ -248,6 +194,8 @@
         <option value="$PROJECT_DIR$/src/Cell.java" />
         <option value="$PROJECT_DIR$/src/Database.java" />
         <option value="$PROJECT_DIR$/src/Edge.java" />
+        <option value="$PROJECT_DIR$/src/txtValidator.java" />
+        <option value="$PROJECT_DIR$/src/intVerifier.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
       </list>
     </option>
@@ -1084,7 +1032,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266774000" />
+    <option name="totallyTimeSpent" value="270886000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1121,6 +1069,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22777778" sideWeight="0.50553507" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1153,7 +1102,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22777778" sideWeight="0.5111524" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1232,342 +1180,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="uml://JAVA/BoardPanel">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID />
-          <OriginalElement>BoardPanel</OriginalElement>
-          <nodes>
-            <node x="0.0" y="380.0">java.awt.event.KeyListener</node>
-            <node x="142.0" y="380.0">java.awt.event.ActionListener</node>
-            <node x="346.25" y="120.0">Grid</node>
-            <node x="799.25" y="200.0">javax.swing.TransferHandler.HasGetTransferHandler</node>
-            <node x="1342.25" y="0.0">java.awt.image.ImageObserver</node>
-            <node x="549.25" y="200.0">MonsterSkills</node>
-            <node x="570.25" y="120.0">GameAudioPlayer</node>
-            <node x="461.8560283687944" y="300.0">Monster</node>
-            <node x="1358.25" y="200.0">java.awt.Container</node>
-            <node x="1392.125" y="470.0">javax.swing.JFrame</node>
-            <node x="202.02269503546108" y="200.0">PlayerSkills</node>
-            <node x="1260.25" y="120.0">Cell</node>
-            <node x="1139.25" y="120.0">Settings</node>
-            <node x="978.1574468085108" y="300.0">javax.swing.JComponent</node>
-            <node x="217.20744680851112" y="300.0">Player</node>
-            <node x="1633.625" y="380.0">java.awt.Frame</node>
-            <node x="442.25" y="120.0">Sprite</node>
-            <node x="1593.4764184397168" y="300.0">java.awt.Window</node>
-            <node x="1635.9574468085111" y="0.0">java.awt.MenuContainer</node>
-            <node x="701.25" y="200.0">Trap</node>
-            <node x="1173.6991134751775" y="380.0">javax.swing.RootPaneContainer</node>
-            <node x="1488.25" y="200.0">javax.accessibility.Accessible</node>
-            <node x="1352.25" y="120.0">java.awt.Component</node>
-            <node x="340.0226950354611" y="200.0">Moveable</node>
-            <node x="610.7074468085111" y="0.0">java.io.Serializable</node>
-            <node x="63.20744680851112" y="300.0">java.util.EventListener</node>
-            <node x="151.5" y="470.0">BoardPanel</node>
-            <node x="1396.625" y="550.0">Game</node>
-            <node x="1016.25" y="120.0">Nougat</node>
-            <node x="0.0" y="625.0">Main</node>
-            <node x="1063.6991134751775" y="380.0">javax.swing.JPanel</node>
-            <node x="1449.625" y="380.0">javax.swing.WindowConstants</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="javax.swing.JPanel" target="javax.swing.JComponent">
-              <point x="-22.5" y="-15.0" />
-              <point x="1086.1991134751775" y="355.0" />
-              <point x="1042.657446808511" y="355.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="java.awt.event.KeyListener" target="java.util.EventListener">
-              <point x="0.0" y="-15.0" />
-              <point x="61.0" y="355.0" />
-              <point x="96.70744680851112" y="355.0" />
-              <point x="-33.5" y="15.0" />
-            </edge>
-            <edge source="Settings" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="1189.75" y="70.0" />
-              <point x="704.1241134751779" y="70.0" />
-              <point x="34.41666666666674" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JComponent" target="java.awt.Container">
-              <point x="43.0" y="-15.0" />
-              <point x="1085.657446808511" y="260.0" />
-              <point x="1385.75" y="260.0" />
-              <point x="-27.5" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JPanel" target="javax.accessibility.Accessible">
-              <point x="22.5" y="-15.0" />
-              <point x="1131.1991134751775" y="355.0" />
-              <point x="1224.9574468085111" y="355.0" />
-              <point x="1224.9574468085111" y="270.0" />
-              <point x="1507.4166666666667" y="270.0" />
-              <point x="-38.33333333333326" y="15.0" />
-            </edge>
-            <edge source="Moveable" target="Sprite">
-              <point x="27.0" y="-15.0" />
-              <point x="421.0226950354611" y="175.0" />
-              <point x="463.75" y="175.0" />
-              <point x="-21.5" y="15.0" />
-            </edge>
-            <edge source="java.awt.Component" target="java.awt.image.ImageObserver">
-              <point x="0.0" y="-15.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="Cell" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="1296.25" y="60.0" />
-              <point x="713.9574468085111" y="60.0" />
-              <point x="44.25" y="15.0" />
-            </edge>
-            <edge source="Player" target="PlayerSkills">
-              <point x="0.0" y="-15.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="Nougat" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="1067.75" y="80.0" />
-              <point x="694.2907801418446" y="80.0" />
-              <point x="24.58333333333337" y="15.0" />
-            </edge>
-            <edge source="Game" target="javax.swing.JFrame">
-              <point x="0.0" y="-15.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="java.awt.Frame" target="java.awt.Window">
-              <point x="-21.75" y="-15.0" />
-              <point x="1655.375" y="355.0" />
-              <point x="1643.4764184397168" y="355.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JFrame" target="javax.swing.RootPaneContainer">
-              <point x="-18.799999999999955" y="-15.0" />
-              <point x="1420.325" y="430.0" />
-              <point x="1258.1991134751775" y="430.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="BoardPanel" target="javax.swing.JPanel">
-              <point x="40.0" y="-15.0" />
-              <point x="251.5" y="450.0" />
-              <point x="1108.6991134751775" y="450.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="Moveable" target="java.io.Serializable">
-              <point x="-27.0" y="-15.0" />
-              <point x="367.0226950354611" y="175.0" />
-              <point x="335.75" y="175.0" />
-              <point x="335.75" y="60.0" />
-              <point x="625.4574468085111" y="60.0" />
-              <point x="-44.25" y="15.0" />
-            </edge>
-            <edge source="java.awt.Frame" target="java.awt.MenuContainer">
-              <point x="21.75" y="-15.0" />
-              <point x="1698.875" y="355.0" />
-              <point x="1743.9574468085111" y="355.0" />
-              <point x="36.0" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JFrame" target="javax.accessibility.Accessible">
-              <point x="0.0" y="-15.0" />
-              <point x="1439.125" y="280.0" />
-              <point x="1545.75" y="280.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="Player" target="Moveable">
-              <point x="29.0" y="-15.0" />
-              <point x="289.7074468085111" y="280.0" />
-              <point x="367.0226950354611" y="280.0" />
-              <point x="-27.0" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JComponent" target="javax.swing.TransferHandler.HasGetTransferHandler">
-              <point x="-43.0" y="-15.0" />
-              <point x="999.6574468085108" y="280.0" />
-              <point x="946.25" y="280.0" />
-              <point x="49.0" y="15.0" />
-            </edge>
-            <edge source="Monster" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="512.3560283687943" y="280.0" />
-              <point x="538.75" y="280.0" />
-              <point x="538.75" y="90.0" />
-              <point x="654.9574468085111" y="90.0" />
-              <point x="-14.75" y="15.0" />
-            </edge>
-            <edge source="java.awt.Window" target="javax.accessibility.Accessible">
-              <point x="25.0" y="-15.0" />
-              <point x="1668.4764184397168" y="250.0" />
-              <point x="1584.0833333333333" y="250.0" />
-              <point x="38.33333333333326" y="15.0" />
-            </edge>
-            <edge source="BoardPanel" target="java.awt.event.ActionListener">
-              <point x="0.0" y="-15.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="Monster" target="Moveable">
-              <point x="-33.66666666666663" y="-15.0" />
-              <point x="478.68936170212777" y="280.0" />
-              <point x="421.0226950354611" y="280.0" />
-              <point x="27.0" y="15.0" />
-            </edge>
-            <edge source="BoardPanel" target="java.awt.event.KeyListener">
-              <point x="-40.0" y="-15.0" />
-              <point x="171.5" y="450.0" />
-              <point x="61.0" y="450.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="Sprite" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="485.25" y="80.0" />
-              <point x="645.1241134751779" y="80.0" />
-              <point x="-24.58333333333337" y="15.0" />
-            </edge>
-            <edge source="java.awt.Window" target="java.awt.Container">
-              <point x="-25.0" y="-15.0" />
-              <point x="1618.4764184397168" y="260.0" />
-              <point x="1440.75" y="260.0" />
-              <point x="27.5" y="15.0" />
-            </edge>
-            <edge source="Trap" target="java.io.Serializable">
-              <point x="19.5" y="-15.0" />
-              <point x="759.75" y="100.0" />
-              <point x="674.6241134751779" y="100.0" />
-              <point x="4.916666666666629" y="15.0" />
-            </edge>
-            <edge source="Grid" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="384.25" y="70.0" />
-              <point x="635.2907801418446" y="70.0" />
-              <point x="-34.41666666666663" y="15.0" />
-            </edge>
-            <edge source="java.awt.Component" target="java.awt.MenuContainer">
-              <point x="40.66666666666674" y="-15.0" />
-              <point x="1453.9166666666667" y="100.0" />
-              <point x="1671.9574468085111" y="100.0" />
-              <point x="-36.0" y="15.0" />
-            </edge>
-            <edge source="GameAudioPlayer" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="649.25" y="100.0" />
-              <point x="664.7907801418446" y="100.0" />
-              <point x="-4.916666666666629" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JFrame" target="java.awt.Frame">
-              <point x="37.59999999999991" y="-15.0" />
-              <point x="1476.725" y="450.0" />
-              <point x="1677.125" y="450.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JFrame" target="javax.swing.WindowConstants">
-              <point x="18.799999999999955" y="-15.0" />
-              <point x="1457.925" y="440.0" />
-              <point x="1531.625" y="440.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="Trap" target="Sprite">
-              <point x="-19.5" y="-15.0" />
-              <point x="720.75" y="175.0" />
-              <point x="506.75" y="175.0" />
-              <point x="21.5" y="15.0" />
-            </edge>
-            <edge source="java.awt.Component" target="java.io.Serializable">
-              <point x="-40.66666666666674" y="-15.0" />
-              <point x="1372.5833333333333" y="50.0" />
-              <point x="723.7907801418446" y="50.0" />
-              <point x="54.08333333333337" y="15.0" />
-            </edge>
-            <edge source="Monster" target="MonsterSkills">
-              <point x="33.66666666666663" y="-15.0" />
-              <point x="546.0226950354611" y="280.0" />
-              <point x="615.25" y="280.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="Player" target="java.io.Serializable">
-              <point x="-29.0" y="-15.0" />
-              <point x="231.70744680851112" y="280.0" />
-              <point x="191.52269503546108" y="280.0" />
-              <point x="191.52269503546108" y="50.0" />
-              <point x="615.6241134751779" y="50.0" />
-              <point x="-54.08333333333337" y="15.0" />
-            </edge>
-            <edge source="java.awt.event.ActionListener" target="java.util.EventListener">
-              <point x="0.0" y="-15.0" />
-              <point x="211.5" y="355.0" />
-              <point x="163.70744680851112" y="355.0" />
-              <point x="33.5" y="15.0" />
-            </edge>
-            <edge source="java.awt.Container" target="java.awt.Component">
-              <point x="0.0" y="-15.0" />
-              <point x="0.0" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JFrame" target="javax.swing.TransferHandler.HasGetTransferHandler">
-              <point x="-37.59999999999991" y="-15.0" />
-              <point x="1401.525" y="440.0" />
-              <point x="848.25" y="440.0" />
-              <point x="-49.0" y="15.0" />
-            </edge>
-            <edge source="javax.swing.JComponent" target="java.io.Serializable">
-              <point x="0.0" y="-15.0" />
-              <point x="1042.657446808511" y="280.0" />
-              <point x="1005.75" y="280.0" />
-              <point x="1005.75" y="90.0" />
-              <point x="684.4574468085111" y="90.0" />
-              <point x="14.75" y="15.0" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="0.6" x="390.0" y="264.0" />
-          <SelectedNodes>
-            <node>Cell</node>
-          </SelectedNodes>
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="147" column="19" lean-forward="false" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/util/PriorityQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="81" column="13" lean-forward="false" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/839deda0-b198-40ae-b56a-2f7826279c88/console.sql" />
-    <entry file="file://$PROJECT_DIR$/.classpath">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="46" lean-forward="false" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.project">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DD.java" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="552" column="16" lean-forward="false" selection-start-line="552" selection-start-column="16" selection-end-line="552" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar!/sun/applet/AppletAudioClip.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1770,19 +1382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="647" column="11" lean-forward="false" selection-start-line="647" selection-start-column="11" selection-end-line="647" selection-end-column="11" />
-          <folding>
-            <element signature="e#23772#23773#0" expanded="true" />
-            <element signature="e#23836#23837#0" expanded="true" />
-            <element signature="e#183183#183184#0" expanded="true" />
-            <element signature="e#183227#183228#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/awt/GridBagLayout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1812,22 +1411,7 @@
           <caret line="99" column="51" lean-forward="false" selection-start-line="99" selection-start-column="51" selection-end-line="99" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1494723439000" expanded="true" signature="2648:2700" ph="SELECT * FRO... User" />
-            <marker date="1494723439000" expanded="true" signature="3830:3916" ph="SELECT * FRO... User" />
-            <marker date="1494723439000" expanded="true" signature="5522:5657" ph="INSERT INTO User... " />
-            <marker date="1494723439000" expanded="true" signature="6536:6584" ph="SELECT Name,... User" />
-            <marker date="1494723439000" expanded="true" signature="8795:8863" ph="SELECT missi... User" />
-            <marker date="1494723439000" expanded="true" signature="11156:11246" ph="UPDATE User " />
-            <marker date="1494723439000" expanded="true" signature="14103:14188" ph="UPDATE User " />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BoardPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1869,14 +1453,111 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/event/TableModelListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="37" column="17" lean-forward="false" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/Scrollable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="42" column="17" lean-forward="false" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/event/ListSelectionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="647" column="11" lean-forward="false" selection-start-line="647" selection-start-column="11" selection-end-line="647" selection-end-column="11" />
+          <folding>
+            <element signature="e#23772#23773#0" expanded="false" />
+            <element signature="e#23836#23837#0" expanded="false" />
+            <element signature="e#183183#183184#0" expanded="false" />
+            <element signature="e#183227#183228#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/io/ObjectOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="347" column="0" lean-forward="false" selection-start-line="347" selection-start-column="0" selection-end-line="347" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BoardPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/table/DefaultTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="84" column="11" lean-forward="false" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
+          <folding>
+            <element signature="e#2103#2104#0" expanded="true" />
+            <element signature="e#2129#2130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/javax/swing/JComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="1931" column="16" lean-forward="false" selection-start-line="1931" selection-start-column="16" selection-end-line="1931" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/awt/Component.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="1241" column="19" lean-forward="false" selection-start-line="1241" selection-start-column="19" selection-end-line="1241" selection-end-column="19" />
+          <folding>
+            <element signature="e#41124#41125#0" expanded="true" />
+            <element signature="e#41170#41171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="345" column="23" lean-forward="false" selection-start-line="345" selection-start-column="23" selection-end-line="345" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/intVerifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="759" column="13" lean-forward="true" selection-start-line="759" selection-start-column="13" selection-end-line="759" selection-end-column="13" />
+        <state relative-caret-position="709">
+          <caret line="768" column="21" lean-forward="true" selection-start-line="768" selection-start-column="21" selection-end-line="768" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1494757025000" expanded="false" signature="36236:36247" ph=" { " />
-            <marker date="1494757025000" expanded="false" signature="36262:36268" ph=" }" />
           </folding>
         </state>
       </provider>
