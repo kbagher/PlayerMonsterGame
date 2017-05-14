@@ -53,8 +53,6 @@ public class Settings implements Serializable {
      * The Monster's skills.
      */
     public ArrayList mSkills;
-
-
     /**
      * Game grid structure
      */

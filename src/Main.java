@@ -67,7 +67,7 @@ public class Main {
         }
 
         try {
-            User.register(name.getText(),address.getText(),username.getText(),new String(password.getPassword()));
+            User.register(name.getText(), address.getText(), username.getText(), new String(password.getPassword()));
             JOptionPane.showMessageDialog(null, "User Registered Successfully", null, JOptionPane.INFORMATION_MESSAGE);
             return true; // registered
         } catch (UsernameAlreadyExistsException e) {
@@ -80,19 +80,19 @@ public class Main {
     }
 
 
-    private static boolean loadGameMenu(User u){
+    private static boolean loadGameMenu(User u) {
 
         try {
             u.loadGame();
             int option = JOptionPane.showOptionDialog(null, "Do you want to load a saved game?", "Load game", JOptionPane.YES_NO_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE, null,null,null);
-            return option==0;
+                    JOptionPane.INFORMATION_MESSAGE, null, null, null);
+            return option == 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
         int option = JOptionPane.showOptionDialog(null, "You don't have any saved game :(" +
                         "\n\nHint: You can always load a saved game after you login", "Load game", JOptionPane.OK_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null,new String[]{"ok"},null);
+                JOptionPane.INFORMATION_MESSAGE, null, new String[]{"ok"}, null);
         return false;
     }
 
@@ -181,7 +181,7 @@ public class Main {
         String status = "new";
 
         if (loadGameMenu(user))
-            status="load";
+            status = "load";
 
         /**
          * Starting,restarting and loading the game

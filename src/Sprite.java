@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 /**
  * Sprite represents a 2D object in the game such as; a player,monster or a trap.
- *
+ * <p>
  * The Sprite class should be extended by any 2D object in the game.
  */
 public abstract class Sprite implements Serializable {

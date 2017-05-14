@@ -15,18 +15,16 @@ import java.util.*;
  */
 public class Grid implements Serializable {
 
-//    int gs.getSize() = 11;
-//    ArrayList<Integer> gs.getColumns() = new ArrayList<>();
-//    ArrayList<Integer> rows = new ArrayList<>();
-
-    private GridStructure gs;
-
     /**
-     * All grid cells
+     * Grid structure object to build the grid
+     */
+    private GridStructure gs;
+    /**
+     * Grid cells
      */
     private ArrayList<Cell> cells = new ArrayList<>();
     /**
-     * The Cells 2D representation.
+     * Cells 2D representation.
      */
     private Cell[][] cells2D;
     /**
@@ -35,14 +33,14 @@ public class Grid implements Serializable {
     private SpriteNode[][] spriteNodes;
 
     /**
-     * Check if the grid contains the exact passed cell
+     * Check if the grid contains either cell's column or row
      *
      * @param r cell row
      * @param c cell column
      *
      * @return if the cell exists in the grid
      */
-    public boolean containsCell(int r, int c) {
+    public boolean containsCellColumnOrRow(int r, int c) {
         if (gs.getRows().contains(r) || gs.getColumns().contains(c))
             return true;
         return false;
@@ -92,7 +90,7 @@ public class Grid implements Serializable {
         int k = 0;
         for (int row = 0; row < gs.getSize(); row++) {
             for (int column = 0; column < gs.getSize(); column++) {
-                if (containsCell(row, column)) {
+                if (containsCellColumnOrRow(row, column)) {
                     cells2D[row][column] = new Cell(row, column);
                     cells.add(cells2D[row][column]);
                     // track cell's graph node position representation on the 2D grid
@@ -115,7 +113,7 @@ public class Grid implements Serializable {
     private void buildGraph() {
         for (int row = 0; row < gs.getSize(); row++)
             for (int column = 0; column < gs.getSize(); column++) {
-                if (containsCell(row, column)) {
+                if (containsCellColumnOrRow(row, column)) {
                     SpriteNode node = spriteNodes[row][column];
                     if (containsColumn(column) && row > 0) {     // up node
                         node.addEdge(new Edge(spriteNodes[row - 1][column], 1));
@@ -146,7 +144,7 @@ public class Grid implements Serializable {
      * @throws Exception the exception
      */
     public Cell getCell(int row, int col) throws Exception {
-        if (!containsCell(row, col))
+        if (!containsCellColumnOrRow(row, col))
             throw new Exception("Invalid Coordinates row = " + row + " column " + col);
         return cells2D[row][col];
     }
@@ -164,7 +162,7 @@ public class Grid implements Serializable {
      * @throws Exception the exception
      */
     public SpriteNode getNode(int row, int col) throws Exception {
-        if (!containsCell(row, col))
+        if (!containsCellColumnOrRow(row, col))
             throw new Exception("Invalid Coordinates row = " + row + " column " + col);
         return spriteNodes[row][col];
     }
@@ -276,7 +274,7 @@ public class Grid implements Serializable {
     private void clearGraph() {
         for (int row = 0; row < gs.getSize(); row++)
             for (int column = 0; column < gs.getSize(); column++) {
-                if (containsCell(row, column)) {
+                if (containsCellColumnOrRow(row, column)) {
                     spriteNodes[row][column].previous = null;
                     spriteNodes[row][column].distance = Double.POSITIVE_INFINITY;
                 }
@@ -535,19 +533,21 @@ public class Grid implements Serializable {
      * @throws Exception the exception
      */
     public static void main(String args[]) throws Exception {
-//        Grid grid = new Grid();
-//        Cell c1 = grid.getCell(8, 0);
-//        Cell c2 = grid.getCell(8, 1);
-//        Cell c3 = grid.getCell(0, 2);
-//        Cell c4 = grid.getCell(2, 0);
-//        Cell c5 = grid.getCell(8, 5);
-//
-//        System.out.println("Distance from (" + c1 + ") to (" + c2 + ") is "
-//                + grid.distance(c1, c2));
-////
-//        System.out.println("From (0,0) to (0,2) best direction is "
-//                + grid.getMoveDirection(c1, c3, new Trap(null)));
-//        System.out.println("From (0,0) to (2,0) best direction is "
-//                + grid.getMoveDirection(c1, c4, new Trap(null)));
+        Grid grid = new Grid(new GridStructure());
+
+        Cell c1 = grid.getCell(5, 5);
+
+        Cell c2 = grid.getCell(0, 0);
+
+        Cell c3 = grid.getCell(0, 5);
+
+        System.out.println("Distance from (" + c1 + ") to (" + c2 + ") is "
+                + grid.distance(c1, c2));
+
+        System.out.println("From "+c1+" to "+c3+" best direction to avoid trap is "
+                + grid.getMoveDirection(c1, c3, new Trap(null)));
+
+        System.out.println("From "+c1+" to "+c2+" best direction to avoid trap is "
+                + grid.getMoveDirection(c1, c2, new Trap(null)));
     }
 }

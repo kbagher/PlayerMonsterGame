@@ -1,5 +1,6 @@
 import java.io.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 
 /**
@@ -50,6 +51,11 @@ public class User implements Serializable {
     public static boolean register(String name, String address, String username, String password) throws ClassNotFoundException, SQLException, UsernameAlreadyExistsException {
         Database db = new Database();
         return db.register(name, address, username, password);
+    }
+
+    public static ArrayList<User> results() throws SQLException, ClassNotFoundException {
+        Database db = new Database();
+        return db.getResults();
     }
 
     /**

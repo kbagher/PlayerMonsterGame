@@ -41,7 +41,6 @@ public class Nougat implements Serializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return Game.settings.nougatEnergy;
         }
         return 0;

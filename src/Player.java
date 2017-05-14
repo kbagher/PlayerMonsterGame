@@ -29,19 +29,21 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
      * @param row           player's row in the grid
      * @param col           player's column in the grid
      * @param caloriesValue initial energy
+     *
      * @throws Exception the exception
      */
     public Player(Grid g, Trap t, int row, int col, int caloriesValue) throws Exception {
         super(g);
         currentCell = grid.getCell(row, col);
         currentDirection = ' ';
-        if(caloriesValue<=0 || caloriesValue<= Game.settings.stepEnergy) throw new Exception("Invalid user energy");
+        if (caloriesValue <= 0 || caloriesValue <= Game.settings.stepEnergy) throw new Exception("Invalid user energy");
         energy = caloriesValue;
         trap = t;
     }
 
     /**
      * Moves the player on the grid
+     *
      * @return the next step cell
      */
     public Cell move() {
@@ -53,18 +55,18 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
         if (canPerformEnergyAction(calculateCalories(steps))) { // have enough energy to move
             if (currentDirection != ' ') { // player have a direction to move
                 /*
-                  Determine the max cell that can be reached according
-                  to the user's provided steps.
-                  Some cases where the user want's to move more than one step where
-                  he can only perform one step as he will reach the end of the grid
+                 * Determine the max cell that can be reached according
+                 * to the user's provided steps.
+                 * Some cases where the user want's to move more than one step where
+                 * he can only perform one step as he will reach the end of the grid
                  */
                 Cell tempCell = grid.getCell(currentCell, currentDirection, steps);
                 /*
-                  Recalculate the steps to reflect the new max cell which wil be reached
+                 * Recalculate the steps to reflect the new max cell which wil be reached
                  */
                 steps = grid.distance(currentCell, tempCell);
                 /*
-                  Deduct energy from the user after updating the possible steps
+                 * Deduct energy from the user after updating the possible steps
                  */
                 decreaseEnergy(calculateCalories(steps));
                 if (tempCell != null)
@@ -81,9 +83,11 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
 
     /**
      * Calculate moving energy required based on the given steps.
-     *
+     * <p>
      * Calculating steps is used by summing the exponential movement steps
+     *
      * @param steps movement steps
+     *
      * @return energy required
      */
     private int calculateCalories(int steps) {
@@ -99,6 +103,7 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
      * an action based on the given energy
      *
      * @param requiredEnergy action's required energy
+     *
      * @return true if the player have enough energy
      */
     private boolean canPerformEnergyAction(int requiredEnergy) {
@@ -161,7 +166,8 @@ public class Player extends Moveable implements PlayerSkills, Serializable {
 
     @Override
     public void skip() {
-        if (!hasSkill(PlayerSkillsType.SKIP))  return; // player does not have the skill
+        if (!hasSkill(PlayerSkillsType.SKIP)) return; // player does not have the skill
+
         if (steps >= 3) return; // can't do more than 3 steps
 
         steps++;

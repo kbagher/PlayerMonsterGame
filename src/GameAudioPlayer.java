@@ -19,7 +19,7 @@ public class GameAudioPlayer implements Serializable {
      *
      * @throws IOException
      */
-    public static  synchronized void playCoinAudio() throws IOException {
+    public static synchronized void playCoinAudio() throws IOException {
         new Thread(new Runnable() {
             public void run() {
                 try {
@@ -33,8 +33,7 @@ public class GameAudioPlayer implements Serializable {
                     }
                     in.reset();
                     sun.audio.AudioPlayer.player.start(new AudioStream(in));
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -49,7 +48,7 @@ public class GameAudioPlayer implements Serializable {
      *
      * @throws IOException the io exception
      */
-    public  void playAudio(String fileName) throws IOException {
+    public void playAudio(String fileName) throws IOException {
         InputStream in;
         in = new FileInputStream("./assets/" + fileName);
         audio = new AudioStream(in);

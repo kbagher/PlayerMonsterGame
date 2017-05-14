@@ -53,6 +53,7 @@ public class Trap extends Sprite implements Serializable {
      * Determine if the monster should be trapped ot not based on the passed cell
      *
      * @param cell the cell
+     *
      * @return the boolean
      */
     public boolean isTrapped(Cell cell) {
