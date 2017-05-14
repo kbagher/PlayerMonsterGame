@@ -18,7 +18,10 @@ public class Game extends JFrame {
      * Main JPanel holding all controls and settings
      */
     private JPanel pnMain;
-
+    /**
+     * Main Tabbed pane
+     */
+    private JTabbedPane tbpControl;
     /**
      * Start game button
      */
@@ -158,7 +161,7 @@ public class Game extends JFrame {
         /*
       The Tabbed Pane to hold the control,settings and results panels.
      */
-        JTabbedPane tbpControl = new JTabbedPane();
+        tbpControl = new JTabbedPane();
 
         /*
       The dashboard panel
@@ -1090,6 +1093,13 @@ public class Game extends JFrame {
      * Save the current game.
      */
     public void saveGame() {
+
+        if (!validateUserInput()) {
+            JOptionPane.showMessageDialog(null, "Please make sure all fields contains whole numbers", "Error", JOptionPane.ERROR_MESSAGE);
+            tbpControl.setSelectedIndex(1);
+            return;
+        }
+
         pauseGame(true);
         try {
             user.saveGame(this, settings);
