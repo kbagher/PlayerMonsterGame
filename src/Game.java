@@ -4,6 +4,8 @@ import java.awt.*;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.Locale;
 
 
 /* This class is the main System level class which creates all the objects
@@ -40,6 +42,11 @@ public class Game extends JFrame {
      * Status label to show the current game status and any other messages to the user
      */
     private JLabel lbStatus;
+
+    /**
+     * Users results
+     */
+    JTextArea taScoreResults;
 
     /**
      * Game settings - game speed
@@ -709,7 +716,8 @@ public class Game extends JFrame {
         /*
       Score list
      */
-        JTextArea taScoreResults = new JTextArea(2, 10);
+        taScoreResults = new JTextArea(2, 10);
+        taScoreResults.setFont(new Font("monospaced", Font.PLAIN, 12));
         taScoreResults.setEditable(false);
         JScrollPane scpScoreResults = new JScrollPane(taScoreResults);
         gbcResults.gridx = 1;
@@ -747,6 +755,21 @@ public class Game extends JFrame {
 
     }
 
+    private void displayResults(){
+        try {
+            ArrayList<User> users = User.results();
+
+            taScoreResults.setText("");
+            taScoreResults.append(String.format("  %-50s %-10s %-10s %n","Player","Wins","Loss"));
+            for (User usr : users){
+                taScoreResults.append(String.format("  %-50s %-10s %-10s %n",usr.getName(),usr.getWin(),usr.getLoss()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+    }
+
     /**
      * Load the game settings from the user into the game settings' object and display it on screen
      */
@@ -754,7 +777,7 @@ public class Game extends JFrame {
 
         // reload settings to reflect any possible changes
         loadGameSettings();
-
+        displayResults();
         /*
          * display settings in GUI
          */
