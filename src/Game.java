@@ -750,6 +750,7 @@ public class Game extends JFrame {
         try {
             settings = user.loadSettings();
         } catch (Exception e) {
+            settings =new Settings();
             System.err.println(e.getMessage());
         }
 
