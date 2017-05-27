@@ -115,7 +115,7 @@ public class Database {
     private boolean usernameExists(String username) throws SQLException, ClassNotFoundException {
         conn = getConnection();
         stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM User where username='" + username + "';");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM User where Username='" + username + "';");
         if (rs.next()) {
             stmt.close();
             conn.close();
@@ -341,10 +341,9 @@ public class Database {
     public String loadSettings(String username) throws UserNotFoundException, SQLException, ClassNotFoundException, DataLoadingException {
         try {
             return loadSerializedData(username, "Settings");
-        }catch (DataLoadingException e){
+        } catch (DataLoadingException e) {
             throw new DataLoadingException("No Settings data is available");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
     }

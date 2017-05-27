@@ -799,6 +799,9 @@ public class Game extends JFrame {
 
     }
 
+    /**
+     * display users results in the GUI
+     */
     private void displayResults() {
         try {
             ArrayList<User> users = User.results();
@@ -893,7 +896,7 @@ public class Game extends JFrame {
          */
         try {
             user.saveSettings(settings);
-            JOptionPane.showMessageDialog(this, "Settings Updated", null, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Settings Saved", null, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

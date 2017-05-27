@@ -20,24 +20,24 @@ public class GameAudioPlayer implements Serializable {
      * @throws IOException
      */
     public static synchronized void playCoinAudio() throws IOException {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    if (audioContent == null) {
-                        File file = new File("./assets/coin.wav");
-                        FileInputStream fin = null;
-                        fin = new FileInputStream(file);
-                        audioContent = new byte[(int) file.length()];
-                        fin.read(audioContent);
-                        in = new ByteArrayInputStream(audioContent);
-                    }
-                    in.reset();
-                    sun.audio.AudioPlayer.player.start(new AudioStream(in));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            public void run() {
+//                try {
+//                    if (audioContent == null) {
+//                        File file = new File("./assets/coin.wav");
+//                        FileInputStream fin = null;
+//                        fin = new FileInputStream(file);
+//                        audioContent = new byte[(int) file.length()];
+//                        fin.read(audioContent);
+//                        in = new ByteArrayInputStream(audioContent);
+//                    }
+//                    in.reset();
+//                    sun.audio.AudioPlayer.player.start(new AudioStream(in));
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
     }
 
 

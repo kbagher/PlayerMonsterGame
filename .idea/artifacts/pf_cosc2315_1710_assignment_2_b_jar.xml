@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="pf_cosc2315_1710_assignment_2_b:jar">
+    <output-path>$USER_HOME$/Desktop/pf_cosc2315_1710_assignment_2_b.jar</output-path>
+    <root id="archive" name="pf_cosc2315_1710_assignment_2_b.jar">
+      <element id="module-output" name="pf_cosc2315_1710_assignment_2_b" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/sqlite-jdbc-3.16.1.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/assets" />
+      <element id="file-copy" path="$PROJECT_DIR$/Database.db" />
+    </root>
+  </artifact>
+</component>

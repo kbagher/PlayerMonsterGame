@@ -159,7 +159,7 @@ public class Main {
         } catch (UserNotFoundException e) { // user not found
             JOptionPane.showMessageDialog(null, "Unknown username", null, JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) { // unknown error
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Unknown erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Unknown error", JOptionPane.ERROR_MESSAGE);
         }
         return null;
     }
